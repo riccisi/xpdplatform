@@ -4,7 +4,7 @@ import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Media;
 import lombok.RequiredArgsConstructor;
 
 /**
- * @todo make a tesr fot this class
+ * @todo #1 make a test for this class.
  */
 @RequiredArgsConstructor
 public class JsonMedia implements Media<JsonRendered> {
