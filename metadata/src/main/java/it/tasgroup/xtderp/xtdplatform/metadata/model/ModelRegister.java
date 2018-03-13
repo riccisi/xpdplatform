@@ -6,13 +6,13 @@ import java.util.List;
 
 public class ModelRegister {
 
-    private final List<Model> models = new ArrayList<>();
+    private final List<ModelMetadata> modelMetadata = new ArrayList<>();
 
-    Iterator<Model> iterator() {
-        return this.models.iterator();
+    Iterator<ModelMetadata> iterator() {
+        return this.modelMetadata.iterator();
     }
 
-    public void add(Model model) {
-        this.models.add(model);
+    public void add(ModelMetadata modelMetadata) {
+        this.modelMetadata.add(modelMetadata);
     }
 }

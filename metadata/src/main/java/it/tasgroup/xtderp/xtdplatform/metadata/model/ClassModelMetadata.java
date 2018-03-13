@@ -11,7 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 
 @RequiredArgsConstructor
-public class ClassModel<T> implements Model {
+public class ClassModelMetadata<T> implements ModelMetadata {
 
     @NonNull
     private final Class<T> modelClass;

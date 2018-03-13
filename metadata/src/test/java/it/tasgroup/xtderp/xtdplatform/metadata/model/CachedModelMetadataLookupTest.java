@@ -6,23 +6,23 @@ import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.*;
 
-public class CachedModelLookupTest {
+public class CachedModelMetadataLookupTest {
 
     @Test
     public void get() {
 
-        ModelLookup alwaysNew = MockModel::new;
+        ModelLookup alwaysNew = MockModelMetadata::new;
 
-        Model a = alwaysNew.get("a");
-        Model aBis = alwaysNew.get("a");
+        ModelMetadata a = alwaysNew.get("a");
+        ModelMetadata aBis = alwaysNew.get("a");
 
         assertThat("same key subsequent calls", a, not(equalTo(aBis)));
 
         CachedModelLookup lookup = new CachedModelLookup(alwaysNew);
 
-        Model b = lookup.get("b");
-        Model bBis = lookup.get("b");
-        Model c = lookup.get("c");
+        ModelMetadata b = lookup.get("b");
+        ModelMetadata bBis = lookup.get("b");
+        ModelMetadata c = lookup.get("c");
 
         assertThat("same key subsequent calls", b, equalTo(bBis));
         assertThat("different key", b, not(equalTo(c)));

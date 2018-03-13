@@ -9,10 +9,11 @@ import java.util.Collection;
  * @version $Id$
  * @since 1.0
  */
-public interface RenderedList extends Rendered {
+public interface RenderedList<T> extends Rendered<T> {
 
-    RenderedList with(Collection<Printable> printables);
+    RenderedList<T> with(Collection<Printable> printables);
 
-    RenderedList with(Printable... v);
+    RenderedList<T> with(Printable... v);
 
+    // @todo #1 add RenderedPrimitive to handle primitives as root
 }

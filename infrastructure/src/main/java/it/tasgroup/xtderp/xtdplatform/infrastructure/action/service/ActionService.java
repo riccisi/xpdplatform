@@ -37,6 +37,6 @@ public class ActionService {
             HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         Action<HttpServletRequest,HttpServletResponse> action = this.lookup.get(id);
-        action.execute(() -> request).printOn(response);
+        action.execute(() -> request).writeOn(response);
     }
 }

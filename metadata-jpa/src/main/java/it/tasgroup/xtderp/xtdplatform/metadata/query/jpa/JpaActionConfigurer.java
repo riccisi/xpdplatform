@@ -1,6 +1,5 @@
 package it.tasgroup.xtderp.xtdplatform.metadata.query.jpa;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.action.ActionConfigurer;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.action.ActionRegister;
 import it.tasgroup.xtderp.xtdplatform.metadata.query.JsonQueryAction;
@@ -17,14 +16,12 @@ public class JpaActionConfigurer implements ActionConfigurer {
 
     private final EntityManager entityManager;
 
-    private final ObjectMapper mapper;
-
     @Override
     public void configure(ActionRegister register) {
         Set<EntityType<?>> entityTypes = this.entityManager.getMetamodel().getEntities();
         for (EntityType<?> entityType : entityTypes) {
             Class<?> entityClass = entityType.getJavaType();
-            register.add(new JsonQueryAction<>(new JpaPagedQueryAction<>(entityClass, entityManager), mapper));
+            register.add(new JsonQueryAction(new JpaQuery<>(entityClass, entityManager)));
             log.info(String.format("Query for entity %s succesfully registered!", entityClass));
         }
     }

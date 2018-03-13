@@ -10,7 +10,7 @@ public class ConfigurableModels implements Models {
     private final Iterable<ModelConfigurer> configurers;
 
     @Override
-    public Iterator<Model> iterator() {
+    public Iterator<ModelMetadata> iterator() {
         ModelRegister register = new ModelRegister();
         this.configurers.forEach(configurer -> configurer.configure(register));
         return register.iterator();

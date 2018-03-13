@@ -15,11 +15,10 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class HttpJsonRequest extends RequestDelegate<JsonNode> {
 
-    public HttpJsonRequest(Request<HttpServletRequest> request, ObjectMapper mapper) {
+    public HttpJsonRequest(Request<HttpServletRequest> request) {
         super(
             new StreamToJsonRequest(
-                new HttpToStreamRequest(request),
-                mapper
+                new HttpToStreamRequest(request)
             )
         );
     }

@@ -7,19 +7,19 @@ import java.util.Arrays;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.*;
 
-public class DefaultModelLookupTest {
+public class DefaultModelMetadataLookupTest {
 
     @Test
     public void testGetModel() {
 
-        MockModel a = new MockModel("a");
-        MockModel b = new MockModel("b");
-        MockModel c = new MockModel("c");
+        MockModelMetadata a = new MockModelMetadata("a");
+        MockModelMetadata b = new MockModelMetadata("b");
+        MockModelMetadata c = new MockModelMetadata("c");
 
-        Models models = () -> Arrays.<Model>asList(a, b, c).iterator();
+        Models models = () -> Arrays.<ModelMetadata>asList(a, b, c).iterator();
 
         DefaultModelLookup modelLookup = new DefaultModelLookup(models);
-        Model found = modelLookup.get("b");
+        ModelMetadata found = modelLookup.get("b");
 
         assertThat("found model", found, equalTo(b));
 

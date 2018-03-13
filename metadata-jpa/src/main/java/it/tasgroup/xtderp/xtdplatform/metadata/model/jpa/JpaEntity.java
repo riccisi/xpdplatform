@@ -1,69 +1,47 @@
 package it.tasgroup.xtderp.xtdplatform.metadata.model.jpa;
 
+import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Media;
+import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Printable;
+import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Rendered;
+import it.tasgroup.xtderp.xtdplatform.infrastructure.media.RenderedObject;
 import it.tasgroup.xtderp.xtdplatform.metadata.model.Attribute;
-import it.tasgroup.xtderp.xtdplatform.metadata.model.CachedModel;
 import it.tasgroup.xtderp.xtdplatform.metadata.model.Entity;
-import it.tasgroup.xtderp.xtdplatform.metadata.model.ClassModel;
-import it.tasgroup.xtderp.xtdplatform.metadata.model.Model;
-import it.tasgroup.xtderp.xtdplatform.metadata.model.ProcessedModel;
+import it.tasgroup.xtderp.xtdplatform.metadata.model.EntityMetadata;
+import lombok.RequiredArgsConstructor;
 
-import java.io.Serializable;
-import java.lang.reflect.Field;
-import java.util.Iterator;
-import javax.persistence.EntityManager;
+/**
+ * Created with IntelliJ IDEA.
+ *
+ * @author Simone Ricciardi (simone.ricciardi@gmail.com)
+ * @version $Id$
+ * @since 1.0
+ */
+@RequiredArgsConstructor
+public class JpaEntity<T> implements Entity {
 
-import static org.reflections.ReflectionUtils.getFields;
-import static org.reflections.ReflectionUtils.withName;
+    private final T entity;
+    private final EntityMetadata<T> metadata;
 
-public class JpaEntity<T> implements Entity<T> {
-
-    private final EntityManager entityManager;
-
-    private final Class<T> modelClass;
-
-    private Model fieldModel;
-
-    public JpaEntity(EntityManager entityManager, Class<T> modelClass) {
-        this.entityManager = entityManager;
-        this.modelClass = modelClass;
-        this.fieldModel = new CachedModel(new ClassModel<T>(this.modelClass));
+    @Override
+    public void save() throws Exception {
+        throw new UnsupportedOperationException("#save()");
     }
 
     @Override
-    public String id() {
-        return this.entityManager.getMetamodel().entity(this.modelClass).getName();
+    public void delete() throws Exception {
+        throw new UnsupportedOperationException("#delete()");
     }
 
     @Override
-    public ProcessedModel process() {
-        return null;
-    }
-
-    @Override
-    public Iterator<Attribute> iterator() {
-        Iterator<Attribute> fieldsIterator = this.fieldModel.iterator();
-        return null;
-    }
-
-    @Override
-    public Serializable idOf(Object entity) {
-        try {
-            String idName = this.entityManager.getMetamodel().entity(this.modelClass).getId(this.modelClass).getName();
-            Field idField = getFields(this.modelClass, withName(idName)).iterator().next();
-            idField.setAccessible(true);
-            return (Serializable) idField.get(entity);
-        } catch (Exception e) {
-            throw new RuntimeException(String.format("Unable to get id value from entity %s", entity), e);
+    public Rendered print(Media media) {
+        RenderedObject rendered = media.object();
+        for (Attribute attribute : metadata) {
+            rendered = rendered.with(attribute.name(), this.printableValue(attribute.name()));
         }
+        return rendered;
     }
 
-    @Override
-    public void save(T entity) {
-        this.entityManager.persist(entity);
-    }
-
-    @Override
-    public void delete(T entity) {
-        this.entityManager.remove(entity);
+    private Printable printableValue(String attributeName) {
+        return Printable.EMPTY;
     }
 }

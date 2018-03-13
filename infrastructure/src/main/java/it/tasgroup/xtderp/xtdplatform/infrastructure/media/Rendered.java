@@ -2,6 +2,7 @@ package it.tasgroup.xtderp.xtdplatform.infrastructure.media;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Optional;
 
 /**
  * Created with IntelliJ IDEA.
@@ -10,9 +11,20 @@ import java.io.OutputStream;
  * @version $Id$
  * @since 1.0
  */
-public interface Rendered {
+public interface Rendered<T> {
 
-    Rendered EMPTY = stream -> {};
+    Rendered<Optional> EMPTY = new Rendered<Optional>() {
+        @Override
+        public Optional value() {
+            return Optional.empty();
+        }
+
+        @Override
+        public void writeOn(OutputStream stream) {
+        }
+    };
+
+    T value();
 
     void writeOn(OutputStream stream) throws IOException;
 }

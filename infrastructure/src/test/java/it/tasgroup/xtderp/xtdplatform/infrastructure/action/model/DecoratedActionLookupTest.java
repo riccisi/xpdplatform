@@ -2,6 +2,8 @@ package it.tasgroup.xtderp.xtdplatform.infrastructure.action.model;
 
 import it.tasgroup.xtderp.xtdplatform.infrastructure.action.*;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Media;
+import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Rendered;
+import it.tasgroup.xtderp.xtdplatform.infrastructure.media.RenderedObject;
 import lombok.RequiredArgsConstructor;
 import org.junit.Before;
 import org.junit.Test;
@@ -35,7 +37,7 @@ public class DecoratedActionLookupTest {
     @Test
     public void testValidSum() throws Exception {
         StringWriter writer = new StringWriter();
-        sum.execute(() -> 1).printOn(writer);
+        sum.execute(() -> 1).writeOn(writer);
         assertThat(writer.toString(), equalTo("6"));
     }
 
@@ -68,7 +70,7 @@ public class DecoratedActionLookupTest {
         }
 
         @Override
-        public void print(Media media) {
+        public <T> Rendered<T> print(Media<T> media) {
             throw new UnsupportedOperationException("#print()");
         }
     }
@@ -92,7 +94,7 @@ public class DecoratedActionLookupTest {
         }
 
         @Override
-        public void print(Media media) {
+        public <T> Rendered<T> print(Media<T> media) {
             throw new UnsupportedOperationException("#print()");
         }
     }
@@ -119,7 +121,7 @@ public class DecoratedActionLookupTest {
         }
 
         @Override
-        public void print(Media media) {
+        public <T> Rendered<T> print(Media<T> media) {
             throw new UnsupportedOperationException("#print()");
         }
     }

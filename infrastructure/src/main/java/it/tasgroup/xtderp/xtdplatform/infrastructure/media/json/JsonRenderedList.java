@@ -20,7 +20,7 @@ import java.util.List;
  * @since 1.0
  */
 @RequiredArgsConstructor
-public final class JsonRenderedList extends JsonRendered implements RenderedList {
+public final class JsonRenderedList extends JsonRendered implements RenderedList<JsonNode> {
 
     private final List<JsonNode> list;
 
@@ -32,7 +32,7 @@ public final class JsonRenderedList extends JsonRendered implements RenderedList
     public JsonRenderedList with(Collection<Printable> printables) {
         return new JsonRenderedList(new ArrayList<JsonNode>(this.list){{
             for (Printable printable : printables) {
-                this.add(printable.print(new JsonMedia()).render());
+                this.add(((JsonRendered) printable.print(new JsonMedia())).value());
             }
         }});
     }
@@ -43,7 +43,7 @@ public final class JsonRenderedList extends JsonRendered implements RenderedList
     }
 
     @Override
-    public JsonNode render() {
+    public JsonNode value() {
         return new ArrayNode(JsonNodeFactory.instance, this.list);
     }
 }

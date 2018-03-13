@@ -32,7 +32,7 @@ public final class MonitoredAction implements Action {
     }
 
     @Override
-    public <T> Rendered<T> print(Media<T> media) {
+    public Rendered print(Media media) {
         return this.action.print(media);
     }
 }

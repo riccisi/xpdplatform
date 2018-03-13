@@ -3,17 +3,15 @@ package it.tasgroup.xtderp.xtdplatform.metadata.model;
 import lombok.RequiredArgsConstructor;
 import org.junit.*;
 
-import java.util.Iterator;
-
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.*;
 
-public class ClassModelTest {
+public class ClassModelMetadataTest {
 
     @Test
     public void testId() {
 
-        ClassModel<TestModel> model = new ClassModel<>(TestModel.class);
+        ClassModelMetadata<TestModel> model = new ClassModelMetadata<>(TestModel.class);
 
         assertThat("Id is the name of the class", TestModel.class.getName(), equalTo(model.id()));
     }
@@ -21,7 +19,7 @@ public class ClassModelTest {
     @Test
     public void testAttributes() {
 
-        ClassModel<TestModel> model = new ClassModel<>(TestModel.class);
+        ClassModelMetadata<TestModel> model = new ClassModelMetadata<>(TestModel.class);
 
         for (Attribute attribute : model) {
             System.out.println(attribute);

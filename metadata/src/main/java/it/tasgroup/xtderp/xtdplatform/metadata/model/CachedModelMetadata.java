@@ -4,9 +4,9 @@ import it.tasgroup.xtderp.xtdplatform.infrastructure.util.CachedIterable;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class CachedModel extends CachedIterable<Attribute> implements Model {
+public class CachedModelMetadata extends CachedIterable<Attribute> implements ModelMetadata {
 
-    private final Model delegate;
+    private final ModelMetadata delegate;
 
     private String id;
 

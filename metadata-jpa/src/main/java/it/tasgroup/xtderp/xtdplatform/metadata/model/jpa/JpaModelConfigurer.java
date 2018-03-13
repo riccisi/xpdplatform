@@ -21,7 +21,7 @@ public class JpaModelConfigurer implements ModelConfigurer {
         Set<EntityType<?>> entityTypes = this.entityManager.getMetamodel().getEntities();
         for (EntityType<?> entityType : entityTypes) {
             Class<?> entityClass = entityType.getJavaType();
-            modelRegister.add(new JpaEntity(this.entityManager, entityClass));
+            modelRegister.add(new JpaEntityMetadata(this.entityManager, entityClass));
             log.info(String.format("Entity %s successfully registered!", entityClass));
         }
     }

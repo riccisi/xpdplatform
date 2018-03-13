@@ -1,13 +1,15 @@
 package it.tasgroup.xtderp.xtdplatform.metadata.model;
 
-import java.io.Serializable;
+/**
+ * Created with IntelliJ IDEA.
+ *
+ * @author Simone Ricciardi (simone.ricciardi@gmail.com)
+ * @version $Id$
+ * @since 1.0
+ */
+public interface Entity extends Model {
 
-public interface Entity<T> extends Model {
+    void save() throws Exception;
 
-    Serializable idOf(T entity);
-
-    void save(T entity);
-
-    void delete(T entity);
-
+    void delete() throws Exception;
 }

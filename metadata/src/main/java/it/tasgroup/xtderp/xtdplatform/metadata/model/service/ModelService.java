@@ -2,7 +2,7 @@ package it.tasgroup.xtderp.xtdplatform.metadata.model.service;
 
 import it.tasgroup.xtderp.xtdplatform.metadata.model.ModelLookup;
 import it.tasgroup.xtderp.xtdplatform.metadata.model.Models;
-import it.tasgroup.xtderp.xtdplatform.metadata.model.Model;
+import it.tasgroup.xtderp.xtdplatform.metadata.model.ModelMetadata;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,12 +19,12 @@ public class ModelService {
     private final ModelLookup modelLookup;
 
     @RequestMapping(method = RequestMethod.GET)
-    public Iterable<Model> get() {
+    public Iterable<ModelMetadata> get() {
         return this.models;
     }
 
     @RequestMapping(value = "/{modelId}", method = RequestMethod.GET)
-    public Model get(@PathVariable("modelId") String modelId) {
+    public ModelMetadata get(@PathVariable("modelId") String modelId) {
         return this.modelLookup.get(modelId);
     }
 }

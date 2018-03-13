@@ -10,10 +10,10 @@ public class CachedModelLookup implements ModelLookup {
 
     private final ModelLookup delegate;
 
-    private final Map<String, Model> cache = new HashMap<>();
+    private final Map<String, ModelMetadata> cache = new HashMap<>();
 
     @Override
-    public Model get(String modelId) {
+    public ModelMetadata get(String modelId) {
         return this.cache.computeIfAbsent(modelId, s -> delegate.get(modelId));
     }
 }

@@ -15,9 +15,9 @@ import static org.junit.Assert.*;
 public class StreamToJsonRequestTest {
 
     @Test
-    public void value() {
+    public void value() throws Exception {
         StreamToJsonRequest request = new StreamToJsonRequest(
-            () -> new InputStreamOf(new TextOf("{ \"prop\": \"value\"}")), new ObjectMapper()
+            () -> new InputStreamOf(new TextOf("{ \"prop\": \"value\"}"))
         );
 
         JsonNode jsonNode = request.value();

@@ -13,7 +13,7 @@ public class CachedModelsTest {
     @Test
     public void test() {
 
-        Models models = () -> Collections.<Model>singletonList(new MockModel("a")).iterator();
+        Models models = () -> Collections.<ModelMetadata>singletonList(new MockModelMetadata("a")).iterator();
 
         assertThat("subsequent calls are different", models.iterator().next(), not(equalTo(models.iterator().next())));
 

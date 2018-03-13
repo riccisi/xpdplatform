@@ -14,9 +14,9 @@ import java.io.InputStream;
 @RequiredArgsConstructor
 public class StreamToJsonRequest implements Request<JsonNode> {
 
-    private final Request<InputStream> request;
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
-    private final ObjectMapper objectMapper;
+    private final Request<InputStream> request;
 
     @Override
     public JsonNode value() throws Exception {

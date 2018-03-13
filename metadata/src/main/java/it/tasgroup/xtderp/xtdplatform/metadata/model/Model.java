@@ -1,9 +1,13 @@
 package it.tasgroup.xtderp.xtdplatform.metadata.model;
 
-public interface Model extends Iterable<Attribute> {
+import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Printable;
 
-    String id();
-
-    ProcessedModel process();
-
+/**
+ * Created with IntelliJ IDEA.
+ *
+ * @author Simone Ricciardi (simone.ricciardi@gmail.com)
+ * @version $Id$
+ * @since 1.0
+ */
+public interface Model extends Printable {
 }

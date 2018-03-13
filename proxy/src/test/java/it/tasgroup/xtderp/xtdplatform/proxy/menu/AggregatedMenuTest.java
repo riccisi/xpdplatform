@@ -4,6 +4,7 @@ import it.tasgroup.xtderp.xtdplatform.infrastructure.action.Action;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.action.Request;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.action.Result;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Media;
+import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Rendered;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.menu.model.ConfigurableMenu;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.menu.model.Menu;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.menu.model.MenuBuilder;
@@ -112,7 +113,7 @@ public class AggregatedMenuTest {
         }
 
         @Override
-        public void print(Media media) {
+        public <T> Rendered<T> print(Media<T> media) {
             throw new UnsupportedOperationException("#print()");
         }
     }

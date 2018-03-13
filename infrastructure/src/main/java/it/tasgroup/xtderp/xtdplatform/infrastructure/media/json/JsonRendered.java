@@ -14,14 +14,12 @@ import java.io.OutputStream;
  * @version $Id$
  * @since 1.0
  */
-public abstract class JsonRendered implements Rendered {
+public abstract class JsonRendered implements Rendered<JsonNode> {
 
     private final ObjectMapper mapper = new ObjectMapper();
 
-    protected abstract JsonNode render();
-
     @Override
     public final void writeOn(OutputStream stream) throws IOException {
-        this.mapper.writeValue(stream, this.render());
+        this.mapper.writeValue(stream, this.value());
     }
 }

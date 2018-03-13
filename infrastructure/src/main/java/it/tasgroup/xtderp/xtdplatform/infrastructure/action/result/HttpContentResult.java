@@ -29,8 +29,8 @@ public class HttpContentResult implements Result<HttpServletResponse> {
     }
 
     @Override
-    public void printOn(HttpServletResponse response) throws Exception {
+    public void writeOn(HttpServletResponse response) throws Exception {
         response.setHeader(CONTENT_TYPE_FIELD, this.contentType);
-        this.result.printOn(response.getOutputStream());
+        this.result.writeOn(response.getOutputStream());
     }
 }

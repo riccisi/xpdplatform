@@ -1,47 +1,42 @@
 package it.tasgroup.xtderp.xtdplatform.metadata.query;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import it.tasgroup.xtderp.xtdplatform.infrastructure.action.ActionWrapper;
+import it.tasgroup.xtderp.xtdplatform.infrastructure.action.Action;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.action.Request;
+import it.tasgroup.xtderp.xtdplatform.infrastructure.action.Result;
+import it.tasgroup.xtderp.xtdplatform.infrastructure.action.request.HttpJsonRequest;
+import it.tasgroup.xtderp.xtdplatform.infrastructure.action.result.HttpJsonResult;
+import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Media;
+import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Printable;
+import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Rendered;
+import lombok.RequiredArgsConstructor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Action stack adapting incoming HTTP JSON request to <code>QueryAction</code> execution.
- *
  */
-public class JsonQueryAction<T> extends ActionWrapper<HttpServletRequest,HttpServletResponse> {
+@RequiredArgsConstructor
+public class JsonQueryAction implements Action<HttpServletRequest,HttpServletResponse> {
 
-    public JsonQueryAction(QueryAction<T> queryAction, ObjectMapper mapper) {
-        super(
-            new HttpJsonAction(
-                new JsonRequestDecorator<Condition>(queryAction) {
+    private final Query query;
 
-                    @Override
-                    protected Request<Condition> decorate(Request<JsonNode> request) {
-                        return new JsonConditionRequest(request);
-                    }
-                },
-                mapper
-            )
-        );
+    @Override
+    public String id() {
+        return String.format("%s.json", this.query.id());
     }
 
-    public JsonQueryAction(PagedQueryAction<T> queryAction, ObjectMapper mapper) {
-        super(
-            new HttpJsonAction(
-                new JsonRequestDecorator<PagedCondition>(queryAction) {
-
-                    @Override
-                    protected Request<PagedCondition> decorate(Request<JsonNode> request) {
-                        return new JsonPagedConditionRequest(request);
-                    }
-                },
-                mapper
-            )
-        );
+    @Override
+    public Result<HttpServletResponse> execute(Request<HttpServletRequest> request) throws Exception {
+        Condition condition = new JsonFilters(new HttpJsonRequest(request).value());
+        return new HttpJsonResult(this.query.find(condition));
     }
+
+    @Override
+    public Rendered print(Media media) {
+        return media.object()
+            .with("id", this.id())
+            .with("type", "query")
+            .with("modelId", this.query.modelId());
+    }
+
 }
-

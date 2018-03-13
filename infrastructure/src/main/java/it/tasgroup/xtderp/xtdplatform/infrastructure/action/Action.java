@@ -6,14 +6,22 @@ import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Rendered;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.util.Identified;
 
 /**
- * The Action.
+ * The Action.<br>
  *
- * Action represents a functionality exposed by the application.
+ * Represents a functionality exposed by the application.
  *
- * @param <T> The Type of the request
- * @param <R> The
+ * @param <T> The type of the request
+ * @param <R> The type of the result.
  */
 public interface Action<T,R> extends Identified, Printable {
+
+    /**
+     * An action can be executed calling this method.
+     *
+     * @param request
+     * @return
+     */
+    Result<R> execute(Request<T> request) throws Exception;
 
     Action EMPTY = new Action() {
         @Override
@@ -31,12 +39,4 @@ public interface Action<T,R> extends Identified, Printable {
             return Result.EMPTY;
         }
     };
-
-    /**
-     * An action can be executed calling this method.
-     *
-     * @param request
-     * @return
-     */
-    Result<R> execute(Request<T> request) throws Exception;
 }

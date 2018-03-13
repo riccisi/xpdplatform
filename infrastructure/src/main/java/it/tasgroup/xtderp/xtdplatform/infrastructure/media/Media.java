@@ -1,8 +1,8 @@
 package it.tasgroup.xtderp.xtdplatform.infrastructure.media;
 
-public interface Media<T extends Rendered> {
+public interface Media<T> {
 
-    RenderedObject object();
+    RenderedObject<T> object();
 
-    RenderedList list();
+    RenderedList<T> list();
 }

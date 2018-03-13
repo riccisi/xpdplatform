@@ -8,7 +8,7 @@ import java.util.Iterator;
 
 @RequiredArgsConstructor
 @ToString
-class MockModel implements Model {
+class MockModelMetadata implements ModelMetadata {
 
     private final String name;
 

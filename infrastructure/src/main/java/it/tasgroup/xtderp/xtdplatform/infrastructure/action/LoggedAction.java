@@ -35,7 +35,7 @@ public final class LoggedAction implements Action {
     }
 
     @Override
-    public <T> Rendered<T> print(Media<T> media) {
+    public Rendered print(Media media) {
         return this.delegate.print(media);
     }
 }

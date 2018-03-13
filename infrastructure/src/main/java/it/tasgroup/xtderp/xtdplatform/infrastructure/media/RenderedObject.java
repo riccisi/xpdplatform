@@ -12,33 +12,33 @@ import java.util.Date;
  * @version $Id$
  * @since 1.0
  */
-public interface RenderedObject extends Rendered {
+public interface RenderedObject<T> extends Rendered<T> {
 
-    RenderedObject with(String k, String v);
+    RenderedObject<T> with(String k, String v);
 
-    RenderedObject with(String k, byte v);
+    RenderedObject<T> with(String k, byte v);
 
-    RenderedObject with(String k, short v);
+    RenderedObject<T> with(String k, short v);
 
-    RenderedObject with(String k, int v);
+    RenderedObject<T> with(String k, int v);
 
-    RenderedObject with(String k, long v);
+    RenderedObject<T> with(String k, long v);
 
-    RenderedObject with(String k, float v);
+    RenderedObject<T> with(String k, float v);
 
-    RenderedObject with(String k, double v);
+    RenderedObject<T> with(String k, double v);
 
-    RenderedObject with(String k, boolean v);
+    RenderedObject<T> with(String k, boolean v);
 
-    RenderedObject with(String k, char v);
+    RenderedObject<T> with(String k, char v);
 
-    RenderedObject with(String k, Date v);
+    RenderedObject<T> with(String k, Date v);
 
-    RenderedObject with(String k, BigDecimal v);
+    RenderedObject<T> with(String k, BigDecimal v);
 
-    RenderedObject with(String k, BigInteger v);
+    RenderedObject<T> with(String k, BigInteger v);
 
-    RenderedObject with(String k, Collection<Printable> v);
+    RenderedObject<T> with(String k, Collection<Printable> v);
 
-    RenderedObject with(String k, Printable v);
+    RenderedObject<T> with(String k, Printable v);
 }

@@ -3,6 +3,7 @@ package it.tasgroup.xtderp.xtdplatform.infrastructure.media.json;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.*;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Printable;
+import it.tasgroup.xtderp.xtdplatform.infrastructure.media.RenderedList;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.media.RenderedObject;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.util.DefaultDateAsString;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +23,7 @@ import java.util.Map;
  * @since 1.0
  */
 @RequiredArgsConstructor
-public final class JsonRenderedObject extends JsonRendered implements RenderedObject {
+public final class JsonRenderedObject extends JsonRendered implements RenderedObject<JsonNode> {
 
     private final Map<String, JsonNode> data;
 
@@ -117,19 +118,19 @@ public final class JsonRenderedObject extends JsonRendered implements RenderedOb
     @Override
     public JsonRenderedObject with(String k, Collection<Printable> v) {
         return new JsonRenderedObject(new LinkedHashMap<String, JsonNode>(this.data) {{
-            this.put(k, new JsonRenderedList().with(v).render());
+            this.put(k, new JsonRenderedList().with(v).value());
         }});
     }
 
     @Override
     public JsonRenderedObject with(String k, Printable v) {
         return new JsonRenderedObject(new LinkedHashMap<String, JsonNode>(this.data) {{
-            this.put(k, v.print(new JsonMedia()).render());
+            this.put(k, ((v.print(new JsonMedia())).value()));
         }});
     }
 
     @Override
-    public JsonNode render() {
+    public JsonNode value() {
         return new ObjectNode(JsonNodeFactory.instance, this.data);
     }
 }

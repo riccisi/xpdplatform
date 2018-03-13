@@ -13,9 +13,9 @@ public class ConfigurableModelsTest {
     @Test
     public void test() {
 
-        MockModel a = new MockModel("a");
-        MockModel b = new MockModel("b");
-        MockModel c = new MockModel("c");
+        MockModelMetadata a = new MockModelMetadata("a");
+        MockModelMetadata b = new MockModelMetadata("b");
+        MockModelMetadata c = new MockModelMetadata("c");
 
         ModelConfigurer configurer1 = register -> {
             register.add(a);
@@ -28,7 +28,7 @@ public class ConfigurableModelsTest {
 
         ConfigurableModels models = new ConfigurableModels(Arrays.asList(configurer1, configurer2));
 
-        Iterator<Model> it = models.iterator();
+        Iterator<ModelMetadata> it = models.iterator();
         assertThat("found model a", it.next(), equalTo(a));
         assertThat("found model b", it.next(), equalTo(b));
         assertThat("found model c", it.next(), equalTo(c));

@@ -14,7 +14,6 @@ import java.util.Collection;
 /**
  * {@link Result} that print a {@link Printable} object to an {@link OutputStream} using a {@link Media}.
  *
- *
  * @author Simone Ricciardi (simone.ricciardi@gmail.com)
  * @version $Id$
  * @since 1.0
@@ -24,7 +23,7 @@ public final class PrintableResult implements Result<OutputStream> {
 
     private final Printable result;
 
-    private final Media media;
+    private final Media<?> media;
 
     public PrintableResult(Collection<Printable> printable, Media media) {
         this(new PrintableCollection(printable), media);
@@ -35,7 +34,7 @@ public final class PrintableResult implements Result<OutputStream> {
     }
 
     @Override
-    public void printOn(OutputStream stream) throws Exception {
+    public void writeOn(OutputStream stream) throws Exception {
         this.result.print(this.media).writeOn(stream);
     }
 }

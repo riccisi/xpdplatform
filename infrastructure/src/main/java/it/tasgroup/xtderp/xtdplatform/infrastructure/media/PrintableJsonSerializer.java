@@ -12,6 +12,6 @@ public class PrintableJsonSerializer extends JsonSerializer<Printable> {
 
     @Override
     public void serialize(Printable printable, JsonGenerator gen, SerializerProvider ser) throws IOException {
-        gen.writeTree(printable.print(new JsonMedia()).render());
+        gen.writeTree(printable.print(new JsonMedia()).value());
     }
 }

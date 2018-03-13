@@ -8,7 +8,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 //@ContextConfiguration(classes = ActionServiceTest.TestConfig.class)
 public class ActionServiceTest {
 
@@ -16,6 +16,7 @@ public class ActionServiceTest {
     private TestRestTemplate testRestTemplate;
 
     @Test
+    @Ignore // @todo #1 implement action service integration test
     public void execute() {
 
     }
