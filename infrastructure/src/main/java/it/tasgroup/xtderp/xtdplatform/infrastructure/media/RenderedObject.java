@@ -40,5 +40,7 @@ public interface RenderedObject<T> extends Rendered<T> {
 
     RenderedObject<T> with(String k, Collection<Printable> v);
 
+    RenderedObject<T> with(String k, String... v);
+
     RenderedObject<T> with(String k, Printable v);
 }

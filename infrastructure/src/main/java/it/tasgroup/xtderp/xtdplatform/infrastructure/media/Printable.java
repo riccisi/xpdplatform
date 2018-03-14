@@ -5,7 +5,7 @@ public interface Printable {
     Printable EMPTY = new Printable() {
         @Override
         public <T> Rendered<T> print(Media<T> media) {
-            return media.object();
+            return media.asObject();
         }
     };
 

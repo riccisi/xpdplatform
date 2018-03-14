@@ -34,7 +34,7 @@ public class JpaEntity<T> implements Entity {
 
     @Override
     public Rendered print(Media media) {
-        RenderedObject rendered = media.object();
+        RenderedObject rendered = media.asObject();
         for (Attribute attribute : metadata) {
             rendered = rendered.with(attribute.name(), this.printableValue(attribute.name()));
         }

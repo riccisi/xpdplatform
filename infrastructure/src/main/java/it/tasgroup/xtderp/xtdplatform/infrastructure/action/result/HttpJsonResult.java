@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Collection;
 
 /**
- * {@link Result} that write a {@link Printable} object to an incoming {@link java.io.OutputStream} in JSON format.<br>
+ * {@link Result} that write a {@link Printable} asObject to an incoming {@link java.io.OutputStream} in JSON format.<br>
  *
  * @author Simone Ricciardi (simone.ricciardi@gmail.com)
  * @version $Id$

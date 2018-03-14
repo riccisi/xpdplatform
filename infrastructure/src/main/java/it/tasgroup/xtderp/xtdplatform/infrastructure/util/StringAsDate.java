@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Scalar object that "represent" the date value of a String
+ * Scalar asObject that "represent" the date value of a String
  */
 @RequiredArgsConstructor
 @EqualsAndHashCode

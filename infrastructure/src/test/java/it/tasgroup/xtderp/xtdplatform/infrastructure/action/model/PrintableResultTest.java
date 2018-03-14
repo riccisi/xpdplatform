@@ -33,7 +33,7 @@ public class PrintableResultTest {
         PrintableResult result = new PrintableResult(new Printable() {
             @Override
             public <T> Rendered<T> print(Media<T> media) {
-                return media.object().with("prop", "value");
+                return media.asObject().with("prop", "value");
             }
         }, new JsonMedia());
 

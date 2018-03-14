@@ -12,7 +12,7 @@ import java.io.OutputStream;
 import java.util.Collection;
 
 /**
- * {@link Result} that print a {@link Printable} object to an {@link OutputStream} using a {@link Media}.
+ * {@link Result} that print a {@link Printable} asObject to an {@link OutputStream} using a {@link Media}.
  *
  * @author Simone Ricciardi (simone.ricciardi@gmail.com)
  * @version $Id$

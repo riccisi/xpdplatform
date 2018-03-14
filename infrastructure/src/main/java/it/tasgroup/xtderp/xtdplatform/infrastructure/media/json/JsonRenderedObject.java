@@ -23,7 +23,7 @@ import java.util.Map;
  * @since 1.0
  */
 @RequiredArgsConstructor
-public final class JsonRenderedObject extends JsonRendered implements RenderedObject<JsonNode> {
+final class JsonRenderedObject extends JsonRendered implements RenderedObject<JsonNode> {
 
     private final Map<String, JsonNode> data;
 
@@ -117,6 +117,13 @@ public final class JsonRenderedObject extends JsonRendered implements RenderedOb
 
     @Override
     public JsonRenderedObject with(String k, Collection<Printable> v) {
+        return new JsonRenderedObject(new LinkedHashMap<String, JsonNode>(this.data) {{
+            this.put(k, new JsonRenderedList().with(v).value());
+        }});
+    }
+
+    @Override
+    public RenderedObject<JsonNode> with(String k, String... v) {
         return new JsonRenderedObject(new LinkedHashMap<String, JsonNode>(this.data) {{
             this.put(k, new JsonRenderedList().with(v).value());
         }});

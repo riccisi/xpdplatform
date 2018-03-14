@@ -25,7 +25,7 @@ public class JpaPagedResult<T> implements Printable {
 
     @Override
     public Rendered print(Media media) {
-        return media.object()
+        return media.asObject()
             .with("total", this.page.getTotalElements())
             .with("result", new PrintableCollection(this.page.getContent(), t -> new JpaEntity<T>(t, this.metadata)));
     }

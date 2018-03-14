@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 /**
- * Service exposing action list and action execution to the world!
+ * Service exposing action asList and action execution to the world!
  */
 @RestController
 @RequestMapping(value = "/action")

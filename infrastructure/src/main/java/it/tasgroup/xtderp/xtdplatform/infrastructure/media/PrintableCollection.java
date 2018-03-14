@@ -1,10 +1,10 @@
 package it.tasgroup.xtderp.xtdplatform.infrastructure.media;
 
 import lombok.RequiredArgsConstructor;
+import org.cactoos.Func;
+import org.cactoos.list.Mapped;
 
 import java.util.Collection;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 /**
  * Created with IntelliJ IDEA.
@@ -18,12 +18,13 @@ public final class PrintableCollection implements Printable {
 
     private final Collection<Printable> printables;
 
-    public <T> PrintableCollection(Collection<T> collection, Function<T,Printable> mapFunction) {
-        this.printables = collection.stream().map(mapFunction).collect(Collectors.toList());
+    public <T> PrintableCollection(Collection<T> collection, Func<T,Printable> mapFunction) {
+        this.printables = new Mapped<>(mapFunction, collection);
     }
 
     @Override
-    public Rendered print(Media media) {
-        return media.list().with(this.printables);
+    public <T> Rendered<T> print(Media<T> media) {
+        return media.asList().with(this.printables);
     }
+
 }

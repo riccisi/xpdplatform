@@ -1,5 +1,6 @@
 package it.tasgroup.xtderp.xtdplatform.infrastructure.media;
 
+import it.tasgroup.xtderp.xtdplatform.infrastructure.media.json.PrintableJsonSerializer;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;

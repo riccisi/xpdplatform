@@ -6,7 +6,6 @@ import it.tasgroup.xtderp.xtdplatform.infrastructure.action.Result;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.action.request.HttpJsonRequest;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.action.result.HttpJsonResult;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Media;
-import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Printable;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Rendered;
 import lombok.RequiredArgsConstructor;
 
@@ -33,7 +32,7 @@ public class JsonQueryAction implements Action<HttpServletRequest,HttpServletRes
 
     @Override
     public Rendered print(Media media) {
-        return media.object()
+        return media.asObject()
             .with("id", this.id())
             .with("type", "query")
             .with("modelId", this.query.modelId());
