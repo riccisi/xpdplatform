@@ -5,9 +5,9 @@ public interface Printable {
     Printable EMPTY = new Printable() {
         @Override
         public <T> Rendered<T> print(Media<T> media) {
-            return media.asObject();
+            return media.asNull();
         }
     };
 
-    <T> Rendered<T> print(Media<T> media);
+    <R> Rendered<R> print(Media<R> media);
 }

@@ -22,15 +22,14 @@ public final class LoggedAction implements Action {
     @Override
     @SuppressWarnings("unchecked")
     public Result execute(Request request) throws Exception {
-        boolean error = false;
         try {
             log.debug(String.format("Start execution of action '%s'", this.id()));
-            return this.delegate.execute(new LoggedRequest(request));
-        } catch (Exception e) {
-            error = true;
+            Result result = this.delegate.execute(new LoggedRequest(request));
+            log.debug(String.format("Action '%s' executed successfully!", this.id()));
+            return result;
+        } catch (Throwable e) {
+            log.debug(String.format("Action execution '%s' failed!", this.id()));
             throw e;
-        } finally {
-            log.debug(String.format(error ? "Action execution '%s' failed!" : "action '%s' executed successfully", this.id()));
         }
     }
 

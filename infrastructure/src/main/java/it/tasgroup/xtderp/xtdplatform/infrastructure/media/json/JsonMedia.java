@@ -11,7 +11,6 @@ import java.math.BigInteger;
 import java.util.Date;
 
 /**
- * @todo #1 make a test for this class.
  */
 @RequiredArgsConstructor
 public final class JsonMedia implements Media<JsonNode> {
@@ -79,5 +78,10 @@ public final class JsonMedia implements Media<JsonNode> {
     @Override
     public Rendered<JsonNode> as(BigInteger value) {
         return new JsonBigInteger(value);
+    }
+
+    @Override
+    public Rendered<JsonNode> asNull() {
+        return new JsonNull();
     }
 }

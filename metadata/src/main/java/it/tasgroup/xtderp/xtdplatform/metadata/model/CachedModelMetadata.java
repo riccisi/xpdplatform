@@ -1,5 +1,7 @@
 package it.tasgroup.xtderp.xtdplatform.metadata.model;
 
+import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Media;
+import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Rendered;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.util.CachedIterable;
 import lombok.RequiredArgsConstructor;
 
@@ -19,12 +21,12 @@ public class CachedModelMetadata extends CachedIterable<Attribute> implements Mo
     }
 
     @Override
-    public ProcessedModel process() {
-        return this.delegate.process();
+    protected Iterable<Attribute> iterable() {
+        return this.delegate;
     }
 
     @Override
-    protected Iterable<Attribute> iterable() {
-        return this.delegate;
+    public <T> Rendered<T> print(Media<T> media) {
+        return this.delegate.print(media);
     }
 }

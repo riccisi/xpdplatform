@@ -1,19 +1,15 @@
 package it.tasgroup.xtderp.xtdplatform.metadata.model.jpa;
 
+import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Media;
+import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Rendered;
 import it.tasgroup.xtderp.xtdplatform.metadata.model.Attribute;
 import it.tasgroup.xtderp.xtdplatform.metadata.model.CachedModelMetadata;
 import it.tasgroup.xtderp.xtdplatform.metadata.model.EntityMetadata;
-import it.tasgroup.xtderp.xtdplatform.metadata.model.ClassModelMetadata;
+import it.tasgroup.xtderp.xtdplatform.metadata.model.reflect.ClassModelMetadata;
 import it.tasgroup.xtderp.xtdplatform.metadata.model.ModelMetadata;
-import it.tasgroup.xtderp.xtdplatform.metadata.model.ProcessedModel;
 
-import java.io.Serializable;
-import java.lang.reflect.Field;
 import java.util.Iterator;
 import javax.persistence.EntityManager;
-
-import static org.reflections.ReflectionUtils.getFields;
-import static org.reflections.ReflectionUtils.withName;
 
 public class JpaEntityMetadata<T> implements EntityMetadata<T> {
 
@@ -35,14 +31,13 @@ public class JpaEntityMetadata<T> implements EntityMetadata<T> {
     }
 
     @Override
-    public ProcessedModel process() {
-        return null;
+    public Iterator<Attribute> iterator() {
+        return this.fieldModelMetadata.iterator();
     }
 
     @Override
-    public Iterator<Attribute> iterator() {
-        Iterator<Attribute> fieldsIterator = this.fieldModelMetadata.iterator();
-        return null;
+    public <R> Rendered<R> print(Media<R> media) {
+        throw new UnsupportedOperationException("#print()");
     }
 
    /* @Override

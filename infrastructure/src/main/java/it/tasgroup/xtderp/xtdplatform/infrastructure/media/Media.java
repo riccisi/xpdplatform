@@ -31,4 +31,6 @@ public interface Media<T> {
     Rendered<T> as(BigDecimal value);
 
     Rendered<T> as(BigInteger value);
+
+    Rendered<T> asNull();
 }

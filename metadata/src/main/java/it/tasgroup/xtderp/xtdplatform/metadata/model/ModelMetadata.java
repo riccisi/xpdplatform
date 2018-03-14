@@ -1,9 +1,8 @@
 package it.tasgroup.xtderp.xtdplatform.metadata.model;
 
-public interface ModelMetadata extends Iterable<Attribute> {
+import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Printable;
+import it.tasgroup.xtderp.xtdplatform.infrastructure.util.Identified;
 
-    String id();
-
-    ProcessedModel process();
+public interface ModelMetadata extends Iterable<Attribute>, Identified, Printable {
 
 }

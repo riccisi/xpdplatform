@@ -4,6 +4,8 @@ import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Printable;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.util.Identified;
 
 /**
+ * @todo #7 split into query and paged query
+ *
  * The Query<br>.
  * Represent
  *

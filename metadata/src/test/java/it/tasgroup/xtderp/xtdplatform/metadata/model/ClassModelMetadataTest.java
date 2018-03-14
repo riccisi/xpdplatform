@@ -1,5 +1,6 @@
 package it.tasgroup.xtderp.xtdplatform.metadata.model;
 
+import it.tasgroup.xtderp.xtdplatform.metadata.model.reflect.ClassModelMetadata;
 import lombok.RequiredArgsConstructor;
 import org.junit.*;
 

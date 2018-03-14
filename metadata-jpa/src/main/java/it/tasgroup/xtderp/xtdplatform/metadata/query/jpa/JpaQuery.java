@@ -49,7 +49,7 @@ public class JpaQuery<T> implements Query {
     public PrintableCollection find(Condition condition) {
         JpaStatement<T> statement = new JpaStatement<>();
         condition.apply(statement);
-        return new PrintableCollection(repository.findAll(statement.get()), o -> new JpaEntity<T>(o, this.metadata));
+        return new PrintableCollection(repository.findAll(statement.get()), o -> new JpaEntity<T>(o, this.metadata, entityManager));
     }
 
     @Override
@@ -58,7 +58,7 @@ public class JpaQuery<T> implements Query {
         condition.apply(statement);
         PageRequest pageRequest =  new PageRequest(page - 1, limit);
         Page<T> result = repository.findAll(statement.get(), pageRequest);
-        return new JpaPagedResult<T>(result, this.metadata);
+        return new JpaPagedResult<T>(result, this.metadata, this.entityManager);
     }
 
     private String entityName() {

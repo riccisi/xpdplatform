@@ -31,11 +31,10 @@ public class JsonQueryAction implements Action<HttpServletRequest,HttpServletRes
     }
 
     @Override
-    public Rendered print(Media media) {
+    public <T> Rendered<T> print(Media<T> media) {
         return media.asObject()
             .with("id", this.id())
             .with("type", "query")
             .with("modelId", this.query.modelId());
     }
-
 }

@@ -7,7 +7,10 @@ import it.tasgroup.xtderp.xtdplatform.infrastructure.media.RenderedObject;
 import it.tasgroup.xtderp.xtdplatform.metadata.model.Attribute;
 import it.tasgroup.xtderp.xtdplatform.metadata.model.Entity;
 import it.tasgroup.xtderp.xtdplatform.metadata.model.EntityMetadata;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+
+import javax.persistence.EntityManager;
 
 /**
  * Created with IntelliJ IDEA.
@@ -19,24 +22,25 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class JpaEntity<T> implements Entity {
 
-    private final T entity;
-    private final EntityMetadata<T> metadata;
+    @NonNull private final T entity;
+    @NonNull private final EntityMetadata<T> metadata;
+    @NonNull private final EntityManager entityManager;
 
     @Override
     public void save() throws Exception {
-        throw new UnsupportedOperationException("#save()");
+        this.entityManager.persist(entity);
     }
 
     @Override
     public void delete() throws Exception {
-        throw new UnsupportedOperationException("#delete()");
+        this.entityManager.remove(entity);
     }
 
     @Override
-    public Rendered print(Media media) {
-        RenderedObject rendered = media.asObject();
+    public <R> Rendered<R> print(Media<R> media) {
+        RenderedObject<R> rendered = media.asObject();
         for (Attribute attribute : metadata) {
-            rendered = rendered.with(attribute.name(), this.printableValue(attribute.name()));
+            rendered = attribute.renderValue(entity, rendered);
         }
         return rendered;
     }

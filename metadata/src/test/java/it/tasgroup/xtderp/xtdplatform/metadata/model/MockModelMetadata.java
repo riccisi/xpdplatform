@@ -1,5 +1,7 @@
 package it.tasgroup.xtderp.xtdplatform.metadata.model;
 
+import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Media;
+import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Rendered;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
@@ -18,12 +20,12 @@ class MockModelMetadata implements ModelMetadata {
     }
 
     @Override
-    public ProcessedModel process() {
-        return null;
+    public Iterator iterator() {
+        return Collections.emptyIterator();
     }
 
     @Override
-    public Iterator iterator() {
-        return Collections.emptyIterator();
+    public <T> Rendered<T> print(Media<T> media) {
+        throw new UnsupportedOperationException("#print()");
     }
 }
