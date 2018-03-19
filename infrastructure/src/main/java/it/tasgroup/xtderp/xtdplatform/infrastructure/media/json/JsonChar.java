@@ -19,7 +19,7 @@ import lombok.ToString;
 @ToString(of = "value")
 final class JsonChar  extends JsonRendered implements Rendered<JsonNode> {
 
-    private final char value;
+    private final Character value;
 
     @Override
     public JsonNode value() {

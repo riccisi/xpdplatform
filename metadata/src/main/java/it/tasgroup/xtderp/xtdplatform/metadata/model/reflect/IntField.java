@@ -1,10 +1,7 @@
 package it.tasgroup.xtderp.xtdplatform.metadata.model.reflect;
 
-import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Media;
-import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Rendered;
-import it.tasgroup.xtderp.xtdplatform.infrastructure.media.RenderedObject;
-import it.tasgroup.xtderp.xtdplatform.metadata.model.Field;
-import lombok.RequiredArgsConstructor;
+import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Printable;
+import it.tasgroup.xtderp.xtdplatform.infrastructure.media.PrintableInt;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,34 +10,20 @@ import lombok.RequiredArgsConstructor;
  * @version $Id$
  * @since 1.0
  */
-@RequiredArgsConstructor
-public final class IntField implements Field {
+public final class IntField extends AbstractField {
 
-    private final java.lang.reflect.Field field;
-
-    @Override
-    public String name() {
-        return this.field.getName();
+    IntField(java.lang.reflect.Field field) {
+        super(field);
     }
 
     @Override
-    public <R, T> RenderedObject<R> renderValue(T entity, RenderedObject<R> rendered) {
-        try {
-            this.field.setAccessible(true);
-            return rendered.with(this.field.getName(), this.getValue(entity));
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private <T> int getValue(T entity) throws IllegalAccessException {
-        return this.field.getType().isPrimitive() ? this.field.getInt(entity) : (Integer) this.field.get(entity);
+    protected <T> Printable printableOf(T entity) throws IllegalAccessException {
+        Object value = this.field.get(entity);
+        return new PrintableInt(value != null ? Integer.class.cast(value) : null);
     }
 
     @Override
-    public <T> Rendered<T> print(Media<T> media) {
-        return media.asObject()
-            .with("name", this.field.getName())
-            .with("type", "number");
+    protected String type() {
+        return "number";
     }
 }

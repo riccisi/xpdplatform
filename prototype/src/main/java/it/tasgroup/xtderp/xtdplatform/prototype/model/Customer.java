@@ -26,13 +26,16 @@ public class Customer {
     private String firstName;
     private String lastName;
     private Date birthDate;
+    private Integer age;
+    private int test = 1;
 
     protected Customer() {}
 
-    public Customer(String firstName, String lastName, Date birthDate) {
+    public Customer(String firstName, String lastName, Date birthDate, Integer age) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
+        this.age = age;
     }
 
 }

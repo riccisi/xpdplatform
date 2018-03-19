@@ -1,7 +1,6 @@
 package it.tasgroup.xtderp.xtdplatform.metadata.model.jpa;
 
 import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Media;
-import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Printable;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Rendered;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.media.RenderedObject;
 import it.tasgroup.xtderp.xtdplatform.metadata.model.Attribute;
@@ -40,12 +39,8 @@ public class JpaEntity<T> implements Entity {
     public <R> Rendered<R> print(Media<R> media) {
         RenderedObject<R> rendered = media.asObject();
         for (Attribute attribute : metadata) {
-            rendered = attribute.renderValue(entity, rendered);
+            rendered = attribute.printValue(entity, rendered);
         }
         return rendered;
-    }
-
-    private Printable printableValue(String attributeName) {
-        return Printable.EMPTY;
     }
 }

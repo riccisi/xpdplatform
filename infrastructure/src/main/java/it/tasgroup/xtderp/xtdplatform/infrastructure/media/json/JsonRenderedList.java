@@ -6,11 +6,16 @@ import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.media.*;
 import lombok.RequiredArgsConstructor;
 import org.cactoos.collection.CollectionOf;
+import org.cactoos.list.Joined;
+import org.cactoos.list.ListOf;
 import org.cactoos.list.Mapped;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -22,20 +27,15 @@ import java.util.*;
 @RequiredArgsConstructor
 class JsonRenderedList extends JsonRendered implements RenderedList<JsonNode> {
 
-    private final List<JsonNode> list;
+    private final List<Printable> printables;
 
     JsonRenderedList() {
-        this(new ArrayList<>());
+        this(new ListOf<>());
     }
 
     @Override
-    public JsonRenderedList with(Collection<Printable> printables) {
-        JsonMedia media = new JsonMedia();
-        return new JsonRenderedList(new ArrayList<JsonNode>(this.list){{
-            for (Printable printable : printables) {
-                this.add(printable.print(media).value());
-            }
-        }});
+    public JsonRenderedList with(List<Printable> printables) {
+        return new JsonRenderedList(new Joined<>(this.printables, printables));
     }
 
     @Override
@@ -105,6 +105,10 @@ class JsonRenderedList extends JsonRendered implements RenderedList<JsonNode> {
 
     @Override
     public JsonNode value() {
-        return new ArrayNode(JsonNodeFactory.instance, this.list);
+        JsonMedia media = new JsonMedia();
+        return new ArrayNode(
+            JsonNodeFactory.instance,
+            new Mapped<>(printable -> printable.print(media).value(), this.printables)
+        );
     }
 }

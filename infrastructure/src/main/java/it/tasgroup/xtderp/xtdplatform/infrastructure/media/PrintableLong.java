@@ -16,7 +16,7 @@ import lombok.ToString;
 @ToString(of = "value")
 public final class PrintableLong implements Printable {
 
-    private final long value;
+    private final Long value;
 
     @Override
     public <T> Rendered<T> print(Media<T> media) {

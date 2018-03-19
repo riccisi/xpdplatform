@@ -19,7 +19,7 @@ import lombok.ToString;
 @ToString(of = "value")
 final class JsonBoolean extends JsonRendered implements Rendered<JsonNode> {
 
-    private final boolean value;
+    private final Boolean value;
 
     @Override
     public JsonNode value() {

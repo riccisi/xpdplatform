@@ -1,6 +1,8 @@
 package it.tasgroup.xtderp.xtdplatform.infrastructure.media;
 
+import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
 /**
  * Created with IntelliJ IDEA.
@@ -10,9 +12,11 @@ import lombok.RequiredArgsConstructor;
  * @since 1.0
  */
 @RequiredArgsConstructor
+@EqualsAndHashCode(of = "value", callSuper = false)
+@ToString(of = "value")
 public class PrintableInt implements Printable {
 
-    private final int value;
+    private final Integer value;
 
     @Override
     public <T> Rendered<T> print(Media<T> media) {

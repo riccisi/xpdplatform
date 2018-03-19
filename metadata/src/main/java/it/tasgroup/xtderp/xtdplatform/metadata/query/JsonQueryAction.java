@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  */
 @RequiredArgsConstructor
-public class JsonQueryAction implements Action<HttpServletRequest,HttpServletResponse> {
+public final class JsonQueryAction implements Action<HttpServletRequest,HttpServletResponse> {
 
     private final Query query;
 

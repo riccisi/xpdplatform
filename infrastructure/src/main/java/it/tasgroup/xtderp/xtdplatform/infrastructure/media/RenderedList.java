@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -14,7 +15,7 @@ import java.util.Date;
  */
 public interface RenderedList<T> extends Rendered<T> {
 
-    RenderedList<T> with(Collection<Printable> printables);
+    RenderedList<T> with(List<Printable> printables);
 
     RenderedList<T> with(Printable... value);
 

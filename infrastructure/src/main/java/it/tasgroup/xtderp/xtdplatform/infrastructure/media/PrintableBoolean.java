@@ -16,7 +16,7 @@ import lombok.ToString;
 @ToString(of = "value")
 public final class PrintableBoolean implements Printable {
 
-    private final boolean value;
+    private final Boolean value;
 
     @Override
     public <T> Rendered<T> print(Media<T> media) {

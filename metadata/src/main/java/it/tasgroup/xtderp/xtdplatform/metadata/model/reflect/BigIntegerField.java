@@ -1,11 +1,11 @@
 package it.tasgroup.xtderp.xtdplatform.metadata.model.reflect;
 
-import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Media;
-import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Rendered;
-import it.tasgroup.xtderp.xtdplatform.infrastructure.media.RenderedObject;
+import it.tasgroup.xtderp.xtdplatform.infrastructure.media.*;
 import it.tasgroup.xtderp.xtdplatform.metadata.model.Field;
 import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 
 /**
@@ -15,34 +15,21 @@ import java.math.BigInteger;
  * @version $Id$
  * @since 1.0
  */
-@RequiredArgsConstructor
-public final class BigIntegerField implements Field {
+@ToString
+final class BigIntegerField extends AbstractField {
 
-    private final java.lang.reflect.Field field;
-
-    @Override
-    public String name() {
-        return this.field.getName();
+    BigIntegerField(java.lang.reflect.Field field) {
+        super(field);
     }
 
     @Override
-    public <R, T> RenderedObject<R> renderValue(T entity, RenderedObject<R> rendered) {
-        try {
-            this.field.setAccessible(true);
-            return rendered.with(this.field.getName(), this.getValue(entity));
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private <T> BigInteger getValue(T entity) throws IllegalAccessException {
-        return (BigInteger) this.field.get(entity);
+    protected <T> Printable printableOf(T entity) throws IllegalAccessException {
+        Object value = this.field.get(entity);
+        return new PrintableBigInteger(value != null ? BigInteger.class.cast(value) : null);
     }
 
     @Override
-    public <T> Rendered<T> print(Media<T> media) {
-        return media.asObject()
-            .with("name", this.field.getName())
-            .with("type", "number");
+    protected String type() {
+        return "number";
     }
 }

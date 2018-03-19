@@ -26,22 +26,4 @@ public final class HttpJsonResult extends ResultDelegate<HttpServletResponse> {
             )
         );
     }
-
-    public HttpJsonResult(Collection<Printable> printable) {
-        super(
-            new HttpContentResult(
-                new PrintableResult(printable, new JsonMedia()),
-                CONTENT_TYPE_JSON
-            )
-        );
-    }
-
-    public HttpJsonResult(Iterable<Printable> printable) {
-        super(
-            new HttpContentResult(
-                new PrintableResult(printable, new JsonMedia()),
-                CONTENT_TYPE_JSON
-            )
-        );
-    }
 }

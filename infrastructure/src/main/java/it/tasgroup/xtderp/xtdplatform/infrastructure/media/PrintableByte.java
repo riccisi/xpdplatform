@@ -18,7 +18,7 @@ import java.util.Date;
 @ToString(of = "value")
 public final class PrintableByte implements Printable {
 
-    private final byte value;
+    private final Byte value;
 
     @Override
     public <T> Rendered<T> print(Media<T> media) {

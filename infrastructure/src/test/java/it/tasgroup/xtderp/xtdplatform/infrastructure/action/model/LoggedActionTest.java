@@ -8,12 +8,8 @@ import org.junit.Test;
 public class LoggedActionTest {
 
     @Test
-    public void execute() {
-        LoggedAction action = new LoggedAction(Action.EMPTY);
-        try {
-            action.execute(Request.EMPTY);
-        } catch (Exception e) {
-            throw new IllegalStateException(e);
-        }
+    public void execute() throws Exception {
+        LoggedAction action = new LoggedAction(new Action.Fake("test"));
+        action.execute(Request.EMPTY);
     }
 }

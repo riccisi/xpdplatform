@@ -1,13 +1,11 @@
 package it.tasgroup.xtderp.xtdplatform.infrastructure.action.model;
 
-import it.tasgroup.xtderp.xtdplatform.infrastructure.action.Action;
-import it.tasgroup.xtderp.xtdplatform.infrastructure.action.ActionLookup;
-import it.tasgroup.xtderp.xtdplatform.infrastructure.action.ActionNotFoundException;
-import it.tasgroup.xtderp.xtdplatform.infrastructure.action.DefaultActionLookup;
+import it.tasgroup.xtderp.xtdplatform.infrastructure.action.*;
 import org.cactoos.list.ListOf;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.*;
 
@@ -20,20 +18,16 @@ import static org.junit.Assert.*;
  */
 public class DefaultActionLookupTest {
 
-    private ActionLookup lookup;
-
-    @Before
-    public void init() {
-        this.lookup = new DefaultActionLookup(() -> new ListOf<>(Action.EMPTY).iterator());
-    }
-
     @Test
-    public void okForGoodId() throws Exception {
-        assertThat(this.lookup.get("empty"), notNullValue());
+    public void testRightGetWithGoodId() throws Exception {
+        assertThat(
+            new DefaultActionLookup(new Actions.Fake(new Action.Fake("test"))).get("test"),
+            equalTo(new Action.Fake("test"))
+        );
     }
 
     @Test(expected = ActionNotFoundException.class)
     public void failForWrongId() throws Exception {
-        this.lookup.get("wrong");
+        new DefaultActionLookup(new Actions.Fake()).get("test");
     }
 }

@@ -14,7 +14,6 @@ import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 @RequiredArgsConstructor
 public class ClassModelMetadata<T> implements ModelMetadata {
@@ -29,7 +28,7 @@ public class ClassModelMetadata<T> implements ModelMetadata {
     @Override
     public Iterator<Attribute> iterator() {
         List<Attribute> fields = new ArrayList<>();
-        ReflectionUtils.doWithFields(this.modelClass, field -> fields.add(buildField(field)), this::filter);
+        ReflectionUtils.doWithFields(this.modelClass, field -> fields.add(this.buildField(field)), this::filter);
         return fields.iterator();
     }
 
@@ -40,7 +39,7 @@ public class ClassModelMetadata<T> implements ModelMetadata {
             case "java.lang.Boolean": case "boolean": return new BooleanField(field);
             case "java.lang.Character": case "char": return new CharField(field);
             case "java.lang.Short": case "short": return new ShortField(field);
-            case "java.lang.Integer": case "int": return new IntField(field);
+            case "int": case "java.lang.Integer": return new IntField(field);
             case "java.lang.Long": case "long": return new LongField(field);
             case "java.lang.Float": case "float": return new FloatField(field);
             case "java.lang.Double": case "double": return new DoubleField(field);

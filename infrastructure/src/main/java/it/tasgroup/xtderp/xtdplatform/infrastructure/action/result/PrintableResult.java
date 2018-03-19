@@ -10,6 +10,7 @@ import org.cactoos.list.ListOf;
 
 import java.io.OutputStream;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * {@link Result} that print a {@link Printable} asObject to an {@link OutputStream} using a {@link Media}.
@@ -24,14 +25,6 @@ public final class PrintableResult implements Result<OutputStream> {
     private final Printable result;
 
     private final Media<?> media;
-
-    public PrintableResult(Collection<Printable> printable, Media media) {
-        this(new PrintableCollection(printable), media);
-    }
-
-    public PrintableResult(Iterable<Printable> printable, Media media) {
-        this(new PrintableCollection(new ListOf<>(printable)), media);
-    }
 
     @Override
     public void writeOn(OutputStream stream) throws Exception {

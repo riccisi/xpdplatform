@@ -5,6 +5,7 @@ import org.cactoos.Func;
 import org.cactoos.list.Mapped;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -16,7 +17,7 @@ import java.util.Collection;
 @RequiredArgsConstructor
 public final class PrintableCollection implements Printable {
 
-    private final Collection<Printable> printables;
+    private final List<Printable> printables;
 
     public <T> PrintableCollection(Collection<T> collection, Func<T,Printable> mapFunction) {
         this.printables = new Mapped<>(mapFunction, collection);
@@ -26,5 +27,4 @@ public final class PrintableCollection implements Printable {
     public <T> Rendered<T> print(Media<T> media) {
         return media.asList().with(this.printables);
     }
-
 }

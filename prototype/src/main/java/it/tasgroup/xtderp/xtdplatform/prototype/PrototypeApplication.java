@@ -28,11 +28,11 @@ public class PrototypeApplication extends SpringBootServletInitializer {
     public CommandLineRunner demo(CustomerRepository repository) {
         return (args) -> {
             // save a couple of customers
-            repository.save(new Customer("Jack", "Bauer", new StringAsDate("dd/MM/yyyy","21/09/1973").value()));
-            repository.save(new Customer("Chloe", "O'Brian", new StringAsDate("dd/MM/yyyy","01/03/1938").value()));
-            repository.save(new Customer("Kim", "Bauer", new StringAsDate("dd/MM/yyyy","13/02/1960").value()));
-            repository.save(new Customer("David", "Palmer", new StringAsDate("dd/MM/yyyy","05/05/1998").value()));
-            repository.save(new Customer("Michelle", "Dessler", new StringAsDate("dd/MM/yyyy","12/11/1983").value()));
+            repository.save(new Customer("Jack", "Bauer", new StringAsDate("dd/MM/yyyy","21/09/1973").value(),null));
+            repository.save(new Customer("Chloe", "O'Brian", new StringAsDate("dd/MM/yyyy","01/03/1938").value(),null));
+            repository.save(new Customer("Kim", "Bauer", new StringAsDate("dd/MM/yyyy","13/02/1960").value(),null));
+            repository.save(new Customer("David", "Palmer", new StringAsDate("dd/MM/yyyy","05/05/1998").value(),null));
+            repository.save(new Customer("Michelle", "Dessler", new StringAsDate("dd/MM/yyyy","12/11/1983").value(),null));
         };
     }
 

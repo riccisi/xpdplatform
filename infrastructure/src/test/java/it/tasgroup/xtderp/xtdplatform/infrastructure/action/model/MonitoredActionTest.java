@@ -8,12 +8,8 @@ import org.junit.Test;
 public class MonitoredActionTest {
 
     @Test
-    public void execute() {
-        MonitoredAction monitoredAction = new MonitoredAction(Action.EMPTY);
-        try {
-            monitoredAction.execute(Request.EMPTY);
-        } catch (Exception e) {
-            throw new IllegalStateException(e);
-        }
+    public void execute() throws Exception {
+        MonitoredAction monitoredAction = new MonitoredAction(new Action.Fake("test"));
+        monitoredAction.execute(Request.EMPTY);
     }
 }

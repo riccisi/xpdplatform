@@ -1,6 +1,8 @@
 package it.tasgroup.xtderp.xtdplatform.infrastructure.media;
 
+import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
 import java.util.Date;
 
@@ -12,6 +14,8 @@ import java.util.Date;
  * @since 1.0
  */
 @RequiredArgsConstructor
+@EqualsAndHashCode(of = "value", callSuper = false)
+@ToString(of = "value")
 public class PrintableDate implements Printable {
 
     private final Date value;

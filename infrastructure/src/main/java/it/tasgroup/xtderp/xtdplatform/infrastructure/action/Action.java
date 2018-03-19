@@ -4,6 +4,9 @@ import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Media;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Printable;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Rendered;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.util.Identified;
+import lombok.EqualsAndHashCode;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
 /**
  * The Action.<br>
@@ -23,20 +26,29 @@ public interface Action<T,R> extends Identified, Printable {
      */
     Result<R> execute(Request<T> request) throws Exception;
 
-    Action EMPTY = new Action() {
+    /**
+     * Fake Action implementation class for testing purpose.
+     */
+    @RequiredArgsConstructor
+    @EqualsAndHashCode
+    @ToString
+    final class Fake implements Action<String,StringBuffer> {
+
+        private final String id;
+
         @Override
-        public Rendered print(Media media) {
-            return Rendered.EMPTY;
+        public Result<StringBuffer> execute(Request<String> request) {
+            return out -> out.append(request.value());
+        }
+
+        @Override
+        public <R> Rendered<R> print(Media<R> media) {
+            return media.asObject().with("id", this.id());
         }
 
         @Override
         public String id() {
-            return "empty";
+            return this.id;
         }
-
-        @Override
-        public Result execute(Request request) {
-            return Result.EMPTY;
-        }
-    };
+    }
 }

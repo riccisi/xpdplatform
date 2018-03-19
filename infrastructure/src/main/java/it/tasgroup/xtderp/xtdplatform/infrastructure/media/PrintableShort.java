@@ -16,7 +16,7 @@ import lombok.ToString;
 @ToString(of = "value")
 public final class PrintableShort implements Printable {
 
-    private final short value;
+    private final Short value;
 
     @Override
     public <T> Rendered<T> print(Media<T> media) {

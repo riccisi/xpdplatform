@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -32,13 +33,15 @@ public interface RenderedObject<T> extends Rendered<T> {
 
     RenderedObject<T> with(String k, char v);
 
+    RenderedObject<T> with(String k, Number v);
+
     RenderedObject<T> with(String k, Date v);
 
     RenderedObject<T> with(String k, BigDecimal v);
 
     RenderedObject<T> with(String k, BigInteger v);
 
-    RenderedObject<T> with(String k, Collection<Printable> v);
+    RenderedObject<T> with(String k, List<Printable> v);
 
     RenderedObject<T> with(String k, String... v);
 

@@ -16,7 +16,7 @@ import lombok.ToString;
 @ToString(of = "value")
 public final class PrintableChar implements Printable {
 
-    private final char value;
+    private final Character value;
 
     @Override
     public <T> Rendered<T> print(Media<T> media) {

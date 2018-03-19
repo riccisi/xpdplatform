@@ -46,10 +46,10 @@ public class ConfigurableMenuTest {
 
         @Override
         public void configure(MenuBuilder menuBuilder) {
-            menuBuilder.add("a.b.c", Action.EMPTY);
-            menuBuilder.add("a.b.d", Action.EMPTY);
-            menuBuilder.add("a.b.e", Action.EMPTY);
-            menuBuilder.add("a.z.x", Action.EMPTY);
+            menuBuilder.add("a.b.c", new Action.Fake("abc"));
+            menuBuilder.add("a.b.d", new Action.Fake("abd"));
+            menuBuilder.add("a.b.e", new Action.Fake("abe"));
+            menuBuilder.add("a.z.x", new Action.Fake("azx"));
         }
     }
 }

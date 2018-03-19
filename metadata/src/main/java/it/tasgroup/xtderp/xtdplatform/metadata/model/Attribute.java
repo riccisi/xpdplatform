@@ -14,5 +14,5 @@ public interface Attribute extends Printable {
 
     String name();
 
-    <R,T> RenderedObject<R> renderValue(T entity, RenderedObject<R> rendered);
+    <R,T> RenderedObject<R> printValue(T entity, RenderedObject<R> rendered);
 }

@@ -30,7 +30,7 @@ public class ActionService {
         return this.actions;
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/{id:.+}", method = {RequestMethod.POST,RequestMethod.GET})
     @SuppressWarnings("unchecked")
     public void execute(
             @PathVariable(value = "id") String id,

@@ -3,7 +3,6 @@ package it.tasgroup.xtderp.xtdplatform.infrastructure.media.json;
 import com.fasterxml.jackson.databind.JsonNode;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Media;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Rendered;
-import it.tasgroup.xtderp.xtdplatform.infrastructure.media.RenderedObject;
 import lombok.RequiredArgsConstructor;
 
 import java.math.BigDecimal;
@@ -26,53 +25,58 @@ public final class JsonMedia implements Media<JsonNode> {
     }
 
     @Override
-    public Rendered<JsonNode> as(byte value) {
-        return new JsonByte(value);
+    public Rendered<JsonNode> as(Byte value) {
+        return new NullSafeJsonRendered(value, new JsonByte(value));
     }
 
     @Override
-    public Rendered<JsonNode> as(boolean value) {
-        return new JsonBoolean(value);
+    public Rendered<JsonNode> as(Boolean value) {
+        return new NullSafeJsonRendered(value, new JsonBoolean(value));
     }
 
     @Override
-    public Rendered<JsonNode> as(short value) {
-        return new JsonFloat(value);
+    public Rendered<JsonNode> as(Character value) {
+        return new NullSafeJsonRendered(value, new JsonChar(value));
     }
 
     @Override
-    public Rendered<JsonNode> as(int value) {
-        return new JsonInt(value);
+    public Rendered<JsonNode> as(Short value) {
+        return new NullSafeJsonRendered(value, new JsonShort(value));
     }
 
     @Override
-    public Rendered<JsonNode> as(long value) {
-        return new JsonLong(value);
+    public Rendered<JsonNode> as(Integer value) {
+        return new NullSafeJsonRendered(value, new JsonInt(value));
     }
 
     @Override
-    public Rendered<JsonNode> as(float value) {
-        return new JsonFloat(value);
+    public Rendered<JsonNode> as(Long value) {
+        return new NullSafeJsonRendered(value, new JsonLong(value));
     }
 
     @Override
-    public Rendered<JsonNode> as(double value) {
-        return new JsonDouble(value);
+    public Rendered<JsonNode> as(Float value) {
+        return new NullSafeJsonRendered(value, new JsonFloat(value));
+    }
+
+    @Override
+    public Rendered<JsonNode> as(Double value) {
+        return new NullSafeJsonRendered(value, new JsonDouble(value));
     }
 
     @Override
     public Rendered<JsonNode> as(String value) {
-        return new JsonString(value);
+        return new NullSafeJsonRendered(value, new JsonString(value));
     }
 
     @Override
     public Rendered<JsonNode> as(Date value) {
-        return new JsonDate(value);
+        return new NullSafeJsonRendered(value, new JsonDate(value));
     }
 
     @Override
     public Rendered<JsonNode> as(BigDecimal value) {
-        return new JsonBigDecimal(value);
+        return new NullSafeJsonRendered(value, new JsonBigDecimal(value));
     }
 
     @Override
@@ -80,8 +84,4 @@ public final class JsonMedia implements Media<JsonNode> {
         return new JsonBigInteger(value);
     }
 
-    @Override
-    public Rendered<JsonNode> asNull() {
-        return new JsonNull();
-    }
 }

@@ -1,11 +1,10 @@
 package it.tasgroup.xtderp.xtdplatform.metadata.model.reflect;
 
-import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Media;
-import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Rendered;
-import it.tasgroup.xtderp.xtdplatform.infrastructure.media.RenderedObject;
+import it.tasgroup.xtderp.xtdplatform.infrastructure.media.*;
 import it.tasgroup.xtderp.xtdplatform.metadata.model.Field;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
 /**
  * Created with IntelliJ IDEA.
@@ -14,35 +13,21 @@ import lombok.RequiredArgsConstructor;
  * @version $Id$
  * @since 1.0
  */
-@RequiredArgsConstructor
-@EqualsAndHashCode
-public final class LongField implements Field {
+@ToString
+final class LongField extends AbstractField {
 
-    private final java.lang.reflect.Field field;
-
-    @Override
-    public String name() {
-        return this.field.getName();
+    LongField(java.lang.reflect.Field field) {
+        super(field);
     }
 
     @Override
-    public <R, T> RenderedObject<R> renderValue(T entity, RenderedObject<R> rendered) {
-        try {
-            this.field.setAccessible(true);
-            return rendered.with(this.field.getName(), this.getValue(entity));
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private <T> long getValue(T entity) throws IllegalAccessException {
-        return this.field.getType().isPrimitive() ? this.field.getLong(entity) : (Long) this.field.get(entity);
+    protected <T> Printable printableOf(T entity) throws IllegalAccessException {
+        Object value = this.field.get(entity);
+        return new PrintableLong(value != null ? Long.class.cast(value) : null);
     }
 
     @Override
-    public <T> Rendered<T> print(Media<T> media) {
-        return media.asObject()
-            .with("name", this.field.getName())
-            .with("type", "number");
+    protected String type() {
+        return "number";
     }
 }

@@ -16,7 +16,7 @@ import lombok.ToString;
 @ToString(of = "value")
 public final class PrintableFloat implements Printable {
 
-    private final float value;
+    private final Float value;
 
     @Override
     public <T> Rendered<T> print(Media<T> media) {

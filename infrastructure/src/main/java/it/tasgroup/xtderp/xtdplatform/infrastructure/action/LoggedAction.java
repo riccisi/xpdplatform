@@ -34,7 +34,7 @@ public final class LoggedAction implements Action {
     }
 
     @Override
-    public Rendered print(Media media) {
-        return this.delegate.print(media);
+    public <R> Rendered<R> print(Media<R> media) {
+        throw new UnsupportedOperationException("#print()");
     }
 }

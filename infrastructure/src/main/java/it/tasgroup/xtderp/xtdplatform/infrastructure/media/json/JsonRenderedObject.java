@@ -2,18 +2,20 @@ package it.tasgroup.xtderp.xtdplatform.infrastructure.media.json;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.*;
-import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Printable;
-import it.tasgroup.xtderp.xtdplatform.infrastructure.media.RenderedList;
-import it.tasgroup.xtderp.xtdplatform.infrastructure.media.RenderedObject;
+import it.tasgroup.xtderp.xtdplatform.infrastructure.media.*;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.util.DefaultDateAsString;
 import lombok.RequiredArgsConstructor;
+import org.cactoos.Func;
+import org.cactoos.func.FuncOf;
+import org.cactoos.iterable.IterableOf;
+import org.cactoos.list.Joined;
+import org.cactoos.list.ListOf;
+import org.cactoos.map.MapEntry;
+import org.cactoos.map.MapOf;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.Collection;
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -25,119 +27,99 @@ import java.util.Map;
 @RequiredArgsConstructor
 final class JsonRenderedObject extends JsonRendered implements RenderedObject<JsonNode> {
 
-    private final Map<String, JsonNode> data;
+    private final List<MapEntry<String,Printable>> data;
 
     JsonRenderedObject() {
-        this(new LinkedHashMap<>());
+        this(new ListOf<>());
     }
 
     @Override
     public JsonRenderedObject with(String k, String v) {
-        return new JsonRenderedObject(new LinkedHashMap<String, JsonNode>(this.data) {{
-            this.put(k, new TextNode(v));
-        }});
+        return this.with(k, new PrintableString(v));
     }
 
     @Override
     public JsonRenderedObject with(String k, byte v) {
-        return new JsonRenderedObject(new LinkedHashMap<String, JsonNode>(this.data) {{
-            this.put(k, new ShortNode(v));
-        }});
+        return this.with(k, new PrintableByte(v));
     }
 
     @Override
     public JsonRenderedObject with(String k, short v) {
-        return new JsonRenderedObject(new LinkedHashMap<String, JsonNode>(this.data) {{
-            this.put(k, new ShortNode(v));
-        }});
+        return this.with(k, new PrintableShort(v));
     }
 
     @Override
     public JsonRenderedObject with(String k, int v) {
-        return new JsonRenderedObject(new LinkedHashMap<String, JsonNode>(this.data) {{
-            this.put(k, new IntNode(v));
-        }});
+        return this.with(k, new PrintableInt(v));
     }
 
     @Override
     public JsonRenderedObject with(String k, long v) {
-        return new JsonRenderedObject(new LinkedHashMap<String, JsonNode>(this.data) {{
-            this.put(k, new LongNode(v));
-        }});
+        return this.with(k, new PrintableLong(v));
     }
 
     @Override
     public JsonRenderedObject with(String k, float v) {
-        return new JsonRenderedObject(new LinkedHashMap<String, JsonNode>(this.data) {{
-            this.put(k, new FloatNode(v));
-        }});
+        return this.with(k, new PrintableFloat(v));
     }
 
     @Override
     public JsonRenderedObject with(String k, double v) {
-        return new JsonRenderedObject(new LinkedHashMap<String, JsonNode>(this.data) {{
-            this.put(k, new DoubleNode(v));
-        }});
+        return this.with(k, new PrintableDouble(v));
     }
 
     @Override
     public JsonRenderedObject with(String k, boolean v) {
-        return new JsonRenderedObject(new LinkedHashMap<String, JsonNode>(this.data) {{
-            this.put(k, BooleanNode.valueOf(v));
-        }});
+        return this.with(k, new PrintableBoolean(v));
     }
 
     @Override
     public JsonRenderedObject with(String k, char v) {
-        return new JsonRenderedObject(new LinkedHashMap<String, JsonNode>(this.data) {{
-            this.put(k, new TextNode("" + v));
-        }});
+        return this.with(k, new PrintableChar(v));
+    }
+
+    @Override
+    public RenderedObject<JsonNode> with(String k, Number v) {
+        throw new UnsupportedOperationException("#with()");
     }
 
     @Override
     public JsonRenderedObject with(String k, Date v) {
-        return new JsonRenderedObject(new LinkedHashMap<String, JsonNode>(this.data) {{
-            this.put(k, new TextNode(new DefaultDateAsString(v).value()));
-        }});
+        return this.with(k, new PrintableDate(v));
     }
 
     @Override
     public JsonRenderedObject with(String k, BigDecimal v) {
-        return new JsonRenderedObject(new LinkedHashMap<String, JsonNode>(this.data) {{
-            this.put(k, new DecimalNode(v));
-        }});
+        return this.with(k, new PrintableBigDecimal(v));
     }
 
     @Override
     public JsonRenderedObject with(String k, BigInteger v) {
-        return new JsonRenderedObject(new LinkedHashMap<String, JsonNode>(this.data) {{
-            this.put(k, new BigIntegerNode(v));
-        }});
+        return this.with(k, new PrintableBigInteger(v));
     }
 
     @Override
-    public JsonRenderedObject with(String k, Collection<Printable> v) {
-        return new JsonRenderedObject(new LinkedHashMap<String, JsonNode>(this.data) {{
-            this.put(k, new JsonRenderedList().with(v).value());
-        }});
+    public JsonRenderedObject with(String k, List<Printable> v) {
+        return this.with(k, new PrintableCollection(v));
     }
 
     @Override
     public RenderedObject<JsonNode> with(String k, String... v) {
-        return new JsonRenderedObject(new LinkedHashMap<String, JsonNode>(this.data) {{
-            this.put(k, new JsonRenderedList().with(v).value());
-        }});
+        return this.with(k, new PrintableCollection(new ListOf<>(v), PrintableString::new));
     }
 
     @Override
     public JsonRenderedObject with(String k, Printable v) {
-        return new JsonRenderedObject(new LinkedHashMap<String, JsonNode>(this.data) {{
-            this.put(k, ((v.print(new JsonMedia())).value()));
-        }});
+        return new JsonRenderedObject(new Joined<>(this.data, new ListOf<>(new MapEntry<>(k, v))));
     }
 
     @Override
     public JsonNode value() {
-        return new ObjectNode(JsonNodeFactory.instance, this.data);
+        JsonMedia media = new JsonMedia();
+        Map<String,JsonNode> kids = new LinkedHashMap<>();
+        for (MapEntry<String, Printable> entry : this.data) {
+            kids.put(entry.getKey(), entry.getValue().print(media).value());
+        }
+        return new ObjectNode(JsonNodeFactory.instance, kids);
     }
 }

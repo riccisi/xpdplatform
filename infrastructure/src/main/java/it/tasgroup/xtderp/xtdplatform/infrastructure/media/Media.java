@@ -10,19 +10,21 @@ public interface Media<T> {
 
     RenderedList<T> asList();
 
-    Rendered<T> as(byte value);
+    Rendered<T> as(Byte value);
 
-    Rendered<T> as(boolean value);
+    Rendered<T> as(Boolean value);
 
-    Rendered<T> as(short value);
+    Rendered<T> as(Character value);
 
-    Rendered<T> as(int value);
+    Rendered<T> as(Short value);
 
-    Rendered<T> as(long value);
+    Rendered<T> as(Integer value);
 
-    Rendered<T> as(float value);
+    Rendered<T> as(Long value);
 
-    Rendered<T> as(double value);
+    Rendered<T> as(Float value);
+
+    Rendered<T> as(Double value);
 
     Rendered<T> as(String value);
 
@@ -31,6 +33,4 @@ public interface Media<T> {
     Rendered<T> as(BigDecimal value);
 
     Rendered<T> as(BigInteger value);
-
-    Rendered<T> asNull();
 }

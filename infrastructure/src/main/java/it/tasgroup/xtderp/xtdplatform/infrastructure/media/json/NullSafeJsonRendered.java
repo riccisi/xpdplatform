@@ -1,8 +1,10 @@
 package it.tasgroup.xtderp.xtdplatform.infrastructure.media.json;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectReader;
 import com.fasterxml.jackson.databind.node.NullNode;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Rendered;
+import lombok.RequiredArgsConstructor;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,10 +13,14 @@ import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Rendered;
  * @version $Id$
  * @since 1.0
  */
-final class JsonNull extends JsonRendered implements Rendered<JsonNode> {
+@RequiredArgsConstructor
+final class NullSafeJsonRendered extends JsonRendered implements Rendered<JsonNode> {
+
+    private final Object value;
+    private final Rendered<JsonNode> rendered;
 
     @Override
     public JsonNode value() {
-        return NullNode.getInstance();
+        return this.value != null ? this.rendered.value() : NullNode.getInstance();
     }
 }
