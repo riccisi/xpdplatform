@@ -2,8 +2,8 @@ package it.tasgroup.xtderp.xtdplatform.metadata.query.jpa;
 
 import it.tasgroup.xtderp.xtdplatform.infrastructure.action.ActionConfigurer;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.action.ActionRegister;
-import it.tasgroup.xtderp.xtdplatform.metadata.query.CsvQueryAction;
-import it.tasgroup.xtderp.xtdplatform.metadata.query.JsonQueryAction;
+import it.tasgroup.xtderp.xtdplatform.metadata.query.action.CsvQueryAction;
+import it.tasgroup.xtderp.xtdplatform.metadata.query.action.JsonQueryAction;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 
@@ -22,9 +22,8 @@ public class JpaActionConfigurer implements ActionConfigurer {
         Set<EntityType<?>> entityTypes = this.entityManager.getMetamodel().getEntities();
         for (EntityType<?> entityType : entityTypes) {
             Class<?> entityClass = entityType.getJavaType();
-            JpaQuery<?> query = new JpaQuery<>(entityClass, entityManager);
-            register.add(new JsonQueryAction(query));
-            register.add(new CsvQueryAction(query));
+            register.add(new JsonQueryAction(new JpaPaginatedQuery<>(entityClass, entityManager)));
+            register.add(new CsvQueryAction(new JpaFullQuery<>(entityClass, entityManager)));
             log.info(String.format("Query actions for entity %s succesfully registered!", entityClass));
         }
     }

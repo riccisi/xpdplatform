@@ -26,11 +26,11 @@ import java.util.List;
  * @since 1.0
  */
 @RequiredArgsConstructor
-public final class CsvRenderedList implements RenderedList<CsvObject> {
+final class CsvRenderedList implements RenderedList<CsvObject> {
 
     private final List<Printable> printables;
 
-    public CsvRenderedList() {
+    CsvRenderedList() {
         this(new ListOf<>());
     }
 

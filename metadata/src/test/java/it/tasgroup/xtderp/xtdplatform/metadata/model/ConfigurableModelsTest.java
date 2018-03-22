@@ -1,12 +1,12 @@
 package it.tasgroup.xtderp.xtdplatform.metadata.model;
 
-import org.junit.*;
+import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Iterator;
 
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class ConfigurableModelsTest {
 

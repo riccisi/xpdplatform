@@ -4,6 +4,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
+import java.text.ParseException;
 import java.util.Date;
 
 @RequiredArgsConstructor
@@ -14,7 +15,7 @@ public class DefaultStringAsDate extends DefaultDateFormat implements Scalar<Dat
     private final String dateString;
 
     @Override
-    public Date value() {
+    public Date value() throws ParseException {
         return new StringAsDate(defaultFormat(), dateString).value();
     }
 }

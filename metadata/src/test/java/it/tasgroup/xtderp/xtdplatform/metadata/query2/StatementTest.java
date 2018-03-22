@@ -1,7 +1,7 @@
 package it.tasgroup.xtderp.xtdplatform.metadata.query2;
 
-import it.tasgroup.xtderp.xtdplatform.metadata.query.Statement;
-import org.junit.*;
+import it.tasgroup.xtderp.xtdplatform.metadata.query.filter.Statement;
+import org.junit.Test;
 
 public class StatementTest {
 

@@ -1,10 +1,10 @@
 package it.tasgroup.xtderp.xtdplatform.metadata.model;
 
-import org.junit.*;
+import org.junit.Test;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNot.not;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class CachedModelMetadataLookupTest {
 

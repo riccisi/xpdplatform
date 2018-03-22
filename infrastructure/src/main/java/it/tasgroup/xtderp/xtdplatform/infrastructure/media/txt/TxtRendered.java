@@ -1,7 +1,6 @@
 package it.tasgroup.xtderp.xtdplatform.infrastructure.media.txt;
 
 import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Rendered;
-import lombok.RequiredArgsConstructor;
 
 import java.io.IOException;
 import java.io.OutputStream;

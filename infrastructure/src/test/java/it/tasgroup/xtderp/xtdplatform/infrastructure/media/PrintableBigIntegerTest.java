@@ -1,15 +1,13 @@
 package it.tasgroup.xtderp.xtdplatform.infrastructure.media;
 
 import com.fasterxml.jackson.databind.node.BigIntegerNode;
-import com.fasterxml.jackson.databind.node.DecimalNode;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.media.json.JsonMedia;
 import org.junit.Test;
 
-import java.math.BigDecimal;
 import java.math.BigInteger;
 
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 /**
  * Test case for {@link PrintableBigInteger}

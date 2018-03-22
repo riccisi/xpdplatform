@@ -1,26 +1,16 @@
 package it.tasgroup.xtderp.xtdplatform.proxy.menu;
 
 import it.tasgroup.xtderp.xtdplatform.infrastructure.action.Action;
-import it.tasgroup.xtderp.xtdplatform.infrastructure.action.Request;
-import it.tasgroup.xtderp.xtdplatform.infrastructure.action.Result;
-import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Media;
-import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Rendered;
-import it.tasgroup.xtderp.xtdplatform.infrastructure.menu.model.ConfigurableMenu;
-import it.tasgroup.xtderp.xtdplatform.infrastructure.menu.model.Menu;
-import it.tasgroup.xtderp.xtdplatform.infrastructure.menu.model.MenuBuilder;
-import it.tasgroup.xtderp.xtdplatform.infrastructure.menu.model.MenuConfigurer;
-import it.tasgroup.xtderp.xtdplatform.infrastructure.menu.model.MenuFolder;
-import it.tasgroup.xtderp.xtdplatform.infrastructure.menu.model.MenuItem;
-import it.tasgroup.xtderp.xtdplatform.infrastructure.menu.model.MenuNode;
-import lombok.RequiredArgsConstructor;
-import org.junit.*;
+import it.tasgroup.xtderp.xtdplatform.infrastructure.menu.model.*;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import static java.util.Collections.singletonList;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class AggregatedMenuTest {
 
@@ -82,9 +72,9 @@ public class AggregatedMenuTest {
 
         @Override
         public void configure(MenuBuilder builder) {
-            builder.add("a.b.c", new MockAction("f1"));
-            builder.add("a.b.d", new MockAction("f2"));
-            builder.add("a.e", new MockAction("f3"));
+            builder.add("a.b.c", new Action.Fake("f1"));
+            builder.add("a.b.d", new Action.Fake("f2"));
+            builder.add("a.e", new Action.Fake("f3"));
         }
     }
 
@@ -92,29 +82,8 @@ public class AggregatedMenuTest {
 
         @Override
         public void configure(MenuBuilder builder) {
-            builder.add("a.b.f", new MockAction("f4"));
-            builder.add("g.h.i", new MockAction("f5"));
-        }
-    }
-
-    @RequiredArgsConstructor
-    class MockAction implements Action {
-
-        private final String id;
-
-        @Override
-        public Result execute(Request request) throws Exception {
-            return Result.EMPTY;
-        }
-
-        @Override
-        public String id() {
-            return null;
-        }
-
-        @Override
-        public <T> Rendered<T> print(Media<T> media) {
-            throw new UnsupportedOperationException("#print()");
+            builder.add("a.b.f", new Action.Fake("f4"));
+            builder.add("g.h.i", new Action.Fake("f5"));
         }
     }
 }

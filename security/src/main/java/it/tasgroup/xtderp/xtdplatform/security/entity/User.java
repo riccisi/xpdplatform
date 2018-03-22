@@ -95,62 +95,6 @@ public class User extends BaseEntity {
         inverseJoinColumns={@JoinColumn(name="ID_ROLE", referencedColumnName="ID")})
     private List<Role> roles = new ArrayList<>();
 
-    public String getRifId() {
-        return rifId;
-    }
-
-    public void setRifId(String rifId) {
-        this.rifId = rifId;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getDisplayName() {
-        return displayName;
-    }
-
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
-    }
-
-    public boolean getActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-
     @PrePersist
     private void encodePassword() {
         this.password = new BCryptPasswordEncoder().encode(this.password);

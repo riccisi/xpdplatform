@@ -2,23 +2,15 @@ package it.tasgroup.xtderp.xtdplatform.infrastructure.menu.parser;
 
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.fasterxml.jackson.databind.ser.std.NullSerializer;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.menu.model.MenuFolder;
-import it.tasgroup.xtderp.xtdplatform.infrastructure.menu.model.MenuItem;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.menu.model.MenuNode;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.menu.model.MenuNodeVisitor;
-import org.junit.*;
+import org.junit.Test;
 
-import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 
 import static org.hamcrest.MatcherAssert.assertThat;

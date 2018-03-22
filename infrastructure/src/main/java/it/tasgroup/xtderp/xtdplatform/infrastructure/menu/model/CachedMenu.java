@@ -3,10 +3,6 @@ package it.tasgroup.xtderp.xtdplatform.infrastructure.menu.model;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.util.CachedIterable;
 import lombok.RequiredArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 /**
  * Decorator of a Menu (delegate) that caches subsequent calls to the iterator method.
  */

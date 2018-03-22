@@ -5,9 +5,9 @@ import it.tasgroup.xtderp.xtdplatform.metadata.model.ModelRegister;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 
-import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.metamodel.EntityType;
+import java.util.Set;
 
 @Log
 @RequiredArgsConstructor

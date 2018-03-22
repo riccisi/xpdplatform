@@ -1,21 +1,23 @@
 package it.tasgroup.xtderp.xtdplatform.infrastructure.util;
 
 //import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
-//import it.tasgroup.xtderp.xtdplatform.model.model.annotation.XtdExclude;
 import lombok.SneakyThrows;
 import org.apache.commons.lang.ClassUtils;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
+import javax.validation.constraints.NotNull;
 import java.beans.PropertyDescriptor;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.text.SimpleDateFormat;
-import javax.validation.constraints.NotNull;
+
+//import it.tasgroup.xtderp.xtdplatform.model.model.annotation.XtdExclude;
 
 public class AttributeDescriptor {
 

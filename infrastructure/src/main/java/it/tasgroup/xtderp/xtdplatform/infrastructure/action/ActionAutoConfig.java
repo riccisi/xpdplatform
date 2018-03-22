@@ -1,5 +1,6 @@
 package it.tasgroup.xtderp.xtdplatform.infrastructure.action;
 
+import it.tasgroup.xtderp.xtdplatform.infrastructure.action.service.ActionExecutionService;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.action.service.ActionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -30,8 +31,13 @@ public class ActionAutoConfig {
     }
 
     @Bean
-    public ActionService actionService(Actions actions, ActionLookup lookup) {
-        return new ActionService(actions, lookup);
+    public ActionService actionService(Actions actions) {
+        return new ActionService(actions);
+    }
+
+    @Bean
+    public ActionExecutionService actionExecutionService(ActionLookup lookup) {
+        return new ActionExecutionService(lookup);
     }
 
 }

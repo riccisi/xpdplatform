@@ -20,8 +20,4 @@ public class Permission extends AbstractAuditableModel {
     @Column(name = "COD")
     private String id;
 
-    public String getCode() {
-        return id;
-    }
-
 }*/

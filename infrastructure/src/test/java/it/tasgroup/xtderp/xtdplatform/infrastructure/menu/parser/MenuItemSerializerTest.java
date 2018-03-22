@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.action.Action;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.menu.model.MenuItem;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.menu.model.MenuNodeVisitor;
-import org.junit.*;
+import org.junit.Test;
 
 import java.io.StringWriter;
 import java.io.Writer;

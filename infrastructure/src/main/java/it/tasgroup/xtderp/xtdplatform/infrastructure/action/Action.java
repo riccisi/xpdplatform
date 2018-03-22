@@ -11,12 +11,14 @@ import lombok.ToString;
 /**
  * The Action.<br>
  *
- * Represents a functionality exposed by the application.
+ * It's a cardinal rule of the overall infrastructure because represents a functionality exposed by the application.
+ * Each pre-built functions provided by the platform is modeled by an Action.
  *
- * @param <T> The type of the request
- * @param <R> The type of the result.
+ * @author Simone Ricciardi (simone.ricciardi@gmail.com)
+ * @version $Id$
+ * @since 1.0
  */
-public interface Action<T,R> extends Identified, Printable {
+public interface Action extends Identified, Printable {
 
     /**
      * An action can be executed calling this method.
@@ -24,7 +26,7 @@ public interface Action<T,R> extends Identified, Printable {
      * @param request
      * @return
      */
-    Result<R> execute(Request<T> request) throws Exception;
+    Result execute(Request request) throws Exception;
 
     /**
      * Fake Action implementation class for testing purpose.
@@ -32,13 +34,19 @@ public interface Action<T,R> extends Identified, Printable {
     @RequiredArgsConstructor
     @EqualsAndHashCode
     @ToString
-    final class Fake implements Action<String,StringBuffer> {
+    final class Fake implements Action {
 
         private final String id;
 
+        /**
+         * A fake execute implementation: write to the output the value of the input.
+         *
+         * @param request
+         * @return
+         */
         @Override
-        public Result<StringBuffer> execute(Request<String> request) {
-            return out -> out.append(request.value());
+        public Result execute(Request request) {
+            return out -> out.writer().write(request.asString());
         }
 
         @Override

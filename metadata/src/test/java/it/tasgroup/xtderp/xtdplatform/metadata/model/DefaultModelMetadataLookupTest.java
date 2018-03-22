@@ -1,11 +1,12 @@
 package it.tasgroup.xtderp.xtdplatform.metadata.model;
 
-import org.junit.*;
+import org.junit.Test;
 
 import java.util.Arrays;
 
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 
 public class DefaultModelMetadataLookupTest {
 

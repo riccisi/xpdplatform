@@ -1,10 +1,22 @@
 package it.tasgroup.xtderp.xtdplatform.infrastructure.action;
 
-import java.util.Optional;
+import org.cactoos.text.TextOf;
 
-public interface Request<T> {
+import java.io.IOException;
+import java.io.InputStream;
 
-    Request EMPTY = Optional::empty;
+/**
+ * Created with IntelliJ IDEA.
+ *
+ * @author Simone Ricciardi (simone.ricciardi@gmail.com)
+ * @version $Id$
+ * @since 1.0
+ */
+public interface Request {
 
-    T value() throws Exception;
+    InputStream body() throws IOException;
+
+    default String asString() throws IOException {
+       return new TextOf(this.body()).asString();
+    }
 }

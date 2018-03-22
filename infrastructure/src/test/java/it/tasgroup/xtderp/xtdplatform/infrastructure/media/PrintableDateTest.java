@@ -2,7 +2,6 @@ package it.tasgroup.xtderp.xtdplatform.infrastructure.media;
 
 import it.tasgroup.xtderp.xtdplatform.infrastructure.media.json.JsonMedia;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.util.DefaultDateAsString;
-import it.tasgroup.xtderp.xtdplatform.infrastructure.util.DefaultStringAsDate;
 import org.cactoos.io.OutputStreamTo;
 import org.junit.Test;
 
@@ -10,7 +9,7 @@ import java.io.StringWriter;
 import java.util.Date;
 
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 /**
  * Test case for {@link PrintableDate}

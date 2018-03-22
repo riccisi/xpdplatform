@@ -41,27 +41,6 @@ public class Role extends BaseEntity {
     @XtdExclude
     private List<Permission> permissions;
 
-    public String getCod() {
-        return cod;
-    }
-
-    public void setCod(String cod) {
-        this.cod = cod;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getDescription() {
-
-        return description;
-    }
-
-    public List<Permission> getPermissions() {
-        return permissions;
-    }
-
     public List<String> permissionCodes() {
         List<String> permissionCodes = new ArrayList<>();
         for(Permission permission : permissions) {

@@ -3,7 +3,6 @@ package it.tasgroup.xtderp.xtdplatform.infrastructure.media.json;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Rendered;
-import lombok.RequiredArgsConstructor;
 
 import java.io.IOException;
 import java.io.OutputStream;

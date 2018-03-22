@@ -1,8 +1,7 @@
 package it.tasgroup.xtderp.xtdplatform.infrastructure.menu.model;
 
-import org.junit.*;
+import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 
 import static java.util.Collections.singletonList;

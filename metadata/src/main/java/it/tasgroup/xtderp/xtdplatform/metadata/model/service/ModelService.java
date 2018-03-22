@@ -1,8 +1,8 @@
 package it.tasgroup.xtderp.xtdplatform.metadata.model.service;
 
 import it.tasgroup.xtderp.xtdplatform.metadata.model.ModelLookup;
-import it.tasgroup.xtderp.xtdplatform.metadata.model.Models;
 import it.tasgroup.xtderp.xtdplatform.metadata.model.ModelMetadata;
+import it.tasgroup.xtderp.xtdplatform.metadata.model.Models;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

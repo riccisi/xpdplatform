@@ -4,12 +4,12 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import org.junit.*;
+import org.junit.Test;
 
 import java.util.Properties;
 
 import static org.hamcrest.Matchers.equalToIgnoringWhiteSpace;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class PropertiesToJsonSerializerTest {
 

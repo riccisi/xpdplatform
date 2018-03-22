@@ -2,6 +2,7 @@ package it.tasgroup.xtderp.xtdplatform.infrastructure.action;
 
 import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Media;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Rendered;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -12,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public final class MonitoredAction implements Action {
 
-    private final Action action;
+    @NonNull  private final Action action;
 
     @Override
     public String id() {
@@ -32,7 +33,7 @@ public final class MonitoredAction implements Action {
     }
 
     @Override
-    public Rendered print(Media media) {
+    public <R> Rendered<R> print(Media<R> media) {
         return this.action.print(media);
     }
 }

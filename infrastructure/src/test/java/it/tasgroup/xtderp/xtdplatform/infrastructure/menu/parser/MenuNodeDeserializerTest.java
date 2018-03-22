@@ -1,19 +1,17 @@
 package it.tasgroup.xtderp.xtdplatform.infrastructure.menu.parser;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.menu.model.MenuFolder;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.menu.model.MenuItem;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.menu.model.MenuNode;
-import org.junit.*;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.io.IOException;
-import java.io.StringReader;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class MenuNodeDeserializerTest {
 

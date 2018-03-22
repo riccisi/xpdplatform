@@ -3,18 +3,13 @@ package it.tasgroup.xtderp.xtdplatform.infrastructure.media.json;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
-import it.tasgroup.xtderp.xtdplatform.infrastructure.media.*;
+import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Printable;
+import it.tasgroup.xtderp.xtdplatform.infrastructure.media.RenderedList;
 import lombok.RequiredArgsConstructor;
-import org.cactoos.collection.CollectionOf;
 import org.cactoos.list.Joined;
 import org.cactoos.list.ListOf;
 import org.cactoos.list.Mapped;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,71 +31,6 @@ class JsonRenderedList extends JsonRendered implements RenderedList<JsonNode> {
     @Override
     public JsonRenderedList with(List<Printable> printables) {
         return new JsonRenderedList(new Joined<>(this.printables, printables));
-    }
-
-    @Override
-    public JsonRenderedList with(String... value) {
-        return with(new Mapped<>(PrintableString::new, new CollectionOf<>(value)));
-    }
-
-    @Override
-    public RenderedList<JsonNode> with(Integer... value) {
-        return with(new Mapped<>(PrintableInt::new, new CollectionOf<>(value)));
-    }
-
-    @Override
-    public RenderedList<JsonNode> with(Long... value) {
-        return with(new Mapped<>(PrintableLong::new, new CollectionOf<>(value)));
-    }
-
-    @Override
-    public RenderedList<JsonNode> with(Float... value) {
-        return with(new Mapped<>(PrintableFloat::new, new CollectionOf<>(value)));
-    }
-
-    @Override
-    public RenderedList<JsonNode> with(Double... value) {
-        return with(new Mapped<>(PrintableDouble::new, new CollectionOf<>(value)));
-    }
-
-    @Override
-    public RenderedList<JsonNode> with(Character... value) {
-        return with(new Mapped<>(PrintableChar::new, new CollectionOf<>(value)));
-    }
-
-    @Override
-    public RenderedList<JsonNode> with(Date... value) {
-        return with(new Mapped<>(PrintableDate::new, new CollectionOf<>(value)));
-    }
-
-    @Override
-    public RenderedList<JsonNode> with(BigDecimal... value) {
-        return with(new Mapped<>(PrintableBigDecimal::new, new CollectionOf<>(value)));
-    }
-
-    @Override
-    public RenderedList<JsonNode> with(BigInteger... value) {
-        return with(new Mapped<>(PrintableBigInteger::new, new CollectionOf<>(value)));
-    }
-
-    @Override
-    public JsonRenderedList with(Printable... v) {
-        return this.with(Arrays.asList(v));
-    }
-
-    @Override
-    public RenderedList<JsonNode> with(Byte... value) {
-        return with(new Mapped<>(PrintableByte::new, new CollectionOf<>(value)));
-    }
-
-    @Override
-    public RenderedList<JsonNode> with(Boolean... value) {
-        return with(new Mapped<>(PrintableBoolean::new, new CollectionOf<>(value)));
-    }
-
-    @Override
-    public RenderedList<JsonNode> with(Short... value) {
-        return with(new Mapped<>(PrintableShort::new, new CollectionOf<>(value)));
     }
 
     @Override

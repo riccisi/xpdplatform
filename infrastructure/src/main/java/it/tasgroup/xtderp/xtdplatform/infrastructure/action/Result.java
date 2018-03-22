@@ -5,11 +5,11 @@ package it.tasgroup.xtderp.xtdplatform.infrastructure.action;
  *
  * Represents the result produced by the execution of an {@link Action}.
  *
- * @param <T> Type of output on which the implementation of this interface expect to write.
+ * @author Simone Ricciardi (simone.ricciardi@gmail.com)
+ * @version $Id$
+ * @since 1.0
  */
-public interface Result<T> {
+public interface Result {
 
-    Result EMPTY = ont -> {};
-
-    void writeOn(T out) throws Exception;
+    void writeOn(Output output) throws Exception;
 }

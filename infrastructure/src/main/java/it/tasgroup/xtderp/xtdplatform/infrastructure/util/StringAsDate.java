@@ -22,11 +22,7 @@ public class StringAsDate implements Scalar<Date> {
     private final String dateString;
 
     @Override
-    public Date value() {
-        try {
-            return new SimpleDateFormat(format).parse(this.dateString);
-        } catch (ParseException e) {
-            throw new IllegalStateException(e);
-        }
+    public Date value() throws ParseException {
+        return new SimpleDateFormat(format).parse(this.dateString);
     }
 }

@@ -1,12 +1,10 @@
 package it.tasgroup.xtderp.xtdplatform.infrastructure.media.json;
 
 import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Media;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Printable;
-import it.tasgroup.xtderp.xtdplatform.infrastructure.media.json.JsonMedia;
 
 import java.io.IOException;
 

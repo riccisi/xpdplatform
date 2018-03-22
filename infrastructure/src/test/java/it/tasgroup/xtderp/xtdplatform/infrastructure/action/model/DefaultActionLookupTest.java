@@ -1,13 +1,13 @@
 package it.tasgroup.xtderp.xtdplatform.infrastructure.action.model;
 
-import it.tasgroup.xtderp.xtdplatform.infrastructure.action.*;
-import org.cactoos.list.ListOf;
-import org.junit.Before;
+import it.tasgroup.xtderp.xtdplatform.infrastructure.action.Action;
+import it.tasgroup.xtderp.xtdplatform.infrastructure.action.ActionNotFoundException;
+import it.tasgroup.xtderp.xtdplatform.infrastructure.action.Actions;
+import it.tasgroup.xtderp.xtdplatform.infrastructure.action.DefaultActionLookup;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 /**
  * Test case for {@link DefaultActionLookup}

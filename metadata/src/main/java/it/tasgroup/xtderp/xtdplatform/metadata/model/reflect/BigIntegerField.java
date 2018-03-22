@@ -1,11 +1,9 @@
 package it.tasgroup.xtderp.xtdplatform.metadata.model.reflect;
 
-import it.tasgroup.xtderp.xtdplatform.infrastructure.media.*;
-import it.tasgroup.xtderp.xtdplatform.metadata.model.Field;
-import lombok.RequiredArgsConstructor;
+import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Printable;
+import it.tasgroup.xtderp.xtdplatform.infrastructure.media.PrintableBigInteger;
 import lombok.ToString;
 
-import java.math.BigDecimal;
 import java.math.BigInteger;
 
 /**

@@ -1,20 +1,22 @@
 package it.tasgroup.xtderp.xtdplatform.metadata.query.jpa;
 
-import it.tasgroup.xtderp.xtdplatform.metadata.query.Condition;
-import it.tasgroup.xtderp.xtdplatform.metadata.query.LogicOperator;
-import it.tasgroup.xtderp.xtdplatform.metadata.query.Statement;
+import it.tasgroup.xtderp.xtdplatform.metadata.query.filter.Filter;
+import it.tasgroup.xtderp.xtdplatform.metadata.query.filter.json.LogicOperator;
+import it.tasgroup.xtderp.xtdplatform.metadata.query.filter.Statement;
 import lombok.NonNull;
+import org.cactoos.list.ListOf;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.domain.Specifications;
 
-import java.util.Collection;
-import java.util.StringTokenizer;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
+import java.util.Collection;
+import java.util.List;
+import java.util.StringTokenizer;
 
-import static it.tasgroup.xtderp.xtdplatform.metadata.query.LogicOperator.AND;
-import static it.tasgroup.xtderp.xtdplatform.metadata.query.LogicOperator.OR;
+import static it.tasgroup.xtderp.xtdplatform.metadata.query.filter.json.LogicOperator.AND;
+import static it.tasgroup.xtderp.xtdplatform.metadata.query.filter.json.LogicOperator.OR;
 
 public final class JpaStatement<T> implements Statement {
 
@@ -34,29 +36,33 @@ public final class JpaStatement<T> implements Statement {
     }
 
     @Override
-    public Statement and(Condition condition) {
+    public Statement and(Filter... filter) {
+        return this.and(new ListOf<>(filter));
+    }
+
+    @Override
+    public Statement and(List<Filter> filters) {
         JpaStatement<T> jpaStatement = new JpaStatement<>();
-        condition.apply(jpaStatement);
-        strategy.concat(jpaStatement.get());
+        for (Filter filter : filters) {
+            filter.applyOn(jpaStatement);
+            strategy.concat(jpaStatement.get());
+        }
         return this;
     }
 
     @Override
-    public Statement and(Collection<Condition> condition) {
-        return null;
+    public Statement or(Filter... filters) {
+        return this.or(new ListOf<>(filters));
     }
 
     @Override
-    public Statement or(Condition condition) {
+    public Statement or(List<Filter> filters) {
         JpaStatement<T> jpaStatement = new JpaStatement<T>(OR);
-        condition.apply(jpaStatement);
-        strategy.concat(jpaStatement.get());
+        for (Filter filter : filters) {
+            filter.applyOn(jpaStatement);
+            strategy.concat(jpaStatement.get());
+        }
         return this;
-    }
-
-    @Override
-    public Statement or(Collection<Condition> condition) {
-        return null;
     }
 
     @Override

@@ -3,8 +3,6 @@ package it.tasgroup.xtderp.xtdplatform.prototype.repository;
 import it.tasgroup.xtderp.xtdplatform.prototype.model.Customer;
 import org.springframework.data.repository.CrudRepository;
 
-import java.util.List;
-
 /**
  * Created with IntelliJ IDEA.
  *

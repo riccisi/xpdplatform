@@ -5,8 +5,6 @@ import org.junit.Test;
 
 import java.io.StringWriter;
 
-import static org.junit.Assert.*;
-
 /**
  * Test case for {@link CsvMedia}
  *

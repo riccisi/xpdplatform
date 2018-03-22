@@ -1,6 +1,5 @@
 package it.tasgroup.xtderp.xtdplatform.infrastructure.action;
 
-import it.tasgroup.xtderp.xtdplatform.infrastructure.action.request.LoggedRequest;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Media;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Rendered;
 import lombok.NonNull;
@@ -24,7 +23,7 @@ public final class LoggedAction implements Action {
     public Result execute(Request request) throws Exception {
         try {
             log.debug(String.format("Start execution of action '%s'", this.id()));
-            Result result = this.delegate.execute(new LoggedRequest(request));
+            Result result = this.delegate.execute(request);
             log.debug(String.format("Action '%s' executed successfully!", this.id()));
             return result;
         } catch (Throwable e) {
@@ -35,6 +34,6 @@ public final class LoggedAction implements Action {
 
     @Override
     public <R> Rendered<R> print(Media<R> media) {
-        throw new UnsupportedOperationException("#print()");
+        return this.delegate.print(media);
     }
 }

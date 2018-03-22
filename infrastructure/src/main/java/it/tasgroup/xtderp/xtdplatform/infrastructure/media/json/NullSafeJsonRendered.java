@@ -1,7 +1,6 @@
 package it.tasgroup.xtderp.xtdplatform.infrastructure.media.json;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectReader;
 import com.fasterxml.jackson.databind.node.NullNode;
 import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Rendered;
 import lombok.RequiredArgsConstructor;

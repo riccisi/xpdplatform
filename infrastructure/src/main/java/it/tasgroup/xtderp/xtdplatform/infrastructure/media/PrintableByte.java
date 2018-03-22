@@ -4,8 +4,6 @@ import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
-import java.util.Date;
-
 /**
  * Created with IntelliJ IDEA.
  *

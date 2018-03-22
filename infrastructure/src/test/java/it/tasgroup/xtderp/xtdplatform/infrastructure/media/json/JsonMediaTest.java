@@ -2,8 +2,6 @@ package it.tasgroup.xtderp.xtdplatform.infrastructure.media.json;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 /**
  * Test case for {@link $CLASS}
  *

@@ -5,11 +5,11 @@ import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Rendered;
 import it.tasgroup.xtderp.xtdplatform.metadata.model.Attribute;
 import it.tasgroup.xtderp.xtdplatform.metadata.model.CachedModelMetadata;
 import it.tasgroup.xtderp.xtdplatform.metadata.model.EntityMetadata;
-import it.tasgroup.xtderp.xtdplatform.metadata.model.reflect.ClassModelMetadata;
 import it.tasgroup.xtderp.xtdplatform.metadata.model.ModelMetadata;
+import it.tasgroup.xtderp.xtdplatform.metadata.model.reflect.ClassModelMetadata;
 
-import java.util.Iterator;
 import javax.persistence.EntityManager;
+import java.util.Iterator;
 
 public class JpaEntityMetadata<T> implements EntityMetadata<T> {
 

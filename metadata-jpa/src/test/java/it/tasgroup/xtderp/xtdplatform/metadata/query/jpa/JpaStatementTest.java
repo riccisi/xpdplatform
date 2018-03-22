@@ -1,8 +1,6 @@
 package it.tasgroup.xtderp.xtdplatform.metadata.query.jpa;
 
-import org.junit.*;
-
-import static org.junit.Assert.*;
+import org.junit.Test;
 
 public class JpaStatementTest {
 

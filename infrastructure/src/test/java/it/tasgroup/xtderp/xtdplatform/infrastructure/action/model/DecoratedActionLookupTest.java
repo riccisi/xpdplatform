@@ -1,18 +1,6 @@
 package it.tasgroup.xtderp.xtdplatform.infrastructure.action.model;
 
-import it.tasgroup.xtderp.xtdplatform.infrastructure.action.*;
-import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Media;
-import it.tasgroup.xtderp.xtdplatform.infrastructure.media.Rendered;
-import it.tasgroup.xtderp.xtdplatform.infrastructure.media.RenderedObject;
-import lombok.RequiredArgsConstructor;
-import org.junit.Before;
-import org.junit.Test;
-
-import java.io.StringWriter;
-import java.io.Writer;
-
-import static org.hamcrest.core.IsEqual.equalTo;
-import static org.junit.Assert.*;
+import it.tasgroup.xtderp.xtdplatform.infrastructure.action.DecoratedActionLookup;
 
 /**
  * Test case for {@link DecoratedActionLookup}.
@@ -23,7 +11,7 @@ import static org.junit.Assert.*;
  */
 public class DecoratedActionLookupTest {
 
-    private Action<Integer,Writer> sum;
+    /*private Action sum;
 
     @Before
     public void init() throws ActionNotFoundException {
@@ -52,7 +40,7 @@ public class DecoratedActionLookupTest {
     }
 
     @RequiredArgsConstructor
-    class SumAction implements Action<Integer,Writer> {
+    class SumAction implements Action {
 
         private final int base;
 
@@ -124,5 +112,5 @@ public class DecoratedActionLookupTest {
         public <T> Rendered<T> print(Media<T> media) {
             throw new UnsupportedOperationException("#print()");
         }
-    }
+    }*/
 }

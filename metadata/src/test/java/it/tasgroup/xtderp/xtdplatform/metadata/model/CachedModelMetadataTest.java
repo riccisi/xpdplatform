@@ -1,6 +1,6 @@
 package it.tasgroup.xtderp.xtdplatform.metadata.model;
 
-import org.junit.*;
+import org.junit.Test;
 
 public class CachedModelMetadataTest {
 

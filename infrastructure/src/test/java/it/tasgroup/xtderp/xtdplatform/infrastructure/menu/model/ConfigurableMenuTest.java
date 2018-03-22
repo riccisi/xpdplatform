@@ -1,7 +1,7 @@
 package it.tasgroup.xtderp.xtdplatform.infrastructure.menu.model;
 
 import it.tasgroup.xtderp.xtdplatform.infrastructure.action.Action;
-import org.junit.*;
+import org.junit.Test;
 
 import java.util.Iterator;
 
