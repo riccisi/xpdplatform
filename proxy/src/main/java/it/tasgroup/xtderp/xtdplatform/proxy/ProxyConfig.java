@@ -1,6 +1,6 @@
 package it.tasgroup.xtderp.xtdplatform.proxy;
 
-import it.tasgroup.xtderp.xtdplatform.infrastructure.menu.model.Menu;
+import it.tasgroup.xtderp.xtdplatform.core.menu.model.Menu;
 import it.tasgroup.xtderp.xtdplatform.proxy.menu.AggregatedMenu;
 import it.tasgroup.xtderp.xtdplatform.proxy.menu.DiscoverableMenus;
 import org.springframework.cloud.client.discovery.DiscoveryClient;

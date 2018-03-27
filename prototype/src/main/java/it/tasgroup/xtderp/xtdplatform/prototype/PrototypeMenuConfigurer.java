@@ -1,7 +1,7 @@
 package it.tasgroup.xtderp.xtdplatform.prototype;
 
-import it.tasgroup.xtderp.xtdplatform.infrastructure.menu.model.MenuBuilder;
-import it.tasgroup.xtderp.xtdplatform.infrastructure.menu.model.MenuConfigurer;
+import it.tasgroup.xtderp.xtdplatform.core.menu.model.MenuBuilder;
+import it.tasgroup.xtderp.xtdplatform.core.menu.model.MenuConfigurer;
 
 
 public class PrototypeMenuConfigurer implements MenuConfigurer {

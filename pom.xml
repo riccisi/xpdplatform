@@ -24,12 +24,11 @@
     </properties>
 
     <modules>
-        <module>infrastructure</module>
-        <module>metadata</module>
-        <module>metadata-jpa</module>
+        <module>core</module>
+        <module>core-jpa</module>
         <module>proxy</module>
         <module>batch</module>
-        <module>security</module>
+        <module>admin</module>
         <module>prototype</module>
     </modules>
 
@@ -37,17 +36,17 @@
         <dependencies>
             <dependency>
                 <groupId>it.tasgroup.xtderp.xtdplatform</groupId>
-                <artifactId>infrastructure</artifactId>
+                <artifactId>core</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>it.tasgroup.xtderp.xtdplatform</groupId>
-                <artifactId>metadata</artifactId>
+                <artifactId>core-jpa</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>it.tasgroup.xtderp.xtdplatform</groupId>
-                <artifactId>metadata-jpa</artifactId>
+                <artifactId>admin</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

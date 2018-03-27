@@ -1,0 +1,9 @@
+
+# Auto Configuration
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+it.tasgroup.xtderp.xtdplatform.core.localization.LocalizationAutoConfig,\
+it.tasgroup.xtderp.xtdplatform.core.media.MediaAutoConfig,\
+it.tasgroup.xtderp.xtdplatform.core.action.ActionAutoConfig,\
+it.tasgroup.xtderp.xtdplatform.core.menu.MenuAutoConfig,\
+it.tasgroup.xtderp.xtdplatform.core.swagger.SwaggerAutoConfig,\
+it.tasgroup.xtderp.xtdplatform.core.metadata.MetadataAutoconfig

@@ -15,7 +15,11 @@
     <dependencies>
         <dependency>
             <groupId>it.tasgroup.xtderp.xtdplatform</groupId>
-            <artifactId>metadata-jpa</artifactId>
+            <artifactId>core-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>it.tasgroup.xtderp.xtdplatform</groupId>
+            <artifactId>admin</artifactId>
         </dependency>
         <dependency>
             <groupId>com.h2database</groupId>

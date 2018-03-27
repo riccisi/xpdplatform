@@ -29,7 +29,7 @@ public class Customer {
     private Integer age;
     private int test = 1;
 
-    protected Customer() {}
+    private Customer() {}
 
     public Customer(String firstName, String lastName, Date birthDate, Integer age) {
         this.firstName = firstName;

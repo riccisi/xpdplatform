@@ -1,3 +1,0 @@
-
-# Auto Configuration
-#org.springframework.boot.autoconfigure.EnableAutoConfiguration=\it.tasgroup.xtderp.xtdplatform.metadata.model.ModelAutoconfig,\it.tasgroup.xtderp.xtdplatform.metadata.query.QueryAutoConfig

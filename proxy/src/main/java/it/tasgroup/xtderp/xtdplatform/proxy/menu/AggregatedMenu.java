@@ -1,6 +1,6 @@
 package it.tasgroup.xtderp.xtdplatform.proxy.menu;
 
-import it.tasgroup.xtderp.xtdplatform.infrastructure.menu.model.*;
+import it.tasgroup.xtderp.xtdplatform.core.menu.model.*;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Iterator;

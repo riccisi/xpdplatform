@@ -1,16 +1,18 @@
 package it.tasgroup.xtderp.xtdplatform.prototype;
 
-import it.tasgroup.xtderp.xtdplatform.infrastructure.util.StringAsDate;
+import it.tasgroup.xtderp.xtdplatform.core.util.StringAsDate;
 import it.tasgroup.xtderp.xtdplatform.prototype.model.Customer;
 import it.tasgroup.xtderp.xtdplatform.prototype.repository.CustomerRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
+@EntityScan(basePackages = "it.tasgroup.xtderp.xtdplatform.prototype.model")
 public class PrototypeApplication extends SpringBootServletInitializer {
 
     @Override

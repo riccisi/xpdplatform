@@ -1,7 +1,7 @@
 package it.tasgroup.xtderp.xtdplatform.proxy.menu;
 
-import it.tasgroup.xtderp.xtdplatform.infrastructure.action.Action;
-import it.tasgroup.xtderp.xtdplatform.infrastructure.menu.model.*;
+import it.tasgroup.xtderp.xtdplatform.core.action.Action;
+import it.tasgroup.xtderp.xtdplatform.core.menu.model.*;
 import org.junit.Test;
 
 import java.util.ArrayList;

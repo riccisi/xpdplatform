@@ -1,6 +1,6 @@
 package it.tasgroup.xtderp.xtdplatform.proxy.menu;
 
-import it.tasgroup.xtderp.xtdplatform.infrastructure.menu.model.Menu;
+import it.tasgroup.xtderp.xtdplatform.core.menu.model.Menu;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
