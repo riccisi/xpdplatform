@@ -16,61 +16,61 @@ import java.util.List;
  */
 public interface RenderedObject<T> extends Rendered<T> {
 
-    RenderedObject<T> with(String k, Printable v);
+    RenderedObject<T> with(String key, Printable val);
 
-    default RenderedObject<T> with(String k, String v) {
-        return this.with(k, new PrintableString(v));
+    default RenderedObject<T> with(final String key, final String val) {
+        return this.with(key, new PrintableString(val));
     }
 
-    default RenderedObject<T> with(String k, byte v) {
-        return this.with(k, new PrintableByte(v));
+    default RenderedObject<T> with(final String key, final byte val) {
+        return this.with(key, new PrintableByte(val));
     }
 
-    default RenderedObject<T> with(String k, short v) {
-        return this.with(k, new PrintableShort(v));
+    default RenderedObject<T> with(final String key, final short val) {
+        return this.with(key, new PrintableShort(val));
     }
 
-    default RenderedObject<T> with(String k, int v) {
-        return this.with(k, new PrintableInt(v));
+    default RenderedObject<T> with(final String key, final int val) {
+        return this.with(key, new PrintableInt(val));
     }
 
-    default RenderedObject<T> with(String k, long v) {
-        return this.with(k, new PrintableLong(v));
+    default RenderedObject<T> with(final String key, final long val) {
+        return this.with(key, new PrintableLong(val));
     }
 
-    default RenderedObject<T> with(String k, float v) {
-        return this.with(k, new PrintableFloat(v));
+    default RenderedObject<T> with(final String key, final float val) {
+        return this.with(key, new PrintableFloat(val));
     }
 
-    default RenderedObject<T> with(String k, double v) {
-        return this.with(k, new PrintableDouble(v));
+    default RenderedObject<T> with(final String key, final double val) {
+        return this.with(key, new PrintableDouble(val));
     }
 
-    default RenderedObject<T> with(String k, boolean v) {
-        return this.with(k, new PrintableBoolean(v));
+    default RenderedObject<T> with(final String key, final boolean val) {
+        return this.with(key, new PrintableBoolean(val));
     }
 
-    default RenderedObject<T> with(String k, char v) {
-        return this.with(k, new PrintableChar(v));
+    default RenderedObject<T> with(final String key, final char val) {
+        return this.with(key, new PrintableChar(val));
     }
 
-    default RenderedObject<T> with(String k, Date v) {
-        return this.with(k, new PrintableDate(v));
+    default RenderedObject<T> with(final String key, final Date val) {
+        return this.with(key, new PrintableDate(val));
     }
 
-    default RenderedObject<T> with(String k, BigDecimal v) {
-        return this.with(k, new PrintableBigDecimal(v));
+    default RenderedObject<T> with(final String key, final BigDecimal val) {
+        return this.with(key, new PrintableBigDecimal(val));
     }
 
-    default RenderedObject<T> with(String k, BigInteger v) {
-        return this.with(k, new PrintableBigInteger(v));
+    default RenderedObject<T> with(final String key, final BigInteger val) {
+        return this.with(key, new PrintableBigInteger(val));
     }
 
-    default RenderedObject<T> with(String k, List<Printable> v) {
-        return this.with(k, new PrintableList(v));
+    default RenderedObject<T> with(final String key, final List<Printable> val) {
+        return this.with(key, new PrintableList(val));
     }
 
-    default RenderedObject<T> with(String k, String... v) {
-        return this.with(k, new PrintableList(new ListOf<>(v), PrintableString::new));
+    default RenderedObject<T> with(final String key, final String... val) {
+        return this.with(key, new PrintableList(new ListOf<>(val), PrintableString::new));
     }
 }

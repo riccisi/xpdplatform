@@ -1,8 +1,8 @@
 package it.tasgroup.xtderp.xtdplatform.core.query.filter.json;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import it.tasgroup.xtderp.xtdplatform.core.query.filter.Statement;
 import it.tasgroup.xtderp.xtdplatform.core.query.filter.Filter;
+import it.tasgroup.xtderp.xtdplatform.core.query.filter.Statement;
 import lombok.RequiredArgsConstructor;
 
 /**
@@ -34,7 +34,7 @@ final class JsonLike extends JsonExpression {
             if(!operator.isMissingNode()) {
                 return "like".equals(operator.asText());
             } else {
-                return node.has("anyMatch") && node.get("anyMatch").asBoolean();
+                return this.node.has("anyMatch") && this.node.get("anyMatch").asBoolean();
             }
         }
 

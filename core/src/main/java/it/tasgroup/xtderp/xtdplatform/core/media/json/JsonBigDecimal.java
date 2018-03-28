@@ -2,7 +2,6 @@ package it.tasgroup.xtderp.xtdplatform.core.media.json;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.DecimalNode;
-import it.tasgroup.xtderp.xtdplatform.core.media.Rendered;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
@@ -19,7 +18,7 @@ import java.math.BigDecimal;
 @RequiredArgsConstructor
 @EqualsAndHashCode(of = "value", callSuper = false)
 @ToString(of = "value")
-final class JsonBigDecimal extends JsonRendered implements Rendered<JsonNode> {
+final class JsonBigDecimal extends JsonRendered {
 
     private final BigDecimal value;
 

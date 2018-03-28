@@ -14,7 +14,7 @@ import it.tasgroup.xtderp.xtdplatform.core.query.QueryResult;
  */
 public final class CsvQueryAction extends QueryAction {
 
-    public CsvQueryAction(Query query) {
+    public CsvQueryAction(final Query query) {
         super(query);
     }
 
@@ -24,7 +24,7 @@ public final class CsvQueryAction extends QueryAction {
     }
 
     @Override
-    Result wrap(QueryResult queryResult) {
-        return new CsvResult(queryResult);
+    Result wrap(final QueryResult result) {
+        return new CsvResult(result);
     }
 }

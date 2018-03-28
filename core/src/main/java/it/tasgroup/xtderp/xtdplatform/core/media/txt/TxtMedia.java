@@ -29,62 +29,62 @@ public final class TxtMedia implements Media<String> {
     }
 
     @Override
-    public Rendered<String> as(Byte value) {
+    public Rendered<String> as(final Byte value) {
         return new NullSafeTxtRendered(value, new TxtRenderedNumber(value));
     }
 
     @Override
-    public Rendered<String> as(Boolean value) {
+    public Rendered<String> as(final Boolean value) {
         return new NullSafeTxtRendered(value, new TxtRenderedBoolean(value));
     }
 
     @Override
-    public Rendered<String> as(Character value) {
+    public Rendered<String> as(final Character value) {
         return new NullSafeTxtRendered(value, new TxtRenderedString(value));
     }
 
     @Override
-    public Rendered<String> as(Short value) {
+    public Rendered<String> as(final Short value) {
         return new NullSafeTxtRendered(value, new TxtRenderedNumber(value));
     }
 
     @Override
-    public Rendered<String> as(Integer value) {
+    public Rendered<String> as(final Integer value) {
         return new NullSafeTxtRendered(value, new TxtRenderedNumber(value));
     }
 
     @Override
-    public Rendered<String> as(Long value) {
+    public Rendered<String> as(final Long value) {
         return new NullSafeTxtRendered(value, new TxtRenderedNumber(value));
     }
 
     @Override
-    public Rendered<String> as(Float value) {
+    public Rendered<String> as(final Float value) {
         return new NullSafeTxtRendered(value, new TxtRenderedNumber(value));
     }
 
     @Override
-    public Rendered<String> as(Double value) {
+    public Rendered<String> as(final Double value) {
         return new NullSafeTxtRendered(value, new TxtRenderedNumber(value));
     }
 
     @Override
-    public Rendered<String> as(String value) {
+    public Rendered<String> as(final String value) {
         return new NullSafeTxtRendered(value, new TxtRenderedString(value));
     }
 
     @Override
-    public Rendered<String> as(Date value) {
+    public Rendered<String> as(final Date value) {
         return new NullSafeTxtRendered(value, new TxtRenderedDate(value));
     }
 
     @Override
-    public Rendered<String> as(BigDecimal value) {
+    public Rendered<String> as(final BigDecimal value) {
         return new NullSafeTxtRendered(value, new TxtRenderedNumber(value));
     }
 
     @Override
-    public Rendered<String> as(BigInteger value) {
+    public Rendered<String> as(final BigInteger value) {
         return new NullSafeTxtRendered(value, new TxtRenderedNumber(value));
     }
 

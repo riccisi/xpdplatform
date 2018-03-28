@@ -17,7 +17,7 @@ import java.util.Date;
  * @since 1.0
  */
 @RequiredArgsConstructor
-public class CsvMedia implements Media<CsvObject> {
+public final class CsvMedia implements Media<CsvObject> {
 
     @Override
     public RenderedObject<CsvObject> asObject() {

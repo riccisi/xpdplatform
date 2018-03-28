@@ -2,9 +2,9 @@ package it.tasgroup.xtderp.xtdplatform.core.query.request;
 
 import it.tasgroup.xtderp.xtdplatform.core.action.Request;
 import it.tasgroup.xtderp.xtdplatform.core.action.request.JsonRequest;
+import it.tasgroup.xtderp.xtdplatform.core.query.filter.PaginatedFilter;
 import it.tasgroup.xtderp.xtdplatform.core.query.filter.json.JsonFilterOf;
 import it.tasgroup.xtderp.xtdplatform.core.query.filter.json.JsonPaginatedFilter;
-import it.tasgroup.xtderp.xtdplatform.core.query.filter.PaginatedFilter;
 
 import java.io.IOException;
 import java.io.InputStream;

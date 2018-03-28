@@ -6,8 +6,6 @@ import it.tasgroup.xtderp.xtdplatform.core.media.Printable;
 import it.tasgroup.xtderp.xtdplatform.core.media.json.JsonMedia;
 import lombok.RequiredArgsConstructor;
 
-import java.io.IOException;
-
 /**
  * Created with IntelliJ IDEA.
  *

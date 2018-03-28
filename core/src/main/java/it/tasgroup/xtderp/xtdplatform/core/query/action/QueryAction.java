@@ -18,20 +18,20 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 abstract class QueryAction implements Action {
 
-    final Query query;
+    protected final Query query;
 
     @Override
-    public final Result execute(Request request) throws Exception {
+    public final Result execute(final Request request) throws Exception {
         return this.wrap(this.query.find(request));
     }
 
     @Override
-    public final <T> Rendered<T> print(Media<T> media) throws Exception {
+    public final <T> Rendered<T> print(final Media<T> media) throws Exception {
         return media.asObject()
             .with("id", this.id())
             .with("type", "query")
             .with("modelId", this.query.modelId());
     }
 
-    abstract Result wrap(QueryResult queryResult);
+    abstract Result wrap(QueryResult result);
 }

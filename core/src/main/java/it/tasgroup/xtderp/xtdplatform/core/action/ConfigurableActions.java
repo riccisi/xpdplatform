@@ -12,13 +12,13 @@ import java.util.Iterator;
  * @since 1.0
  */
 @RequiredArgsConstructor
-public class ConfigurableActions implements Actions {
+public final class ConfigurableActions implements Actions {
 
     private final Iterable<ActionConfigurer> configurers;
 
     @Override
     public Iterator<Action> iterator() {
-        ActionRegister register = new ActionRegister();
+        final ActionRegister register = new ActionRegister();
         this.configurers.forEach(configurer -> configurer.configure(register));
         return register.iterator();
     }

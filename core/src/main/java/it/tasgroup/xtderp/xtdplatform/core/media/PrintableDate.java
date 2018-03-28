@@ -16,12 +16,12 @@ import java.util.Date;
 @RequiredArgsConstructor
 @EqualsAndHashCode(of = "value", callSuper = false)
 @ToString(of = "value")
-public class PrintableDate implements Printable {
+public final class PrintableDate implements Printable {
 
     private final Date value;
 
     @Override
-    public <T> Rendered<T> print(Media<T> media) {
+    public <T> Rendered<T> print(final Media<T> media) {
         return media.as(this.value);
     }
 }

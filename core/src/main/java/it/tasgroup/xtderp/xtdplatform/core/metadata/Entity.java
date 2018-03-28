@@ -33,18 +33,23 @@ public interface Entity extends Model {
         }
 
         @Override
-        public void save() throws Exception {
+        public void save() {
             // do nothing
         }
 
         @Override
-        public void delete() throws Exception {
+        public void delete() {
             // do nothing
         }
 
         @Override
-        public <R> Rendered<R> print(Media<R> media) throws Exception {
+        public <R> Rendered<R> print(final Media<R> media) throws Exception {
             return this.model.print(media);
+        }
+
+        @Override
+        public Object value() {
+            return this.model.value();
         }
     }
 }

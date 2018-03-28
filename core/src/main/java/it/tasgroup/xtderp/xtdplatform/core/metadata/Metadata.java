@@ -16,7 +16,7 @@ public interface Metadata extends Iterable<ModelMetadata> {
 
         private final List<ModelMetadata> metadata;
 
-        public Fake(ModelMetadata... metadata) {
+        public Fake(final ModelMetadata... metadata) {
             this(new ListOf<>(metadata));
         }
 

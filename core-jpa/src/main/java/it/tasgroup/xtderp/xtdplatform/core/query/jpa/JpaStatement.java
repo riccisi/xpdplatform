@@ -1,8 +1,8 @@
 package it.tasgroup.xtderp.xtdplatform.core.query.jpa;
 
 import it.tasgroup.xtderp.xtdplatform.core.query.filter.Filter;
-import it.tasgroup.xtderp.xtdplatform.core.query.filter.json.LogicOperator;
 import it.tasgroup.xtderp.xtdplatform.core.query.filter.Statement;
+import it.tasgroup.xtderp.xtdplatform.core.query.filter.json.LogicOperator;
 import lombok.NonNull;
 import org.cactoos.list.ListOf;
 import org.springframework.data.jpa.domain.Specification;
@@ -46,7 +46,7 @@ public final class JpaStatement<T> implements Statement {
         for (Filter filter : filters) {
             filter.applyOn(jpaStatement);
         }
-        strategy.concat(jpaStatement.get());
+        this.strategy.concat(jpaStatement.get());
         return this;
     }
 
@@ -61,89 +61,89 @@ public final class JpaStatement<T> implements Statement {
         for (Filter filter : filters) {
             filter.applyOn(jpaStatement);
         }
-        strategy.concat(jpaStatement.get());
+        this.strategy.concat(jpaStatement.get());
         return this;
     }
 
     @Override
     public Statement eq(@NonNull String property, @NonNull Object value) {
-        strategy.concat((root, query, cb) -> cb.equal(pathOf(root, property), value));
+        this.strategy.concat((root, query, cb) -> cb.equal(this.pathOf(root, property), value));
         return this;
     }
 
     @Override
     public Statement notEq(@NonNull String property, @NonNull Object value) {
-        strategy.concat((root, query, cb) -> cb.notEqual(pathOf(root, property), value));
+        this.strategy.concat((root, query, cb) -> cb.notEqual(this.pathOf(root, property), value));
         return this;
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public Statement like(@NonNull String property, @NonNull String value) {
-        strategy.concat((root, query, cb) -> cb.like(pathOf(root, property), ("%" + value.toLowerCase() + "%")));
+        this.strategy.concat((root, query, cb) -> cb.like(this.pathOf(root, property), "%" + value.toLowerCase() + "%"));
         return this;
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public Statement notLike(@NonNull String property, @NonNull String value) {
-        strategy.concat((root, query, cb) -> cb.notLike(pathOf(root, property), ("%" + value.toLowerCase() + "%")));
+        this.strategy.concat((root, query, cb) -> cb.notLike(this.pathOf(root, property), "%" + value.toLowerCase() + "%"));
         return this;
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public Statement gt(@NonNull String property, @NonNull Comparable value) {
-        strategy.concat((root, query, cb) -> cb.greaterThan(pathOf(root, property), value));
+        this.strategy.concat((root, query, cb) -> cb.greaterThan(this.pathOf(root, property), value));
         return this;
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public Statement gte(@NonNull String property, @NonNull Comparable value) {
-        strategy.concat((root, query, cb) -> cb.greaterThanOrEqualTo(pathOf(root, property), value));
+        this.strategy.concat((root, query, cb) -> cb.greaterThanOrEqualTo(this.pathOf(root, property), value));
         return this;
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public Statement lt(@NonNull String property, @NonNull Comparable value) {
-        strategy.concat((root, query, cb) -> cb.lessThan(pathOf(root, property), value));
+        this.strategy.concat((root, query, cb) -> cb.lessThan(this.pathOf(root, property), value));
         return this;
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public Statement lte(@NonNull String property, @NonNull Comparable value) {
-        strategy.concat((root, query, cb) -> cb.lessThanOrEqualTo(pathOf(root, property), value));
+        this.strategy.concat((root, query, cb) -> cb.lessThanOrEqualTo(this.pathOf(root, property), value));
         return this;
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public Statement in(@NonNull String property, @NonNull Collection value) {
-        strategy.concat((root, query, cb) -> value.size() > 0 ? pathOf(root, property).in(value) : null);
+        this.strategy.concat((root, query, cb) -> value.size() > 0 ? this.pathOf(root, property).in(value) : null);
         return this;
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public Statement notIn(@NonNull String property, @NonNull Collection value) {
-        strategy.concat((root, query, cb) -> value.size() > 0 ? cb.not(pathOf(root, property).in(value)) : null);
+        this.strategy.concat((root, query, cb) -> value.size() > 0 ? cb.not(this.pathOf(root, property).in(value)) : null);
         return this;
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public Statement isNull(@NonNull String property) {
-        strategy.concat((root, query, cb) -> cb.isNull(pathOf(root, property)));
+        this.strategy.concat((root, query, cb) -> cb.isNull(this.pathOf(root, property)));
         return this;
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public Statement isNotNull(@NonNull String property) {
-        strategy.concat((root, query, cb) -> cb.isNotNull(pathOf(root, property)));
+        this.strategy.concat((root, query, cb) -> cb.isNotNull(this.pathOf(root, property)));
         return this;
     }
 
@@ -186,7 +186,7 @@ public final class JpaStatement<T> implements Statement {
 
         @Override
         public void concat(Specification<T> spec) {
-            root = root.and(spec);
+            JpaStatement.this.root = JpaStatement.this.root.and(spec);
         }
     }
 
@@ -194,7 +194,7 @@ public final class JpaStatement<T> implements Statement {
 
         @Override
         public void concat(Specification<T> spec) {
-            root = root.or(spec);
+            JpaStatement.this.root = JpaStatement.this.root.or(spec);
         }
     }
 }

@@ -2,7 +2,6 @@ package it.tasgroup.xtderp.xtdplatform.core.media.json;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ShortNode;
-import it.tasgroup.xtderp.xtdplatform.core.media.Rendered;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
@@ -17,7 +16,7 @@ import lombok.ToString;
 @RequiredArgsConstructor
 @EqualsAndHashCode(of = "value", callSuper = false)
 @ToString(of = "value")
-final class JsonShort extends JsonRendered implements Rendered<JsonNode> {
+final class JsonShort extends JsonRendered {
 
     private final short value;
 

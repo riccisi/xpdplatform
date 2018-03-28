@@ -8,7 +8,6 @@ import org.apache.commons.csv.CSVPrinter;
 import org.cactoos.list.Joined;
 import org.cactoos.list.ListOf;
 
-import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.math.BigDecimal;
@@ -35,12 +34,12 @@ final class CsvRenderedList implements RenderedList<CsvObject> {
     }
 
     @Override
-    public CsvRenderedList with(List<Printable> printables) {
+    public CsvRenderedList with(final List<Printable> printables) {
         return new CsvRenderedList(new Joined<>(this.printables, printables));
     }
 
     @Override
-    public CsvRenderedList with(Printable... value) {
+    public CsvRenderedList with(final Printable... value) {
         return this.with(Arrays.asList(value));
     }
 
@@ -114,7 +113,7 @@ final class CsvRenderedList implements RenderedList<CsvObject> {
         String[] headers = new String[0];
         List<Iterable<Object>> values = new ArrayList<>();
         CsvMedia media = new CsvMedia();
-        for (Printable printable : printables) {
+        for (Printable printable : this.printables) {
             CsvObject csvObject = printable.print(media).value();
             headers = csvObject.headers();
             values.add(csvObject.values());

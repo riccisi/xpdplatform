@@ -7,14 +7,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RequiredArgsConstructor
-public class CachedMetadataLookup implements MetadataLookup {
+public final class CachedMetadataLookup implements MetadataLookup {
 
     private final MetadataLookup delegate;
 
-    private final Map<String, ModelMetadata> cache = new HashMap<>();
+    private final Map<String, ModelMetadata> cache = new HashMap<>(0);
 
     @Override
-    public ModelMetadata get(String modelId) {
-        return this.cache.computeIfAbsent(modelId, id -> new UncheckedFunc<>(delegate::get).apply(id));
+    public ModelMetadata get(final String modelId) {
+        return this.cache.computeIfAbsent(modelId, id -> new UncheckedFunc<>(this.delegate::get).apply(id));
     }
 }

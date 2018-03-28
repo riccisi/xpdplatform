@@ -2,7 +2,6 @@ package it.tasgroup.xtderp.xtdplatform.core.media.json;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.TextNode;
-import it.tasgroup.xtderp.xtdplatform.core.media.Rendered;
 import it.tasgroup.xtderp.xtdplatform.core.util.DefaultDateAsString;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +19,7 @@ import java.util.Date;
 @RequiredArgsConstructor
 @EqualsAndHashCode(of = "value", callSuper = false)
 @ToString(of = "value")
-final class JsonDate extends JsonRendered implements Rendered<JsonNode> {
+final class JsonDate extends JsonRendered {
 
     private final Date value;
 

@@ -3,10 +3,8 @@ package it.tasgroup.xtderp.xtdplatform.core.metadata;
 import org.cactoos.list.ListOf;
 import org.junit.Test;
 
-import java.util.Iterator;
-
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 /**
  * Test case for {@link DefaultEntitiesMetadata}

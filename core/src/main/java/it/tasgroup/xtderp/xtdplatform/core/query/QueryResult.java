@@ -1,7 +1,6 @@
 package it.tasgroup.xtderp.xtdplatform.core.query;
 
 import it.tasgroup.xtderp.xtdplatform.core.media.Printable;
-import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
@@ -9,12 +8,9 @@ import java.util.List;
  * Created with IntelliJ IDEA.
  *
  * @author Simone Ricciardi (simone.ricciardi@gmail.com)
- * @version $Id$
  * @since 1.0
  */
-@RequiredArgsConstructor
-public abstract class QueryResult implements Printable {
+public interface QueryResult extends Printable {
 
-    final List<Printable> result;
-
+    List<Printable> result();
 }

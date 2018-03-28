@@ -6,8 +6,6 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import it.tasgroup.xtderp.xtdplatform.core.media.Media;
 import it.tasgroup.xtderp.xtdplatform.core.media.Printable;
 
-import java.io.IOException;
-
 /**
  * Custom Jackson {@link JsonSerializer} to serialize a {@link Printable} using the {@link Media} API.
  *
@@ -15,14 +13,14 @@ import java.io.IOException;
  * @version $Id$
  * @since 1.0
  */
-public class PrintableJsonSerializer extends JsonSerializer<Printable> {
+public final class PrintableJsonSerializer extends JsonSerializer<Printable> {
 
     @Override
-    public void serialize(Printable printable, JsonGenerator gen, SerializerProvider ser) throws IOException {
+    public void serialize(final Printable printable, final JsonGenerator gen, final SerializerProvider ser) {
         try {
             gen.writeTree(printable.print(new JsonMedia()).value());
-        } catch (Exception e) {
-            throw  new RuntimeException(e);
+        } catch (final Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }

@@ -1,14 +1,10 @@
 package it.tasgroup.xtderp.xtdplatform.admin.entity;
 
-import it.tasgroup.xtderp.xtdplatform.core.metadata.annotation.XtdExclude;
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by borric on 18/11/2015.
@@ -66,11 +62,11 @@ public class User /*extends BaseEntity*/ {
 
     @Column(name = "ACTIVE")
 //    @XtdFieldLayout(order = ATTR_ORDER_ACTIVE,  span = 2)
-    private boolean active = true;
+    private final boolean active = true;
 
     @Column(name = "START_DATE")
 //    @XtdFieldLayout(order = ATTR_ORDER_START_DATE)
-    private Date startDate = new Date();
+    private final Date startDate = new Date();
 
     @Column(name = "END_DATE")
 //    @XtdFieldLayout(order = ATTR_ORDER_END_DATE)

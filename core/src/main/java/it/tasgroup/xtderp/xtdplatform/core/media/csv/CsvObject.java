@@ -28,7 +28,7 @@ final class CsvObject {
         this(new ListOf<>(), new ListOf<>());
     }
 
-    public CsvObject add(String header, Printable value) {
+    public CsvObject add(final String header, final Printable value) {
         return new CsvObject(
             new Joined<>(this.headers, new ListOf<>(header)),
             new Joined<>(this.values, new ListOf<>(value))
@@ -36,11 +36,11 @@ final class CsvObject {
     }
 
     public String[] headers() {
-        return headers.toArray(new String[headers.size()]);
+        return this.headers.toArray(new String[this.headers.size()]);
     }
 
     public Iterable<Object> values() {
-        TxtMedia media = new TxtMedia();
+        final TxtMedia media = new TxtMedia();
         return new Mapped<>(input -> input.print(media).value(), this.values);
     }
 }

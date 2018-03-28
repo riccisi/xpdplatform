@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public final class MonitoredAction implements Action {
 
-    @NonNull  private final Action action;
+    @NonNull private final Action action;
 
     @Override
     public String id() throws Exception {
@@ -22,18 +22,18 @@ public final class MonitoredAction implements Action {
 
     @Override
     @SuppressWarnings("unchecked")
-    public Result execute(Request request) throws Exception {
-        long startTimeMillis = System.currentTimeMillis();
+    public Result execute(final Request request) throws Exception {
+        final long start = System.currentTimeMillis();
         try {
             return this.action.execute(request);
         } finally {
-            long lastTime = System.currentTimeMillis() - startTimeMillis;
-            log.debug(String.format("Action '%s' executed in %d millis.", this.id(), lastTime));
+            final long millis = System.currentTimeMillis() - start;
+            log.debug(String.format("Action '%s' executed in %d millis.", this.id(), millis));
         }
     }
 
     @Override
-    public <R> Rendered<R> print(Media<R> media) throws Exception {
+    public <R> Rendered<R> print(final Media<R> media) throws Exception {
         return this.action.print(media);
     }
 }

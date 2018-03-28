@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import it.tasgroup.xtderp.xtdplatform.core.media.Rendered;
 
-import java.io.IOException;
 import java.io.OutputStream;
 
 /**
@@ -17,7 +16,7 @@ import java.io.OutputStream;
 abstract class JsonRendered implements Rendered<JsonNode> {
 
     @Override
-    public final void writeOn(OutputStream stream) throws Exception {
+    public final void writeOn(final OutputStream stream) throws Exception {
         new ObjectMapper().writeValue(stream, this.value());
     }
 }

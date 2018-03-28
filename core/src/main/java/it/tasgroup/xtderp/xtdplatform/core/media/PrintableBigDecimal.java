@@ -21,7 +21,7 @@ public final class PrintableBigDecimal implements Printable {
     private final BigDecimal value;
 
     @Override
-    public <T> Rendered<T> print(Media<T> media) {
+    public <T> Rendered<T> print(final Media<T> media) {
         return media.as(this.value);
     }
 }

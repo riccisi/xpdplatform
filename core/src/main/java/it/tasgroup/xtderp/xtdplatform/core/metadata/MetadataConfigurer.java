@@ -4,5 +4,5 @@ public interface MetadataConfigurer {
 
     MetadataConfigurer EMPTY = metadataRegister -> {};
 
-    void configure(MetadataRegister metadataRegister);
+    void configure(MetadataRegister register);
 }

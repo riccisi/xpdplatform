@@ -4,11 +4,11 @@ import org.cactoos.iterable.StickyIterable;
 
 import java.util.Iterator;
 
-public class CachedActions implements Actions {
+public final class CachedActions implements Actions {
 
     private final StickyIterable<Action> cache;
 
-    public CachedActions(Actions delegate) {
+    public CachedActions(final Actions delegate) {
         this.cache = new StickyIterable<>(delegate);
     }
 

@@ -45,12 +45,12 @@ public interface Action extends Identified, Printable {
          * @return
          */
         @Override
-        public Result execute(Request request) {
+        public Result execute(final Request request) {
             return out -> out.writer().write(request.asString());
         }
 
         @Override
-        public <R> Rendered<R> print(Media<R> media) {
+        public <R> Rendered<R> print(final Media<R> media) {
             return media.asObject().with("id", this.id());
         }
 

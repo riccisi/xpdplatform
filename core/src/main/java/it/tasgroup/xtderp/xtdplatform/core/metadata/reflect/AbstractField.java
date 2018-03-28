@@ -22,25 +22,18 @@ abstract class AbstractField implements Field {
     @NonNull
     protected final java.lang.reflect.Field field;
 
-/*
     @Override
-    public final String name() {
-        return this.field.getName();
-    }
-*/
-
-    @Override
-    public final <R, T> RenderedObject<R> printValue(T model, RenderedObject<R> rendered) {
+    public final <R, T> RenderedObject<R> printValue(final T model, final RenderedObject<R> rendered) {
         try {
             this.field.setAccessible(true);
             return rendered.with(this.field.getName(), this.printableOf(model));
-        } catch (IllegalAccessException e) {
+        } catch (final IllegalAccessException e) {
             throw new RuntimeException(e);
         }
     }
 
     @Override
-    public <T> Rendered<T> print(Media<T> media) {
+    public final <T> Rendered<T> print(final Media<T> media) {
         return media.asObject()
             .with("name", this.field.getName())
             .with("type", this.type());

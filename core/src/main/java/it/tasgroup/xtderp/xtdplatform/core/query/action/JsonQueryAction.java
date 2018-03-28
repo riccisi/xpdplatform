@@ -14,7 +14,7 @@ import it.tasgroup.xtderp.xtdplatform.core.query.QueryResult;
  */
 public final class JsonQueryAction extends QueryAction {
 
-    public JsonQueryAction(Query query) {
+    public JsonQueryAction(final Query query) {
         super(query);
     }
 
@@ -24,7 +24,7 @@ public final class JsonQueryAction extends QueryAction {
     }
 
     @Override
-    Result wrap(QueryResult queryResult) {
-        return new JsonResult(queryResult);
+    Result wrap(final QueryResult result) {
+        return new JsonResult(result);
     }
 }

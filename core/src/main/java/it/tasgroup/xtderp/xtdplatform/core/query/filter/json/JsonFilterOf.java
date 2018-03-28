@@ -1,8 +1,8 @@
 package it.tasgroup.xtderp.xtdplatform.core.query.filter.json;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import it.tasgroup.xtderp.xtdplatform.core.query.filter.Statement;
 import it.tasgroup.xtderp.xtdplatform.core.query.filter.Filter;
+import it.tasgroup.xtderp.xtdplatform.core.query.filter.Statement;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import org.cactoos.collection.Filtered;
@@ -55,7 +55,7 @@ public final class JsonFilterOf implements Filter {
         try {
             return this.matchers.iterator().next().matched();
         } catch (NoSuchElementException e) {
-            throw new RuntimeException(String.format("No matched filters to node %s, check your json request!", node));
+            throw new RuntimeException(String.format("No matched filters to node %s, check your json request!", this.node));
         }
     }
 }

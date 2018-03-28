@@ -18,21 +18,22 @@ import lombok.RequiredArgsConstructor;
  * @since 1.0
  */
 @RequiredArgsConstructor
-public final class ClassModel<T> implements Model {
+public final class ClassModel<T> implements Model<T> {
 
     @NonNull private final T model;
     @NonNull private final ModelMetadata metadata;
 
     @Override
-    public <R> Rendered<R> print(Media<R> media) {
+    public <R> Rendered<R> print(final Media<R> media) {
         RenderedObject<R> rendered = media.asObject();
-        for (Attribute attribute : this.metadata) {
+        for (final Attribute attribute : this.metadata) {
             rendered = attribute.printValue(this.model, rendered);
         }
         return rendered;
     }
 
-    public T internal() {
+    @Override
+    public T value() {
         return this.model;
     }
 }

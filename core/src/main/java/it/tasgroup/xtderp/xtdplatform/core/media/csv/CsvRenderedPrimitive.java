@@ -27,10 +27,10 @@ public final class CsvRenderedPrimitive implements Rendered<Object> {
     }
 
     @Override
-    public void writeOn(OutputStream stream) throws IOException {
-        CSVFormat format = CSVFormat.DEFAULT.withHeader();
+    public void writeOn(final OutputStream stream) throws IOException {
+        final CSVFormat format = CSVFormat.DEFAULT.withHeader();
         try (CSVPrinter printer = new CSVPrinter(new OutputStreamWriter(stream), format)) {
-            printer.printRecord(value);
+            printer.printRecord(this.value);
         }
     }
 }

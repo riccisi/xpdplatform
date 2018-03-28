@@ -11,6 +11,7 @@ import java.util.Iterator;
 
 public interface EntityMetadata extends ModelMetadata {
 
+    @Override
     Entity newInstance() throws Exception;
 
     /**
@@ -28,19 +29,19 @@ public interface EntityMetadata extends ModelMetadata {
         }
 
         @Override
-        public Entity newInstance() throws Exception {
+        public Entity newInstance() {
             return new Entity.Fake();
         }
 
         @Override
-        public <R> Rendered<R> print(Media<R> media) throws Exception {
+        public <R> Rendered<R> print(final Media<R> media) {
             return media.asObject()
                 .with("id",this.id)
                 .with("type","entity");
         }
 
         @Override
-        public String id() throws Exception {
+        public String id() {
             return this.id;
         }
 

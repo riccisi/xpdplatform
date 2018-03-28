@@ -30,19 +30,19 @@ public interface ModelMetadata extends Iterable<Attribute>, Identified, Printabl
         }
 
         @Override
-        public Model newInstance() throws Exception {
+        public Model newInstance() {
             return new Model.Fake();
         }
 
         @Override
-        public <R> Rendered<R> print(Media<R> media) throws Exception {
+        public <R> Rendered<R> print(final Media<R> media) {
             return media.asObject()
                 .with("id",this.id)
                 .with("type","model");
         }
 
         @Override
-        public String id() throws Exception {
+        public String id() {
             return this.id;
         }
 

@@ -19,7 +19,7 @@ public final class PrintableByte implements Printable {
     private final Byte value;
 
     @Override
-    public <T> Rendered<T> print(Media<T> media) {
+    public <T> Rendered<T> print(final Media<T> media) {
         return media.as(this.value);
     }
 }

@@ -17,11 +17,11 @@ public class JpaMetadataConfigurer implements MetadataConfigurer {
 
     @Override
     @SuppressWarnings("unchecked")
-    public void configure(MetadataRegister metadataRegister) {
+    public void configure(MetadataRegister register) {
         Set<EntityType<?>> entityTypes = this.entityManager.getMetamodel().getEntities();
         for (EntityType<?> entityType : entityTypes) {
             Class<?> entityClass = entityType.getJavaType();
-            metadataRegister.add((new JpaEntityMetadata(this.entityManager, entityClass)));
+            register.add(new JpaEntityMetadata(this.entityManager, entityClass));
             log.info(String.format("Entity %s successfully registered!", entityClass));
         }
     }

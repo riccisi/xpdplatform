@@ -1,8 +1,8 @@
 package it.tasgroup.xtderp.xtdplatform.core.query.filter.json;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import it.tasgroup.xtderp.xtdplatform.core.query.filter.Statement;
 import it.tasgroup.xtderp.xtdplatform.core.query.filter.Filter;
+import it.tasgroup.xtderp.xtdplatform.core.query.filter.Statement;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.cactoos.list.Mapped;
@@ -24,7 +24,7 @@ final class JsonAnd implements Filter {
     @NonNull private final JsonNode node;
 
     @Override
-    public void applyOn(Statement stmt) {
+    public void applyOn(final Statement stmt) {
         stmt.and(new Mapped<>(JsonFilterOf::new, this.node.get(FILTERS)));
     }
 
@@ -37,7 +37,7 @@ final class JsonAnd implements Filter {
         public boolean match() {
             return
                 this.node.has(FILTERS) && (
-                    !node.has(LOGIC_OPERATOR) || AND.equalsIgnoreCase(node.get(LOGIC_OPERATOR).asText())
+                    !this.node.has(LOGIC_OPERATOR) || AND.equalsIgnoreCase(this.node.get(LOGIC_OPERATOR).asText())
                 );
         }
 

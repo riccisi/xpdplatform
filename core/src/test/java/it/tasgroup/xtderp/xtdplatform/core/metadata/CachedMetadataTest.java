@@ -2,12 +2,6 @@ package it.tasgroup.xtderp.xtdplatform.core.metadata;
 
 import org.junit.Test;
 
-import java.util.Collections;
-
-import static org.hamcrest.core.IsEqual.equalTo;
-import static org.hamcrest.core.IsNot.not;
-import static org.junit.Assert.assertThat;
-
 public class CachedMetadataTest {
 
     @Test

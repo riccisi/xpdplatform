@@ -3,10 +3,9 @@ package it.tasgroup.xtderp.xtdplatform.core.metadata.reflect;
 import it.tasgroup.xtderp.xtdplatform.core.media.Media;
 import it.tasgroup.xtderp.xtdplatform.core.media.Printable;
 import it.tasgroup.xtderp.xtdplatform.core.media.Rendered;
-import it.tasgroup.xtderp.xtdplatform.core.metadata.Attribute;
-import it.tasgroup.xtderp.xtdplatform.core.metadata.Model;
-import it.tasgroup.xtderp.xtdplatform.core.metadata.ModelMetadata;
+import it.tasgroup.xtderp.xtdplatform.core.metadata.*;
 import it.tasgroup.xtderp.xtdplatform.core.metadata.annotation.XtdExclude;
+import it.tasgroup.xtderp.xtdplatform.core.metadata.validation.JavaxValidationEngine;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +14,8 @@ import org.cactoos.iterator.Filtered;
 import org.cactoos.iterator.Mapped;
 import org.cactoos.list.ListOf;
 
-import java.lang.reflect.Modifier;
+import java.lang.reflect.*;
+import java.lang.reflect.Field;
 import java.util.Iterator;
 
 /**
@@ -24,20 +24,20 @@ import java.util.Iterator;
  *
  * <p>The class is immutable and thread-safe.
  *
- * @param <T> the type of the introspected model class.
+ * @param <T> the type of the introspected modelClass class.
  */
 @RequiredArgsConstructor
 @EqualsAndHashCode
 @ToString
-public class ClassModelMetadata<T> implements ModelMetadata {
+public final class ClassModelMetadata<T> implements ModelMetadata {
 
     @NonNull private final Class<T> modelClass;
+    @NonNull private final ProcessStrategy<T> strategy;
 
-    /**
-     * The id of the metadata it's the name of class.
-     *
-     * @return
-     */
+    public ClassModelMetadata(final Class<T> modelClass) {
+        this(modelClass, new ProcessStrategyOf<T>(modelClass));
+    }
+
     @Override
     public String id() {
         return this.modelClass.getName();
@@ -48,17 +48,14 @@ public class ClassModelMetadata<T> implements ModelMetadata {
         return new Mapped<>(
             FieldOf::new,
             new Filtered<>(
-                field -> !(Modifier.isStatic(field.getModifiers())) &&
-                         !(Modifier.isTransient(field.getModifiers())) &&
-                         !field.getName().startsWith("this$") &&
-                         !field.isAnnotationPresent(XtdExclude.class),
+                ClassModelMetadata::included,
                 new ClassFieldIterator(this.modelClass)
             )
         );
     }
 
     @Override
-    public <R> Rendered<R> print(Media<R> media) {
+    public <R> Rendered<R> print(final Media<R> media) {
         return media.asObject()
             .with("id", this.id())
             .with("type", "metadata")
@@ -66,7 +63,37 @@ public class ClassModelMetadata<T> implements ModelMetadata {
     }
 
     @Override
-    public ClassModel<T> newInstance() throws Exception {
-        return new ClassModel<>(this.modelClass.newInstance(), this);
+    public Model<T> newInstance() throws Exception {
+        final Constructor<T> ctor = this.modelClass.getDeclaredConstructor();
+        ctor.setAccessible(true);
+        final T instance = ctor.newInstance();
+        return
+            new ValidatedModel<>(
+                new ProcessedModel<>(
+                    new ClassModel<>(instance, this),
+                    this.strategy
+                ),
+                new JavaxValidationEngine<>(instance)
+            );
+    }
+
+    private static boolean included(final Field field) {
+        return notStatic(field) && notTransient(field) && notThis(field) && notToExclude(field);
+    }
+
+    private static boolean notToExclude(final AnnotatedElement field) {
+        return !field.isAnnotationPresent(XtdExclude.class);
+    }
+
+    private static boolean notThis(final Member field) {
+        return !field.getName().startsWith("this$");
+    }
+
+    private static boolean notTransient(final Member field) {
+        return !Modifier.isTransient(field.getModifiers());
+    }
+
+    private static boolean notStatic(final Member field) {
+        return !Modifier.isStatic(field.getModifiers());
     }
 }

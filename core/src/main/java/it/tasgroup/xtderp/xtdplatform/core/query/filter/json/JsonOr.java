@@ -1,8 +1,8 @@
 package it.tasgroup.xtderp.xtdplatform.core.query.filter.json;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import it.tasgroup.xtderp.xtdplatform.core.query.filter.Statement;
 import it.tasgroup.xtderp.xtdplatform.core.query.filter.Filter;
+import it.tasgroup.xtderp.xtdplatform.core.query.filter.Statement;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.cactoos.list.Mapped;
@@ -37,9 +37,7 @@ final class JsonOr implements Filter {
         @Override
         public boolean match() {
             return
-                node.has(FILTERS) && (
-                    node.has(LOGIC_OPERATOR) && OR.equalsIgnoreCase(node.get(LOGIC_OPERATOR).asText())
-                );
+                this.node.has(FILTERS) && this.node.has(LOGIC_OPERATOR) && OR.equalsIgnoreCase(this.node.get(LOGIC_OPERATOR).asText());
         }
 
         @Override

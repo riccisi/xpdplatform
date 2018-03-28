@@ -3,30 +3,32 @@ package it.tasgroup.xtderp.xtdplatform.core.query;
 import it.tasgroup.xtderp.xtdplatform.core.media.Media;
 import it.tasgroup.xtderp.xtdplatform.core.media.Printable;
 import it.tasgroup.xtderp.xtdplatform.core.media.Rendered;
-import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
  *
  * @author Simone Ricciardi (simone.ricciardi@gmail.com)
- * @version $Id$
  * @since 1.0
  */
-public class PageQueryResult extends QueryResult {
+@RequiredArgsConstructor
+public final class PageQueryResult implements QueryResult {
 
+    private final List<Printable> result;
     private final long total;
 
-    public PageQueryResult(List<Printable> result, long total) {
-        super(result);
-        this.total = total;
+    @Override
+    public List<Printable> result() {
+        return Collections.unmodifiableList(this.result);
     }
 
     @Override
-    public <R> Rendered<R> print(Media<R> media) {
+    public <R> Rendered<R> print(final Media<R> media) {
         return media.asObject()
-            .with("result", result)
-            .with("total", total);
+            .with("result", this.result)
+            .with("total", this.total);
     }
 }

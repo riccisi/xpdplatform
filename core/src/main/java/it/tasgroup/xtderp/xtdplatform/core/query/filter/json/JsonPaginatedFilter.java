@@ -1,9 +1,9 @@
 package it.tasgroup.xtderp.xtdplatform.core.query.filter.json;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import it.tasgroup.xtderp.xtdplatform.core.query.filter.Statement;
 import it.tasgroup.xtderp.xtdplatform.core.query.filter.Filter;
 import it.tasgroup.xtderp.xtdplatform.core.query.filter.PaginatedFilter;
+import it.tasgroup.xtderp.xtdplatform.core.query.filter.Statement;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 

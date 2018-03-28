@@ -3,6 +3,7 @@ package it.tasgroup.xtderp.xtdplatform.core.metadata.reflect;
 import it.tasgroup.xtderp.xtdplatform.core.media.Media;
 import it.tasgroup.xtderp.xtdplatform.core.media.Rendered;
 import it.tasgroup.xtderp.xtdplatform.core.media.RenderedObject;
+import it.tasgroup.xtderp.xtdplatform.core.metadata.Attribute;
 import it.tasgroup.xtderp.xtdplatform.core.metadata.Field;
 import lombok.RequiredArgsConstructor;
 import org.cactoos.collection.Filtered;
@@ -18,11 +19,11 @@ import java.util.NoSuchElementException;
  * @since 1.0
  */
 @RequiredArgsConstructor
-public class FieldOf implements Field {
+public final class FieldOf implements Field {
 
     private final Collection<FieldMatcher> matchers;
 
-    public FieldOf(java.lang.reflect.Field field) {
+    public FieldOf(final java.lang.reflect.Field field) {
         this(
             new Filtered<>(
                 FieldMatcher::match,
@@ -45,16 +46,16 @@ public class FieldOf implements Field {
     }
 
     @Override
-    public <R, T> RenderedObject<R> printValue(T model, RenderedObject<R> rendered) {
+    public <R, T> RenderedObject<R> printValue(final T model, final RenderedObject<R> rendered) {
         return this.matchedField().printValue(model, rendered);
     }
 
     @Override
-    public <R> Rendered<R> print(Media<R> media) throws Exception {
+    public <R> Rendered<R> print(final Media<R> media) throws Exception {
         return this.matchedField().print(media);
     }
 
-    private Field matchedField() {
+    private Attribute matchedField() {
         try {
             return this.matchers.iterator().next().matched();
         } catch (NoSuchElementException e) {

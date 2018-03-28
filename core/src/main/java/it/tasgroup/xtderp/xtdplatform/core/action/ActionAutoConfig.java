@@ -15,7 +15,7 @@ public class ActionAutoConfig {
 
     @Bean
     @ConditionalOnMissingBean
-    public Actions actions(List<ActionConfigurer> configurers) {
+    public Actions actions(final List<ActionConfigurer> configurers) {
         return new CachedActions(new ConfigurableActions(configurers));
     }
 
@@ -26,17 +26,17 @@ public class ActionAutoConfig {
 
     @Bean
     @ConditionalOnMissingBean
-    public ActionLookup actionLookup(Actions actions, List<ActionDecorator> decorators) {
+    public ActionLookup actionLookup(final Actions actions, final List<ActionDecorator> decorators) {
         return new DecoratedActionLookup(new DefaultActionLookup(actions), decorators);
     }
 
     @Bean
-    public ActionService actionService(Actions actions) {
+    public ActionService actionService(final Actions actions) {
         return new ActionService(actions);
     }
 
     @Bean
-    public ActionExecutionService actionExecutionService(ActionLookup lookup) {
+    public ActionExecutionService actionExecutionService(final ActionLookup lookup) {
         return new ActionExecutionService(lookup);
     }
 

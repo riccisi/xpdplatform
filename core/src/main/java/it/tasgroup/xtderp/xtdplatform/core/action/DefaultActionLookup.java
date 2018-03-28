@@ -12,7 +12,7 @@ import org.cactoos.iterable.ItemAt;
  * @since 1.0
  */
 @RequiredArgsConstructor
-public class DefaultActionLookup implements ActionLookup {
+public final class DefaultActionLookup implements ActionLookup {
 
     private static final String DEFAULT_EXTENSION = "json";
 
@@ -24,14 +24,14 @@ public class DefaultActionLookup implements ActionLookup {
     /**
      * The default extension automatically appended
      */
-    private final String defaultExtension;
+    @NonNull private final String defaultExtension;
 
     /**
      * Overloaded constructor
      *
      * @param actions the iterable of Action.
      */
-    public DefaultActionLookup(Actions actions) {
+    public DefaultActionLookup(final Actions actions) {
         this(actions, DEFAULT_EXTENSION);
     }
 
@@ -43,12 +43,12 @@ public class DefaultActionLookup implements ActionLookup {
      * @throws Exception
      */
     @Override
-    public Action get(String id) throws Exception {
+    public Action get(final String id) throws Exception {
         return
             new ItemAt<>(
                 0,
                 new Filtered<>(
-                    act -> id.equals(act.id()) || (id + "." + defaultExtension).equals(act.id()),
+                    act -> id.equals(act.id()) || String.format("%s.%s",id,this.defaultExtension).equals(act.id()),
                     this.actions
                 )
             ).value();

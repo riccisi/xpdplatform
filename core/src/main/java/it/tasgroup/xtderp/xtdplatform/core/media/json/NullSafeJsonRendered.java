@@ -13,7 +13,7 @@ import lombok.RequiredArgsConstructor;
  * @since 1.0
  */
 @RequiredArgsConstructor
-final class NullSafeJsonRendered extends JsonRendered implements Rendered<JsonNode> {
+final class NullSafeJsonRendered extends JsonRendered {
 
     private final Object value;
     private final Rendered<JsonNode> rendered;

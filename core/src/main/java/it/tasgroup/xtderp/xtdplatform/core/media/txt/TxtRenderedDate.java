@@ -20,7 +20,7 @@ public final class TxtRenderedDate extends TxtRendered {
 
     @Override
     public String value() {
-        DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT, Locale.getDefault());
-        return df.format(value);
+        final DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT, Locale.getDefault());
+        return df.format(this.value);
     }
 }

@@ -1,8 +1,8 @@
 package it.tasgroup.xtderp.xtdplatform.core.metadata.service;
 
+import it.tasgroup.xtderp.xtdplatform.core.metadata.Metadata;
 import it.tasgroup.xtderp.xtdplatform.core.metadata.MetadataLookup;
 import it.tasgroup.xtderp.xtdplatform.core.metadata.ModelMetadata;
-import it.tasgroup.xtderp.xtdplatform.core.metadata.Metadata;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(value = "/metadata")
+@RequestMapping("/metadata")
 public class MetadataService {
 
     private final Metadata metadata;

@@ -18,7 +18,7 @@ final class TxtRenderedNumber extends TxtRendered {
 
     @Override
     public String value() {
-        DecimalFormat df = new DecimalFormat( "#,###,###,##0.##" );
-        return df.format(value);
+        final DecimalFormat df = new DecimalFormat( "#,###,###,##0.##" );
+        return df.format(this.value);
     }
 }

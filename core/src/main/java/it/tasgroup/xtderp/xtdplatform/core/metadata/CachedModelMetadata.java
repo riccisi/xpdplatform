@@ -10,7 +10,7 @@ import java.util.Iterator;
 /**
  *
  */
-public class CachedModelMetadata implements ModelMetadata {
+public final class CachedModelMetadata implements ModelMetadata {
 
     private final ModelMetadata delegate;
     private final StickyIterable<Attribute> cache;
@@ -24,7 +24,7 @@ public class CachedModelMetadata implements ModelMetadata {
 
     @Override
     public String id() throws Exception {
-       return cachedId.value();
+       return this.cachedId.value();
     }
 
     @Override

@@ -19,13 +19,13 @@ import java.math.BigDecimal;
 @ToString
 final class BigDecimalField extends AbstractField {
 
-    BigDecimalField(java.lang.reflect.Field field) {
+    BigDecimalField(final java.lang.reflect.Field field) {
         super(field);
     }
 
     @Override
-    protected <T> Printable printableOf(T entity) throws IllegalAccessException {
-        Object value = this.field.get(entity);
+    protected <T> Printable printableOf(final T entity) throws IllegalAccessException {
+        final Object value = this.field.get(entity);
         return new PrintableBigDecimal(value != null ? BigDecimal.class.cast(value) : null);
     }
 

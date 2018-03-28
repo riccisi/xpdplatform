@@ -15,8 +15,8 @@ public interface Actions extends Iterable<Action> {
 
         private final Iterable<Action> actions;
 
-        public Fake(Action... actions) {
-            this.actions = new IterableOf<>(actions);
+        public Fake(final Action... action) {
+            this.actions = new IterableOf<>(action);
         }
 
         @Override

@@ -17,10 +17,10 @@ abstract class JsonExpression implements Filter {
     private final JsonNode node;
 
     final String property() {
-        return node.get("property").asText();
+        return this.node.get("property").asText();
     }
 
     final Object value() {
-        return new ValueOf(node.get("value")).get();
+        return new ValueOf(this.node.get("value")).get();
     }
 }

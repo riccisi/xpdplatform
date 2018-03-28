@@ -27,8 +27,8 @@ final class CsvRenderedObject implements RenderedObject<CsvObject>{
     }
 
     @Override
-    public CsvRenderedObject with(String k, Printable v) {
-        return new CsvRenderedObject(this.csvObject.add(k, v));
+    public CsvRenderedObject with(String key, Printable val) {
+        return new CsvRenderedObject(this.csvObject.add(key, val));
     }
 
     @Override
@@ -37,9 +37,9 @@ final class CsvRenderedObject implements RenderedObject<CsvObject>{
     }
 
     @Override
-    public void writeOn(OutputStream stream) throws IOException {
-        OutputStreamWriter out = new OutputStreamWriter(stream);
-        CSVFormat format = CSVFormat.DEFAULT.withHeader(this.csvObject.headers());
+    public void writeOn(final OutputStream stream) throws IOException {
+        final OutputStreamWriter out = new OutputStreamWriter(stream);
+        final CSVFormat format = CSVFormat.DEFAULT.withHeader(this.csvObject.headers());
         try (CSVPrinter printer = new CSVPrinter(out, format)) {
             printer.printRecord(this.csvObject.values());
         }

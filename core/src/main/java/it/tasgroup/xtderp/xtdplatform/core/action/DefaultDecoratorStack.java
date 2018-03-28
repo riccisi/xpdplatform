@@ -7,10 +7,10 @@ package it.tasgroup.xtderp.xtdplatform.core.action;
  * @version $Id$
  * @since 1.0
  */
-public class DefaultDecoratorStack implements ActionDecorator {
+public final class DefaultDecoratorStack implements ActionDecorator {
 
     @Override
-    public Action decorate(Action action) {
+    public Action decorate(final Action action) {
         return new MonitoredAction(new LoggedAction(action));
     }
 }

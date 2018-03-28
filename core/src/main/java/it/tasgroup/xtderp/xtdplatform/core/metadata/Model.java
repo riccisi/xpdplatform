@@ -14,7 +14,9 @@ import lombok.ToString;
  * @version $Id$
  * @since 1.0
  */
-public interface Model extends Printable {
+public interface Model<T> extends Printable {
+
+    T value();
 
     /**
      * Fake {@link Model} implementation class for testing purpose.
@@ -32,8 +34,13 @@ public interface Model extends Printable {
         }
 
         @Override
-        public <R> Rendered<R> print(Media<R> media) throws Exception {
+        public <R> Rendered<R> print(final Media<R> media) {
             return media.asObject().with(this.prop,this.value);
+        }
+
+        @Override
+        public Object value() {
+            return this;
         }
     }
 }

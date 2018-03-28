@@ -1,8 +1,8 @@
 package it.tasgroup.xtderp.xtdplatform.core.action;
 
 import lombok.RequiredArgsConstructor;
+import org.cactoos.list.ListOf;
 
-import java.util.Arrays;
 import java.util.Collection;
 
 /**
@@ -14,20 +14,20 @@ import java.util.Collection;
  * @since 1.0
  */
 @RequiredArgsConstructor
-public class DecoratedActionLookup implements ActionLookup {
+public final class DecoratedActionLookup implements ActionLookup {
 
     private final ActionLookup lookup;
 
     private final Collection<ActionDecorator> decorators;
 
-    public DecoratedActionLookup(ActionLookup lookup, ActionDecorator... decorators) {
-        this(lookup, Arrays.asList(decorators));
+    public DecoratedActionLookup(final ActionLookup lookup, final ActionDecorator... decorators) {
+        this(lookup, new ListOf<>(decorators));
     }
 
     @Override
-    public Action get(String id) throws Exception {
+    public Action get(final String id) throws Exception {
         Action action = this.lookup.get(id);
-        for (ActionDecorator decorator : this.decorators) {
+        for (final ActionDecorator decorator : this.decorators) {
             action = decorator.decorate(action);
         }
         return action;

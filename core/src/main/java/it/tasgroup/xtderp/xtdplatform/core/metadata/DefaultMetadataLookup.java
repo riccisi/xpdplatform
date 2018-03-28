@@ -5,16 +5,16 @@ import org.cactoos.iterable.Filtered;
 import org.cactoos.iterable.ItemAt;
 
 @RequiredArgsConstructor
-public class DefaultMetadataLookup implements MetadataLookup {
+public final class DefaultMetadataLookup implements MetadataLookup {
 
     private final Metadata metadata;
 
     @Override
-    public ModelMetadata get(String modelId) throws Exception {
+    public ModelMetadata get(final String id) throws Exception {
         return new ItemAt<>(
             0,
             new Filtered<>(
-                model -> model.id().equals(modelId),
+                model -> model.id().equals(id),
                 this.metadata
             )
         ).value();

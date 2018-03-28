@@ -1,7 +1,9 @@
 package it.tasgroup.xtderp.xtdplatform.prototype.model;
 
 
+import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,29 +15,32 @@ import java.util.Date;
  * Created with IntelliJ IDEA.
  *
  * @author Simone Ricciardi (simone.ricciardi@gmail.com)
- * @version $Id$
  * @since 1.0
  */
 @Entity
 @ToString
+@EqualsAndHashCode(of = {"name","surname","birth"})
 public class Customer {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
-    private String firstName;
-    private String lastName;
-    private Date birthDate;
+    @NotBlank private String name;
+    @NotBlank private String surname;
+    private Date birth;
     private Integer age;
     private int test = 1;
 
     private Customer() {}
 
-    public Customer(String firstName, String lastName, Date birthDate, Integer age) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthDate = birthDate;
+    public Customer(final String name, final String surname, final Date birth, final Integer age) {
+        this.name = name;
+        this.surname = surname;
+        this.birth = new Date(birth.getTime());
         this.age = age;
     }
 
+    public final void process() {
+        this.test += 1;
+    }
 }

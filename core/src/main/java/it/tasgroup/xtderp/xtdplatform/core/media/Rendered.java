@@ -1,6 +1,5 @@
 package it.tasgroup.xtderp.xtdplatform.core.media;
 
-import java.io.IOException;
 import java.io.OutputStream;
 
 /**

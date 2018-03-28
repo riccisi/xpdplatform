@@ -1,8 +1,8 @@
 package it.tasgroup.xtderp.xtdplatform.core.action;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,11 +11,11 @@ import java.util.List;
  * @version $Id$
  * @since 1.0
  */
-public class ActionRegister {
+public final class ActionRegister {
 
-    private final List<Action> actions = new ArrayList<>();
+    private final Collection<Action> actions = new ArrayList<>(0);
 
-    public void add(Action action) {
+    public void add(final Action action) {
         this.actions.add(action);
     }
 

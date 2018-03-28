@@ -19,11 +19,10 @@ public final class LoggedAction implements Action {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
-    public Result execute(Request request) throws Exception {
+    public Result execute(final Request request) throws Exception {
         try {
             log.debug(String.format("Start execution of action '%s'", this.id()));
-            Result result = this.delegate.execute(request);
+            final Result result = this.delegate.execute(request);
             log.debug(String.format("Action '%s' executed successfully!", this.id()));
             return result;
         } catch (Throwable e) {
@@ -33,7 +32,7 @@ public final class LoggedAction implements Action {
     }
 
     @Override
-    public <R> Rendered<R> print(Media<R> media) throws Exception {
+    public <R> Rendered<R> print(final Media<R> media) throws Exception {
         return this.delegate.print(media);
     }
 }

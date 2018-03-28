@@ -1,7 +1,10 @@
 package it.tasgroup.xtderp.xtdplatform.core.metadata.reflect;
 
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Iterator over a all declared field of a class, including those inherited from the parent classes.

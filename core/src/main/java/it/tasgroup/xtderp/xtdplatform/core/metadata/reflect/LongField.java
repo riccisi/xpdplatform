@@ -17,13 +17,13 @@ import lombok.ToString;
 @ToString
 final class LongField extends AbstractField {
 
-    LongField(java.lang.reflect.Field field) {
+    LongField(final java.lang.reflect.Field field) {
         super(field);
     }
 
     @Override
-    protected <T> Printable printableOf(T entity) throws IllegalAccessException {
-        Object value = this.field.get(entity);
+    protected <T> Printable printableOf(final T entity) throws IllegalAccessException {
+        final Object value = this.field.get(entity);
         return new PrintableLong(value != null ? Long.class.cast(value) : null);
     }
 

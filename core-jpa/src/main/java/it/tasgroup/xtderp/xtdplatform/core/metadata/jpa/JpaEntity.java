@@ -4,6 +4,7 @@ import it.tasgroup.xtderp.xtdplatform.core.media.Media;
 import it.tasgroup.xtderp.xtdplatform.core.media.Rendered;
 import it.tasgroup.xtderp.xtdplatform.core.metadata.Entity;
 import it.tasgroup.xtderp.xtdplatform.core.metadata.EntityMetadata;
+import it.tasgroup.xtderp.xtdplatform.core.metadata.Model;
 import it.tasgroup.xtderp.xtdplatform.core.metadata.reflect.ClassModel;
 import lombok.NonNull;
 
@@ -18,35 +19,40 @@ import javax.persistence.EntityManager;
  * @version $Id$
  * @since 1.0
  */
-public class JpaEntity<T> implements Entity {
+public final class JpaEntity<T> implements Entity {
 
-    @NonNull private final ClassModel<T> classModel;
+    @NonNull private final Model model;
     @NonNull private final EntityMetadata metadata;
-    @NonNull private final EntityManager entityManager;
+    @NonNull private final EntityManager manager;
 
-    public JpaEntity(T classModel, EntityMetadata metadata, EntityManager entityManager) {
-        this(new ClassModel<>(classModel, metadata), metadata, entityManager);
+    public JpaEntity(final T model, final EntityMetadata metadata, final EntityManager manager) {
+        this(new ClassModel<>(model, metadata), metadata, manager);
     }
 
-    public JpaEntity(ClassModel<T> classModel, EntityMetadata metadata, EntityManager entityManager) {
-        this.classModel = classModel;
+    public JpaEntity(final Model model, final EntityMetadata metadata, final EntityManager manager) {
+        this.model = model;
         this.metadata = metadata;
-        this.entityManager = entityManager;
+        this.manager = manager;
     }
 
     @Override
-    public void save() throws Exception {
-        this.entityManager.persist(classModel.internal());
+    public void save() {
+        this.manager.persist(this.model.value());
     }
 
     @Override
-    public void delete() throws Exception {
-        this.entityManager.remove(classModel.internal());
+    public void delete() {
+        this.manager.remove(this.model.value());
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public <R> Rendered<R> print(Media<R> media) throws Exception {
-        return this.classModel.print(media);
+    public <R> Rendered<R> print(final Media<R> media) throws Exception {
+        return this.model.print(media);
+    }
+
+    @Override
+    public Object value() {
+        return this.model.value();
     }
 }

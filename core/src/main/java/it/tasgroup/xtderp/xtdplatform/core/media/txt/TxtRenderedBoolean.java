@@ -19,9 +19,9 @@ public final class TxtRenderedBoolean extends TxtRendered {
 
     @Override
     public String value() {
-        StringBuilder sb = new StringBuilder();
-        Formatter formatter = new Formatter(sb, Locale.getDefault());
-        formatter.format("%b", value);
+        final StringBuilder sb = new StringBuilder(0);
+        final Formatter formatter = new Formatter(sb, Locale.getDefault());
+        formatter.format("%b", this.value);
         return sb.toString();
     }
 }

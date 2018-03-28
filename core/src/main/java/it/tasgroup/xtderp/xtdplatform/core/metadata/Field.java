@@ -21,12 +21,12 @@ public interface Field extends Attribute {
         }
 
         @Override
-        public <R, T> RenderedObject<R> printValue(T model, RenderedObject<R> rendered) {
+        public <R, T> RenderedObject<R> printValue(final T model, final RenderedObject<R> rendered) {
             return rendered.with(this.prop,this.value);
         }
 
         @Override
-        public <R> Rendered<R> print(Media<R> media) throws Exception {
+        public <R> Rendered<R> print(final Media<R> media) {
             return media.asObject().with("name", this.prop).with("type","string");
         }
     }

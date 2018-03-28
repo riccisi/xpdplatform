@@ -1,8 +1,8 @@
 package it.tasgroup.xtderp.xtdplatform.core.query.filter.json;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import it.tasgroup.xtderp.xtdplatform.core.query.filter.Statement;
 import it.tasgroup.xtderp.xtdplatform.core.query.filter.Filter;
+import it.tasgroup.xtderp.xtdplatform.core.query.filter.Statement;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Arrays;
@@ -16,13 +16,13 @@ import java.util.Arrays;
  */
 final class JsonEq extends JsonExpression {
 
-    JsonEq(JsonNode node) {
+    JsonEq(final JsonNode node) {
         super(node);
     }
 
     @Override
-    public void applyOn(Statement stmt) {
-        stmt.eq(property(), value());
+    public void applyOn(final Statement stmt) {
+        stmt.eq(this.property(), this.value());
     }
 
     @RequiredArgsConstructor
@@ -32,11 +32,11 @@ final class JsonEq extends JsonExpression {
 
         @Override
         public boolean match() {
-            JsonNode operator = this.node.path("operator");
-            if(!operator.isMissingNode()) {
-                return Arrays.asList("eq", "=", "==", "===").contains(operator.asText());
+            final JsonNode operator = this.node.path("operator");
+            if (operator.isMissingNode()) {
+                return this.node.has("exactMatch") && this.node.get("exactMatch").asBoolean();
             } else {
-                return node.has("exactMatch") && node.get("exactMatch").asBoolean();
+                return Arrays.asList("eq", "=", "==", "===").contains(operator.asText());
             }
         }
 

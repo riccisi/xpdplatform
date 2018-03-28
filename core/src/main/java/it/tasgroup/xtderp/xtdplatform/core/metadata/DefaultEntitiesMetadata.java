@@ -27,7 +27,7 @@ public final class DefaultEntitiesMetadata implements EntitiesMetadata {
                 EntityMetadata.class::cast,
                 new Filtered<>(
                     input -> EntityMetadata.class.isAssignableFrom(input.getClass()),
-                    metadata.iterator()
+                    this.metadata.iterator()
                 )
             );
     }

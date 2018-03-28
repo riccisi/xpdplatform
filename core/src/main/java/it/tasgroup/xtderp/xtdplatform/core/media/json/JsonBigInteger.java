@@ -2,7 +2,6 @@ package it.tasgroup.xtderp.xtdplatform.core.media.json;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.BigIntegerNode;
-import it.tasgroup.xtderp.xtdplatform.core.media.Rendered;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
@@ -19,7 +18,7 @@ import java.math.BigInteger;
 @RequiredArgsConstructor
 @EqualsAndHashCode(of = "value", callSuper = false)
 @ToString(of = "value")
-final class JsonBigInteger extends JsonRendered implements Rendered<JsonNode> {
+final class JsonBigInteger extends JsonRendered {
 
     private final BigInteger value;
 
