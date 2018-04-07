@@ -11,9 +11,9 @@ import org.cactoos.list.ListOf;
 
 import java.util.Iterator;
 
-public interface ModelMetadata extends Iterable<Attribute>, Identified, Printable {
+public interface ModelMetadata<T> extends Iterable<Attribute>, Identified, Printable {
 
-    Model newInstance() throws Exception;
+    Model<T> newInstance() throws Exception;
 
     /**
      * Fake {@link ModelMetadata} implementation class for testing purpose.
@@ -21,7 +21,7 @@ public interface ModelMetadata extends Iterable<Attribute>, Identified, Printabl
     @RequiredArgsConstructor
     @ToString
     @EqualsAndHashCode
-    final class Fake implements ModelMetadata {
+    final class Fake implements ModelMetadata<Model.Fake> {
 
         private final String id;
 
@@ -30,7 +30,7 @@ public interface ModelMetadata extends Iterable<Attribute>, Identified, Printabl
         }
 
         @Override
-        public Model newInstance() {
+        public Model<Model.Fake> newInstance() {
             return new Model.Fake();
         }
 

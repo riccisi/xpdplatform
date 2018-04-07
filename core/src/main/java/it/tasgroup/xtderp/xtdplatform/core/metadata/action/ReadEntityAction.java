@@ -17,22 +17,23 @@ import lombok.RequiredArgsConstructor;
  * @since 1.0
  */
 @RequiredArgsConstructor
-public final class CreateEntityAction implements Action {
+public final class ReadEntityAction implements Action {
 
-    @NonNull private final EntityMetadata metadata;
+    @NonNull
+    private final EntityMetadata metadata;
 
     @Override
     public String id() throws Exception {
-        return String.format("create%s.json", this.metadata.id());
+        return String.format("read%s.json", this.metadata.id());
     }
 
     @Override
     public Result execute(final Request request) throws Exception {
-        return new JsonResult(this.metadata.newInstance());
+        return new JsonResult(this.metadata.read(request));
     }
 
     @Override
-    public <R> Rendered<R> print(final Media<R> media) throws Exception {
+    public <R> Rendered<R> print(Media<R> media) throws Exception {
         return media.asObject()
             .with("id", this.id())
             .with("type", "entity")

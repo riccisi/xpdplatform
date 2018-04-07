@@ -19,17 +19,17 @@ import javax.persistence.EntityManager;
  * @version $Id$
  * @since 1.0
  */
-public final class JpaEntity<T> implements Entity {
+public final class JpaEntity<T> implements Entity<T> {
 
-    @NonNull private final Model model;
-    @NonNull private final EntityMetadata metadata;
+    @NonNull private final Model<T> model;
+    @NonNull private final EntityMetadata<T> metadata;
     @NonNull private final EntityManager manager;
 
-    public JpaEntity(final T model, final EntityMetadata metadata, final EntityManager manager) {
+    public JpaEntity(final T model, final EntityMetadata<T> metadata, final EntityManager manager) {
         this(new ClassModel<>(model, metadata), metadata, manager);
     }
 
-    public JpaEntity(final Model model, final EntityMetadata metadata, final EntityManager manager) {
+    public JpaEntity(final Model<T> model, final EntityMetadata<T> metadata, final EntityManager manager) {
         this.model = model;
         this.metadata = metadata;
         this.manager = manager;
@@ -52,7 +52,7 @@ public final class JpaEntity<T> implements Entity {
     }
 
     @Override
-    public Object value() {
+    public T value() {
         return this.model.value();
     }
 }

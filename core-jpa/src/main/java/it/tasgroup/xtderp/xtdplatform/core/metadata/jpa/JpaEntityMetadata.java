@@ -1,37 +1,39 @@
 package it.tasgroup.xtderp.xtdplatform.core.metadata.jpa;
 
+import it.tasgroup.xtderp.xtdplatform.core.action.Request;
 import it.tasgroup.xtderp.xtdplatform.core.media.Media;
 import it.tasgroup.xtderp.xtdplatform.core.media.PrintableList;
 import it.tasgroup.xtderp.xtdplatform.core.media.Rendered;
-import it.tasgroup.xtderp.xtdplatform.core.metadata.Attribute;
-import it.tasgroup.xtderp.xtdplatform.core.metadata.Entity;
-import it.tasgroup.xtderp.xtdplatform.core.metadata.EntityMetadata;
-import it.tasgroup.xtderp.xtdplatform.core.metadata.ModelMetadata;
+import it.tasgroup.xtderp.xtdplatform.core.metadata.*;
+import it.tasgroup.xtderp.xtdplatform.core.metadata.reflect.ClassField;
 import it.tasgroup.xtderp.xtdplatform.core.metadata.reflect.ClassModelMetadata;
 import lombok.NonNull;
 
 import javax.persistence.EntityManager;
+import javax.persistence.metamodel.EntityType;
 import java.util.Iterator;
 
 /**
- * {@link EntityMetadata} implementation that use JPA in order to describe an {@link Entity}.
+ * {@link EntityMetadata} implementation that use JPA in order to describe/manage an {@link Entity}.
  *
  * <p>The class is immutable and thread-safe.
  *
+ * @param <T> the JPA entity type.
  * @author Simone Ricciardi (simone.ricciardi@gmail.com)
  * @since 1.0
- * @param <T> the JPA entity type.
  */
-public final class JpaEntityMetadata<T> implements EntityMetadata {
+public final class JpaEntityMetadata<T> implements EntityMetadata<T> {
 
     @NonNull private final EntityManager manager;
     @NonNull private final Class<T> modelClass;
-    private final ModelMetadata metadata;
+    @NonNull private final ModelMetadata<T> metadata;
+    @NonNull private final Field id;
 
     public JpaEntityMetadata(final EntityManager manager, final Class<T> modelClass) {
         this.manager = manager;
         this.modelClass = modelClass;
         this.metadata = new ClassModelMetadata<T>(this.modelClass);
+        this.id = this.idField();
     }
 
     @Override
@@ -53,21 +55,24 @@ public final class JpaEntityMetadata<T> implements EntityMetadata {
     }
 
     @Override
-    public Entity newInstance() throws Exception {
+    public Entity<T> newInstance() throws Exception {
         return new JpaEntity<T>(this.metadata.newInstance(), this, this.manager);
     }
 
-   /* @Override
-    public Serializable idOf(Object entity) {
+    @Override
+    public Entity<T> read(final Request request) throws Exception {
+        final Object value = this.id.parsedValue(request.param("id"));
+        return new JpaEntity<T>(this.manager.find(this.modelClass, value), this, this.manager);
+    }
+
+    private Field idField() {
         try {
-            String idName = this.manager.getMetamodel().entity(this.modelClass).getId(this.modelClass).getName();
-            Field idField = getFields(this.modelClass, withName(idName)).iterator().next();
-            idField.setAccessible(true);
-            return (Serializable) idField.get(entity);
-        } catch (Exception e) {
-            throw new RuntimeException(String.format("Unable to get id value from entity %s", entity), e);
+            final EntityType<T> type = this.manager.getMetamodel().entity(this.modelClass);
+            final String name = type.getId(type.getIdType().getJavaType()).getName();
+            return new ClassField(this.modelClass.getDeclaredField(name));
+        } catch (final Exception e) {
+            throw new IllegalStateException(e);
         }
     }
 
-   */
 }

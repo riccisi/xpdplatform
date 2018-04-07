@@ -12,5 +12,7 @@ import it.tasgroup.xtderp.xtdplatform.core.media.RenderedObject;
  */
 public interface Attribute extends Printable {
 
+    String name();
+
     <R,T> RenderedObject<R> printValue(T model, RenderedObject<R> rendered);
 }

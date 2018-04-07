@@ -22,13 +22,18 @@ public final class FilterRequest implements Request {
 
     private final JsonRequest request;
 
-    public FilterRequest(Request request) {
+    public FilterRequest(final Request request) {
         this.request = new JsonRequest(request);
     }
 
     @Override
     public InputStream body() throws IOException {
         return this.request.body();
+    }
+
+    @Override
+    public String param(final String key) {
+        return this.request.param(key);
     }
 
     public Filter filter() throws Exception {

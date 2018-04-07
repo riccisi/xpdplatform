@@ -10,5 +10,6 @@ import org.springframework.data.repository.CrudRepository;
  * @version $Id$
  * @since 1.0
  */
+@SuppressWarnings("InterfaceNeverImplemented")
 public interface CustomerRepository extends CrudRepository<Customer, Long> {
 }

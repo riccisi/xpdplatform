@@ -11,16 +11,16 @@ import java.util.Set;
 
 @Log
 @RequiredArgsConstructor
-public class JpaMetadataConfigurer implements MetadataConfigurer {
+public final class JpaMetadataConfigurer implements MetadataConfigurer {
 
     private final EntityManager entityManager;
 
     @Override
     @SuppressWarnings("unchecked")
-    public void configure(MetadataRegister register) {
-        Set<EntityType<?>> entityTypes = this.entityManager.getMetamodel().getEntities();
-        for (EntityType<?> entityType : entityTypes) {
-            Class<?> entityClass = entityType.getJavaType();
+    public void configure(final MetadataRegister register) {
+        final Set<EntityType<?>> types = this.entityManager.getMetamodel().getEntities();
+        for (final EntityType<?> type : types) {
+            final Class<?> entityClass = type.getJavaType();
             register.add(new JpaEntityMetadata(this.entityManager, entityClass));
             log.info(String.format("Entity %s successfully registered!", entityClass));
         }

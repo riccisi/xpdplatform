@@ -11,6 +11,7 @@ import java.util.List;
 
 @Configuration
 @Slf4j
+@SuppressWarnings("DesignForExtension")
 public class ActionAutoConfig {
 
     @Bean

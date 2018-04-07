@@ -24,7 +24,7 @@ public interface Model<T> extends Printable {
     @RequiredArgsConstructor
     @ToString
     @EqualsAndHashCode
-    final class Fake implements Model {
+    final class Fake implements Model<Fake> {
 
         private final String prop;
         private final String value;
@@ -35,11 +35,11 @@ public interface Model<T> extends Printable {
 
         @Override
         public <R> Rendered<R> print(final Media<R> media) {
-            return media.asObject().with(this.prop,this.value);
+            return media.asObject().with(this.prop, this.value);
         }
 
         @Override
-        public Object value() {
+        public Fake value() {
             return this;
         }
     }

@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @EntityScan(basePackages = "it.tasgroup.xtderp.xtdplatform.admin")
+@SuppressWarnings("DesignForExtension")
 public class AdminAutoconfig {
 
     @Bean

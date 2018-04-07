@@ -32,6 +32,11 @@ public final class PaginatedFilterRequest implements Request {
         return this.request.body();
     }
 
+    @Override
+    public String param(String key) {
+        return this.request.param(key);
+    }
+
     public PaginatedFilter filter() throws Exception {
         return this.request.parse(node -> new JsonPaginatedFilter(node, new JsonFilterOf(node)));
     }

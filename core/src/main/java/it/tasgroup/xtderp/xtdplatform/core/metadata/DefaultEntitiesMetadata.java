@@ -21,6 +21,7 @@ public final class DefaultEntitiesMetadata implements EntitiesMetadata {
     @NonNull private final Metadata metadata;
 
     @Override
+    @SuppressWarnings("rawtypes")
     public Iterator<EntityMetadata> iterator() {
         return
             new Mapped<>(

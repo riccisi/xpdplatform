@@ -13,21 +13,21 @@ import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 @EntityScan(basePackages = "it.tasgroup.xtderp.xtdplatform.prototype.model")
+@SuppressWarnings("DesignForExtension")
 public class PrototypeApplication extends SpringBootServletInitializer {
 
     @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(PrototypeApplication.class);
+    protected SpringApplicationBuilder configure(final SpringApplicationBuilder application) {
+        return super.configure(application).sources(PrototypeApplication.class);
     }
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         SpringApplication.run(PrototypeApplication.class, args);
     }
 
     @Bean
-    public CommandLineRunner demo(CustomerRepository repository) {
-        return (args) -> {
-            // save a couple of customers
+    public CommandLineRunner demo(final CustomerRepository repository) {
+        return args -> {
             repository.save(new Customer("Jack", "Bauer", new StringAsDate("dd/MM/yyyy","21/09/1973").value(),null));
             repository.save(new Customer("Chloe", "O'Brian", new StringAsDate("dd/MM/yyyy","01/03/1938").value(),null));
             repository.save(new Customer("Kim", "Bauer", new StringAsDate("dd/MM/yyyy","13/02/1960").value(),null));

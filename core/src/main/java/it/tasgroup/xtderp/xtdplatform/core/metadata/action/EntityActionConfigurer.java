@@ -22,9 +22,10 @@ public final class EntityActionConfigurer implements ActionConfigurer {
     private final EntitiesMetadata metadata;
 
     @Override
-    public void configure(ActionRegister register) {
-        for (EntityMetadata meta : this.metadata) {
+    public void configure(final ActionRegister register) {
+        for (final EntityMetadata meta : this.metadata) {
             register.add(new CreateEntityAction(meta));
+            register.add(new ReadEntityAction(meta));
         }
     }
 }

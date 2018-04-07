@@ -22,8 +22,8 @@ public final class JsonRequest implements Request {
     private final Request request;
     private final ObjectMapper objectMapper;
 
-    public JsonRequest(Request request) {
-        this(request,  new ObjectMapper());
+    public JsonRequest(final Request request) {
+        this(request, new ObjectMapper());
     }
 
     @Override
@@ -31,12 +31,17 @@ public final class JsonRequest implements Request {
         return this.request.body();
     }
 
-    public <T> T parse(Func<JsonNode, T> func) throws Exception {
-        JsonNode node = this.objectMapper.readTree(this.body());
+    @Override
+    public String param(String key) {
+        return this.request.param(key);
+    }
+
+    public <T> T parse(final Func<JsonNode, T> func) throws Exception {
+        final JsonNode node = this.objectMapper.readTree(this.body());
         return func.apply(node);
     }
 
-    public <T> T parse(Class<T> toParse) throws Exception{
-        return this.parse(input -> objectMapper.treeToValue(input, toParse));
+    public <T> T parse(final Class<T> toParse) throws Exception{
+        return this.parse(input -> this.objectMapper.treeToValue(input, toParse));
     }
 }

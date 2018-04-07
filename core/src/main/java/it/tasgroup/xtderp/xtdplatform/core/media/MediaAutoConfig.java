@@ -6,10 +6,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
 @Configuration
+@SuppressWarnings("DesignForExtension")
 public class MediaAutoConfig implements Jackson2ObjectMapperBuilderCustomizer {
 
     @Override
-    public void customize(Jackson2ObjectMapperBuilder builder) {
+    public void customize(final Jackson2ObjectMapperBuilder builder) {
         builder.serializerByType(Printable.class, new PrintableJsonSerializer());
     }
 }

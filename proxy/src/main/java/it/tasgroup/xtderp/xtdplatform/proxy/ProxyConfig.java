@@ -9,10 +9,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@SuppressWarnings("DesignForExtension")
 public class ProxyConfig {
 
     @Bean
-    public Menu getMenu(DiscoveryClient discoveryClient, LoadBalancerClient loadBalancerClient) {
+    public Menu getMenu(final DiscoveryClient discoveryClient, final LoadBalancerClient loadBalancerClient) {
         return new AggregatedMenu(new DiscoverableMenus(discoveryClient, loadBalancerClient));
     }
 }

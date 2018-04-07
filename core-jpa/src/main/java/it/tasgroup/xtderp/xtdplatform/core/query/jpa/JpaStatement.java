@@ -28,7 +28,7 @@ public final class JpaStatement<T> implements Statement {
         this(AND);
     }
 
-    public JpaStatement(LogicOperator operator) {
+    public JpaStatement(final LogicOperator operator) {
         switch (operator) {
             case OR: this.strategy = new Or(); break;
             case AND: default: this.strategy = new And();

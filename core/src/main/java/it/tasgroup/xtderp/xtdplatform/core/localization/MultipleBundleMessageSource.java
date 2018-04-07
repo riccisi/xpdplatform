@@ -3,27 +3,22 @@ package it.tasgroup.xtderp.xtdplatform.core.localization;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Properties;
+import java.util.*;
 
-public class MultipleBundleMessageSource extends ReloadableResourceBundleMessageSource {
+public final class MultipleBundleMessageSource extends ReloadableResourceBundleMessageSource {
 
-    private List<String> baseNames = new ArrayList<String>() {{
-        this.add("classpath:messages");
-    }};
+    private static final String[] STRINGS = new String[0];
 
-    public void addResource(String resourceName) {
-        String baseName = String.format("classpath:%s_messages", resourceName);
-        baseNames.add(baseName);
-        this.setBasenames(baseNames.toArray(new String[baseNames.size()]));
+    private final List<String> baseNames = new ArrayList<>(Arrays.asList("classpath:messages"));
+
+    public void addResource(final String name) {
+        this.baseNames.add(String.format("classpath:%s_messages", name));
+        this.setBasenames(this.baseNames.toArray(STRINGS));
         this.clearCache();
     }
 
     public Properties getProperties() {
-        Locale locale = LocaleContextHolder.getLocale();
+        final Locale locale = LocaleContextHolder.getLocale();
         return this.getMergedProperties(locale).getProperties();
     }
-
 }

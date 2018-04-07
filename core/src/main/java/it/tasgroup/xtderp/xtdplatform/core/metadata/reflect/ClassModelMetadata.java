@@ -4,18 +4,15 @@ import it.tasgroup.xtderp.xtdplatform.core.media.Media;
 import it.tasgroup.xtderp.xtdplatform.core.media.Printable;
 import it.tasgroup.xtderp.xtdplatform.core.media.Rendered;
 import it.tasgroup.xtderp.xtdplatform.core.metadata.*;
-import it.tasgroup.xtderp.xtdplatform.core.metadata.annotation.XtdExclude;
 import it.tasgroup.xtderp.xtdplatform.core.metadata.validation.JavaxValidationEngine;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
-import org.cactoos.iterator.Filtered;
-import org.cactoos.iterator.Mapped;
+import org.cactoos.iterable.Joined;
 import org.cactoos.list.ListOf;
 
-import java.lang.reflect.*;
-import java.lang.reflect.Field;
+import java.lang.reflect.Constructor;
 import java.util.Iterator;
 
 /**
@@ -29,13 +26,20 @@ import java.util.Iterator;
 @RequiredArgsConstructor
 @EqualsAndHashCode
 @ToString
-public final class ClassModelMetadata<T> implements ModelMetadata {
+public final class ClassModelMetadata<T> implements ModelMetadata<T> {
 
     @NonNull private final Class<T> modelClass;
     @NonNull private final ProcessStrategy<T> strategy;
+    @NonNull private final Iterable<Attribute> attributes;
 
     public ClassModelMetadata(final Class<T> modelClass) {
-        this(modelClass, new ProcessStrategyOf<T>(modelClass));
+        this(modelClass,
+            new ProcessStrategyOf<T>(modelClass),
+            new Joined<>(
+                new Fields(modelClass),
+                new Formulas(modelClass)
+            )
+        );
     }
 
     @Override
@@ -45,13 +49,7 @@ public final class ClassModelMetadata<T> implements ModelMetadata {
 
     @Override
     public Iterator<Attribute> iterator() {
-        return new Mapped<>(
-            FieldOf::new,
-            new Filtered<>(
-                ClassModelMetadata::included,
-                new ClassFieldIterator(this.modelClass)
-            )
-        );
+        return this.attributes.iterator();
     }
 
     @Override
@@ -75,25 +73,5 @@ public final class ClassModelMetadata<T> implements ModelMetadata {
                 ),
                 new JavaxValidationEngine<>(instance)
             );
-    }
-
-    private static boolean included(final Field field) {
-        return notStatic(field) && notTransient(field) && notThis(field) && notToExclude(field);
-    }
-
-    private static boolean notToExclude(final AnnotatedElement field) {
-        return !field.isAnnotationPresent(XtdExclude.class);
-    }
-
-    private static boolean notThis(final Member field) {
-        return !field.getName().startsWith("this$");
-    }
-
-    private static boolean notTransient(final Member field) {
-        return !Modifier.isTransient(field.getModifiers());
-    }
-
-    private static boolean notStatic(final Member field) {
-        return !Modifier.isStatic(field.getModifiers());
     }
 }

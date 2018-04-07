@@ -23,4 +23,9 @@ public final class HttpRequest implements Request {
     public InputStream body() throws IOException {
         return this.request.getInputStream();
     }
+
+    @Override
+    public String param(final String key) {
+        return this.request.getParameter(key);
+    }
 }

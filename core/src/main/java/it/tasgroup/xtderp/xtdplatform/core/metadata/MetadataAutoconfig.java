@@ -13,6 +13,7 @@ import java.util.List;
 
 @Configuration
 @Log
+@SuppressWarnings("DesignForExtension")
 public class MetadataAutoconfig {
 
     @Bean
@@ -25,43 +26,43 @@ public class MetadataAutoconfig {
     @Bean
     @ConditionalOnMissingBean
     @Profile("dev")
-    public Metadata reloadableModels(List<MetadataConfigurer> configurers) {
+    public Metadata reloadableModels(final List<MetadataConfigurer> configurers) {
         return new ConfigurableMetadata(configurers);
     }
 
     @Bean
     @ConditionalOnMissingBean
     @Profile("dev")
-    public MetadataLookup reloadableModelLookup(Metadata metadata) {
+    public MetadataLookup reloadableModelLookup(final Metadata metadata) {
         return new DefaultMetadataLookup(metadata);
     }
 
     @Bean
     @ConditionalOnMissingBean
-    public Metadata models(List<MetadataConfigurer> configurers) {
+    public Metadata models(final List<MetadataConfigurer> configurers) {
         return new CachedMetadata(new ConfigurableMetadata(configurers));
     }
 
     @Bean
     @ConditionalOnMissingBean
-    public MetadataLookup modelLookup(Metadata metadata) {
+    public MetadataLookup modelLookup(final Metadata metadata) {
         return new CachedMetadataLookup(new DefaultMetadataLookup(metadata));
     }
 
     @Bean
     @ConditionalOnMissingBean
-    public EntitiesMetadata entityMetadata(Metadata metadata) {
+    public EntitiesMetadata entityMetadata(final Metadata metadata) {
         return new DefaultEntitiesMetadata(metadata);
     }
 
     @Bean
     @ConditionalOnMissingBean
-    public ActionConfigurer entityActionConfigurer(EntitiesMetadata metadata) {
+    public ActionConfigurer entityActionConfigurer(final EntitiesMetadata metadata) {
         return new EntityActionConfigurer(metadata);
     }
 
     @Bean
-    public MetadataService modelService(Metadata metadata, MetadataLookup metadataLookup) {
+    public MetadataService modelService(final Metadata metadata, final MetadataLookup metadataLookup) {
         return new MetadataService(metadata, metadataLookup);
     }
 

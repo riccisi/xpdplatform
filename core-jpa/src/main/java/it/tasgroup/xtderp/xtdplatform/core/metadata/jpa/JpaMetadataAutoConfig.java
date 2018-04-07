@@ -7,10 +7,11 @@ import org.springframework.context.annotation.Configuration;
 import javax.persistence.EntityManager;
 
 @Configuration
+@SuppressWarnings("DesignForExtension")
 public class JpaMetadataAutoConfig {
 
     @Bean
-    public MetadataConfigurer modelConfigurer(EntityManager entityManager) {
+    public MetadataConfigurer modelConfigurer(final EntityManager entityManager) {
         return new JpaMetadataConfigurer(entityManager);
     }
 }

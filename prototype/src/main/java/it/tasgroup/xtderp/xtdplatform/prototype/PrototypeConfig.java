@@ -1,20 +1,21 @@
 package it.tasgroup.xtderp.xtdplatform.prototype;
 
 import it.tasgroup.xtderp.xtdplatform.core.localization.MultipleBundleMessageSource;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
 
 @Configuration
+@RequiredArgsConstructor
+@SuppressWarnings("DesignForExtension")
 public class PrototypeConfig {
 
-    @Autowired
-    private MultipleBundleMessageSource messageSource;
+    private final MultipleBundleMessageSource messageSource;
 
     @PostConstruct
     public void init() {
-        messageSource.addResource("prototype");
+        this.messageSource.addResource("prototype");
     }
 
 /*

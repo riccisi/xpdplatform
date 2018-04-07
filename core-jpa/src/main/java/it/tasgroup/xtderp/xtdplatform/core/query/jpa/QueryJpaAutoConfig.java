@@ -7,11 +7,11 @@ import org.springframework.context.annotation.Configuration;
 import javax.persistence.EntityManager;
 
 @Configuration
+@SuppressWarnings("DesignForExtension")
 public class QueryJpaAutoConfig {
 
     @Bean
-    public ActionConfigurer queryActionConfigurer(EntityManager entityManager) {
+    public ActionConfigurer queryActionConfigurer(final EntityManager entityManager) {
         return new JpaQueryActionConfigurer(entityManager);
     }
-
 }

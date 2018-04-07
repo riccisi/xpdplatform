@@ -12,7 +12,7 @@ import lombok.ToString;
  * @author Simone Ricciardi (simone.ricciardi@gmail.com)
  * @since 1.0
  */
-public interface Entity extends Model {
+public interface Entity<T> extends Model<T> {
 
     void save() throws Exception;
 
@@ -24,12 +24,16 @@ public interface Entity extends Model {
     @RequiredArgsConstructor
     @ToString
     @EqualsAndHashCode
-    final class Fake implements Entity {
+    final class Fake implements Entity<Model.Fake> {
 
-        private final Model model;
+        private final Model<Model.Fake> model;
 
         public Fake() {
             this(new Model.Fake());
+        }
+
+        public Fake(final String id) {
+            this(new Model.Fake("id",id));
         }
 
         @Override
@@ -48,7 +52,7 @@ public interface Entity extends Model {
         }
 
         @Override
-        public Object value() {
+        public Model.Fake value() {
             return this.model.value();
         }
     }

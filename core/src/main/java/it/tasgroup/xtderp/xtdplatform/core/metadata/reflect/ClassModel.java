@@ -21,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 public final class ClassModel<T> implements Model<T> {
 
     @NonNull private final T model;
-    @NonNull private final ModelMetadata metadata;
+    @NonNull private final ModelMetadata<T> metadata;
 
     @Override
     public <R> Rendered<R> print(final Media<R> media) {

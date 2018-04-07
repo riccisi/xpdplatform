@@ -15,11 +15,12 @@ import static org.junit.Assert.assertThat;
  */
 public class DefaultEntitiesMetadataTest {
 
+    @SuppressWarnings("unchecked")
     @Test
-    public void testIterator() {
+    public final void testIterator() {
         assertThat(
             new DefaultEntitiesMetadata(
-                () -> new ListOf<>(new ModelMetadata.Fake(), new EntityMetadata.Fake()).iterator()
+                () -> new ListOf(new ModelMetadata.Fake(), new EntityMetadata.Fake()).iterator()
             ).iterator().next(),
             equalTo(new EntityMetadata.Fake())
         );

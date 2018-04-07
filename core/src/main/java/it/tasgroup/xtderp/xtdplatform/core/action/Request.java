@@ -16,6 +16,8 @@ public interface Request {
 
     InputStream body() throws IOException;
 
+    String param(String key);
+
     default String asString() throws IOException {
        return new TextOf(this.body()).asString();
     }

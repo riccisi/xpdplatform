@@ -17,6 +17,7 @@ import java.util.List;
 
 @Configuration
 @Log
+@SuppressWarnings("DesignForExtension")
 public class MenuAutoConfig implements Jackson2ObjectMapperBuilderCustomizer {
 
     @Bean
@@ -34,12 +35,12 @@ public class MenuAutoConfig implements Jackson2ObjectMapperBuilderCustomizer {
     }
 
     @Bean
-    public MenuService menuService(Menu menu) {
+    public MenuService menuService(final Menu menu) {
         return new MenuService(menu);
     }
 
     @Override
-    public void customize(Jackson2ObjectMapperBuilder builder) {
+    public void customize(final Jackson2ObjectMapperBuilder builder) {
         builder.serializerByType(MenuFolder.class, new MenuFolderSerializer());
         builder.serializerByType(MenuItem.class, new MenuItemSerializer());
         builder.deserializerByType(MenuNode.class, new MenuNodeDeserializer());

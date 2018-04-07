@@ -1,5 +1,6 @@
 package it.tasgroup.xtderp.xtdplatform.core.metadata;
 
+import it.tasgroup.xtderp.xtdplatform.core.action.Request;
 import it.tasgroup.xtderp.xtdplatform.core.media.Media;
 import it.tasgroup.xtderp.xtdplatform.core.media.Rendered;
 import lombok.EqualsAndHashCode;
@@ -9,10 +10,12 @@ import org.cactoos.list.ListOf;
 
 import java.util.Iterator;
 
-public interface EntityMetadata extends ModelMetadata {
+public interface EntityMetadata<T> extends ModelMetadata<T> {
 
     @Override
-    Entity newInstance() throws Exception;
+    Entity<T> newInstance() throws Exception;
+
+    Entity<T> read(Request request) throws Exception;
 
     /**
      * Fake {@link EntityMetadata} implementation class for testing purpose.
@@ -20,7 +23,7 @@ public interface EntityMetadata extends ModelMetadata {
     @RequiredArgsConstructor
     @ToString
     @EqualsAndHashCode
-    final class Fake implements EntityMetadata {
+    final class Fake implements EntityMetadata<Model.Fake> {
 
         private final String id;
 
@@ -29,8 +32,13 @@ public interface EntityMetadata extends ModelMetadata {
         }
 
         @Override
-        public Entity newInstance() {
+        public Entity<Model.Fake> newInstance() {
             return new Entity.Fake();
+        }
+
+        @Override
+        public Entity<Model.Fake> read(final Request request) {
+            return new Entity.Fake(this.id);
         }
 
         @Override
