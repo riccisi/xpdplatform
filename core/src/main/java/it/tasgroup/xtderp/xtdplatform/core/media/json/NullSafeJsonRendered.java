@@ -19,6 +19,7 @@ final class NullSafeJsonRendered extends JsonRendered {
     private final Rendered<JsonNode> rendered;
 
     @Override
+    @SuppressWarnings("VariableNotUsedInsideIf")
     public JsonNode value() throws Exception {
         return this.value != null ? this.rendered.value() : NullNode.getInstance();
     }

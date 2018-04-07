@@ -11,28 +11,28 @@ import java.util.ListIterator;
  * @author Simone Ricciardi (simone.ricciardi@gmail.com)
  * @since 1.0
  */
-public final class ClassInheritanceIterator implements Iterator<Class> {
+public final class ClassInheritanceIterator implements Iterator<Class<?>> {
 
     private final ListIterator<Class<?>> it;
 
-    public ClassInheritanceIterator(Class aClass) {
-        List<Class<?>> classes = new ArrayList<>();
+    public ClassInheritanceIterator(final Class<?> aClass) {
+        final List<Class<?>> classes = new ArrayList<>();
         Class<?> current = aClass;
         do {
             classes.add(current);
             current = current.getSuperclass();
         }
-        while (current != null && current != Object.class);
-        it = classes.listIterator(classes.size());
+        while (current != null && !current.equals(Object.class));
+        this.it = classes.listIterator(classes.size());
     }
 
     @Override
     public boolean hasNext() {
-        return it.hasPrevious();
+        return this.it.hasPrevious();
     }
 
     @Override
-    public Class next() {
-        return it.previous();
+    public Class<?> next() {
+        return this.it.previous();
     }
 }
