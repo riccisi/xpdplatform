@@ -6,23 +6,23 @@ import lombok.RequiredArgsConstructor;
 import java.util.Iterator;
 
 @RequiredArgsConstructor
-public class AggregatedMenu implements Menu {
+public final class AggregatedMenu implements Menu {
 
    private final Menus menus;
 
     @Override
     public Iterator<MenuNode> iterator() {
-        DefaultMenuBuilder menuBuilder = new DefaultMenuBuilder();
-        for (Menu menu : menus) {
-            for (MenuNode menuNode : menu) {
-                menuNode.accept(new AbstractMenuNodeVisitor() {
+        final MenuBuilder builder = new DefaultMenuBuilder();
+        for (final Menu menu : this.menus) {
+            for (final MenuNode node : menu) {
+                node.accept(new AbstractMenuNodeVisitor() {
                     @Override
-                    public void visit(MenuItem leaf) {
-                        menuBuilder.add(leaf.code(), leaf.action());
+                    public void visit(final MenuItem leaf) {
+                        builder.add(leaf.code(), leaf.action());
                     }
                 });
             }
         }
-        return menuBuilder.build().iterator();
+        return builder.build().iterator();
     }
 }

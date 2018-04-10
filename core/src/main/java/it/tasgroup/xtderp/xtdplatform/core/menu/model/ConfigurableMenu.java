@@ -14,9 +14,9 @@ public final class ConfigurableMenu implements Menu {
 
     @Override
     public Iterator<MenuNode> iterator() {
-        DefaultMenuBuilder menuBuilder = new DefaultMenuBuilder();
-        this.configurers.forEach(configurer -> configurer.configure(menuBuilder));
-        return menuBuilder.build().iterator();
+        final DefaultMenuBuilder builder = new DefaultMenuBuilder();
+        this.configurers.forEach(configurer -> configurer.configure(builder));
+        return builder.build().iterator();
     }
 
 }

@@ -9,7 +9,7 @@ import org.cactoos.iterator.Mapped;
 import java.util.Iterator;
 
 /**
- *
+ * {@link Iterable} of attributes
  *
  * @author Simone Ricciardi (simone.ricciardi@gmail.com)
  * @since 1.0

@@ -6,14 +6,14 @@ import java.util.Iterator;
 
 public final class CachedMetadata implements Metadata {
 
-    private final StickyIterable<ModelMetadata> cache;
+    private final StickyIterable<ModelMetadata<?>> cache;
 
     public CachedMetadata(final Metadata metadata) {
         this.cache = new StickyIterable<>(metadata);
     }
 
     @Override
-    public Iterator<ModelMetadata> iterator() {
+    public Iterator<ModelMetadata<?>> iterator() {
         return this.cache.iterator();
     }
 }

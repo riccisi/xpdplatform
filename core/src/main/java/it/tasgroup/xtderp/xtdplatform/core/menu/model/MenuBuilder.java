@@ -6,5 +6,5 @@ public interface MenuBuilder {
 
     void add(String path, Action action);
 
-    MenuNode build();
+    MenuFolder build();
 }

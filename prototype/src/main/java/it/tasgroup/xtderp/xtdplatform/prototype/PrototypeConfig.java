@@ -17,12 +17,4 @@ public class PrototypeConfig {
     public void init() {
         this.messageSource.addResource("prototype");
     }
-
-/*
-    @Bean
-    public PrototypeMenuConfigurer menuConfigurer() {
-        return new PrototypeMenuConfigurer();
-    }
-*/
-
 }

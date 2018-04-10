@@ -12,7 +12,7 @@ import it.tasgroup.xtderp.xtdplatform.core.query.QueryResult;
  * @version $Id$
  * @since 1.0
  */
-public final class JsonQueryAction extends QueryAction {
+public final class JsonQueryAction extends QueryAction  {
 
     public JsonQueryAction(final Query query) {
         super(query);

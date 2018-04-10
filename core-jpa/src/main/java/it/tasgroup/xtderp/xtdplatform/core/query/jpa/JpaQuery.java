@@ -19,7 +19,7 @@ abstract class JpaQuery<T> implements Query {
 
     protected final EntityManager entityManager;
     protected final Class<T> entityClass;
-    protected final EntityMetadata metadata;
+    protected final EntityMetadata<T> metadata;
     protected final SimpleJpaRepository<T, Serializable> repository;
 
     public JpaQuery(EntityManager entityManager, Class<T> entityClass) {

@@ -12,19 +12,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/metadata")
-public class MetadataService {
+public final class MetadataService {
 
     private final Metadata metadata;
 
     private final MetadataLookup metadataLookup;
 
     @RequestMapping(method = RequestMethod.GET)
-    public Iterable<ModelMetadata> get() {
+    public Iterable<ModelMetadata<?>> get() {
         return this.metadata;
     }
 
     @RequestMapping(value = "/{metadataId}", method = RequestMethod.GET)
-    public ModelMetadata get(@PathVariable("metadataId") String metadataId) throws Exception {
+    public ModelMetadata<?> get(@PathVariable("metadataId") final String metadataId) throws Exception {
         return this.metadataLookup.get(metadataId);
     }
 }

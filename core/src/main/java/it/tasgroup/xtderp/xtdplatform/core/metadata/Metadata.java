@@ -6,7 +6,7 @@ import org.cactoos.list.ListOf;
 import java.util.Iterator;
 import java.util.List;
 
-public interface Metadata extends Iterable<ModelMetadata> {
+public interface Metadata extends Iterable<ModelMetadata<?>> {
 
     /**
      * Fake {@link Metadata} implementation class for testing purpose.
@@ -14,14 +14,14 @@ public interface Metadata extends Iterable<ModelMetadata> {
     @RequiredArgsConstructor
     final class Fake implements Metadata {
 
-        private final List<ModelMetadata> metadata;
+        private final List<ModelMetadata<?>> metadata;
 
-        public Fake(final ModelMetadata... metadata) {
+        public Fake(final ModelMetadata<?>... metadata) {
             this(new ListOf<>(metadata));
         }
 
         @Override
-        public Iterator<ModelMetadata> iterator() {
+        public Iterator<ModelMetadata<?>> iterator() {
             return this.metadata.iterator();
         }
     }

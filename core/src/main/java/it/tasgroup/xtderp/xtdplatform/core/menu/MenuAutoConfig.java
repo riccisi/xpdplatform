@@ -1,5 +1,6 @@
 package it.tasgroup.xtderp.xtdplatform.core.menu;
 
+import it.tasgroup.xtderp.xtdplatform.core.action.Actions;
 import it.tasgroup.xtderp.xtdplatform.core.menu.model.*;
 import it.tasgroup.xtderp.xtdplatform.core.menu.parser.MenuFolderSerializer;
 import it.tasgroup.xtderp.xtdplatform.core.menu.parser.MenuItemSerializer;
@@ -10,10 +11,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
-
-import java.util.List;
 
 @Configuration
 @Log
@@ -21,17 +19,15 @@ import java.util.List;
 public class MenuAutoConfig implements Jackson2ObjectMapperBuilderCustomizer {
 
     @Bean
-    @Order
     @ConditionalOnMissingBean
-    public MenuConfigurer menuConfigurer() {
-        log.warning("No menu configurer has been defined!");
-        return MenuConfigurer.EMPTY;
+    public MenuActions menuActions(final Actions actions) {
+        return new DefaultMenuActions(actions);
     }
 
     @Bean
     @ConditionalOnMissingBean
-    public Menu menu(List<MenuConfigurer> configurers) {
-        return new CachedMenu(new ConfigurableMenu(configurers));
+    public Menu menu(final MenuActions actions) {
+        return new CachedMenu(new ActionMenu(actions));
     }
 
     @Bean

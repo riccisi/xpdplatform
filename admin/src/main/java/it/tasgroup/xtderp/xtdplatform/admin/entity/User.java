@@ -1,5 +1,8 @@
 package it.tasgroup.xtderp.xtdplatform.admin.entity;
 
+import it.tasgroup.xtderp.xtdplatform.core.metadata.annotation.XtdMenu;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
@@ -11,6 +14,9 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "XTD_UTN")
+@ToString
+@EqualsAndHashCode(of = "username")
+@XtdMenu("menu.submenu.customer")
 //@XtdFormLayout(columns = 2)
 //@XtdModel
 //@XtdLabel("{username}")

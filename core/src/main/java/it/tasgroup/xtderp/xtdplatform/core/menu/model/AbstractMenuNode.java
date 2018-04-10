@@ -9,7 +9,7 @@ public abstract class AbstractMenuNode implements MenuNode {
     private final String code;
 
     @Override
-    public String code() {
+    public final String code() {
         return this.code;
     }
 

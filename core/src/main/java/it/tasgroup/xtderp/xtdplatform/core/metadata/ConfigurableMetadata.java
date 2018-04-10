@@ -11,7 +11,7 @@ public final class ConfigurableMetadata implements Metadata {
     @NonNull  private final Iterable<MetadataConfigurer> configurers;
 
     @Override
-    public Iterator<ModelMetadata> iterator() {
+    public Iterator<ModelMetadata<?>> iterator() {
         final MetadataRegister register = new MetadataRegister();
         this.configurers.forEach(configurer -> configurer.configure(register));
         return register.iterator();

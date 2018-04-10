@@ -2,6 +2,7 @@ package it.tasgroup.xtderp.xtdplatform.prototype.model;
 
 
 import it.tasgroup.xtderp.xtdplatform.core.metadata.annotation.XtdFormula;
+import it.tasgroup.xtderp.xtdplatform.core.metadata.annotation.XtdMenu;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.hibernate.validator.constraints.NotBlank;
@@ -21,11 +22,13 @@ import java.util.Date;
 @Entity
 @ToString
 @EqualsAndHashCode(of = {"name","surname","birth"})
+@XtdMenu("menu.submenu.customer")
 public class Customer {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
+
     @NotBlank private String name;
     @NotBlank private String surname;
     private Date birth;

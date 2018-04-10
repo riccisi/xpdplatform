@@ -17,22 +17,21 @@ import javax.persistence.EntityManager;
  * Created with IntelliJ IDEA.
  *
  * @author Simone Ricciardi (simone.ricciardi@gmail.com)
- * @version $Id$
  * @since 1.0
  */
 public final class JpaPaginatedQuery<T> extends JpaQuery<T> {
 
-    public JpaPaginatedQuery(Class<T> entityClass, EntityManager entityManager) {
+    public JpaPaginatedQuery(final Class<T> entityClass, final EntityManager entityManager) {
         super(entityManager, entityClass);
     }
 
     @Override
-    public QueryResult find(Request request) throws Exception {
-        JpaStatement<T> statement = new JpaStatement<>();
-        PaginatedFilter condition = new PaginatedFilterRequest(request).filter();
+    public QueryResult find(final Request request) throws Exception {
+        final JpaStatement<T> statement = new JpaStatement<>();
+        final PaginatedFilter condition = new PaginatedFilterRequest(request).filter();
         condition.applyOn(statement);
-        PageRequest pageRequest = new PageRequest(condition.page() - 1, condition.limit());
-        Page<T> result = this.repository.findAll(statement.get(), pageRequest);
+        final PageRequest pageRequest = new PageRequest(condition.page() - 1, condition.limit());
+        final Page<T> result = this.repository.findAll(statement.get(), pageRequest);
         return
             new PageQueryResult(
                 new ListOf<>(
