@@ -12,7 +12,7 @@ import static java.util.Collections.singletonList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class AggregatedMenuTest {
+public final class AggregatedMenuTest {
 
     @Test
     public void test() {

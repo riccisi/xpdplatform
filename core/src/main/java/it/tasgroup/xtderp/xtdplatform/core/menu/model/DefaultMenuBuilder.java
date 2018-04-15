@@ -38,14 +38,14 @@ public final class DefaultMenuBuilder implements MenuBuilder {
             checkArgument(!StringUtils.isEmpty(code), "menu id must be not empty!");
             nodePath += StringUtils.isEmpty(nodePath) ? code : '.' + code;
             checkArgument(!parent.hasItem(nodePath), "Node %s is already an item, connot be used as folder");
-            final DefaultMenuFolder menuFolder;
+            final DefaultMenuFolder folder;
             if (parent.hasFolder(nodePath)) {
-                menuFolder = (DefaultMenuFolder) parent.get(nodePath);
+                folder = (DefaultMenuFolder) parent.get(nodePath);
             } else {
-                menuFolder = new DefaultMenuFolder(nodePath);
-                parent.add(menuFolder);
+                folder = new DefaultMenuFolder(nodePath);
+                parent.add(folder);
             }
-            parent = menuFolder;
+            parent = folder;
         }
         return parent;
     }

@@ -17,18 +17,17 @@ import java.util.Iterator;
  * Menu implementation that returns the menu from a remote service.
  */
 @RequiredArgsConstructor
-public class ServiceMenu implements Menu {
+public final class ServiceMenu implements Menu {
 
     private final String service;
-
     private final LoadBalancerClient loadBalancerClient;
 
     @Override
     @HystrixCommand(fallbackMethod = "fallbackIterator")
     public Iterator<MenuNode> iterator() {
-        ServiceInstance instance = this.loadBalancerClient.choose(this.service);
-        URI uri = instance.getUri();
-        MenuNode[] nodes = new RestTemplate().getForObject(uri.resolve("/menu"), MenuNode[].class);
+        final ServiceInstance instance = this.loadBalancerClient.choose(this.service);
+        final URI uri = instance.getUri();
+        final MenuNode[] nodes = new RestTemplate().getForObject(uri.resolve("/menu"), MenuNode[].class);
         return Arrays.asList(nodes).iterator();
     }
 

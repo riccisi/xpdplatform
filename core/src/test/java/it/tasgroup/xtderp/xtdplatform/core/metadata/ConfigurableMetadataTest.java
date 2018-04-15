@@ -19,9 +19,7 @@ public class ConfigurableMetadataTest {
                             register.add(new ModelMetadata.Fake("a"));
                             register.add(new ModelMetadata.Fake("b"));
                         },
-                        register -> {
-                            register.add(new ModelMetadata.Fake("c"));
-                        }
+                        register -> register.add(new ModelMetadata.Fake("c"))
                     )
                 )
             ).intValue(),

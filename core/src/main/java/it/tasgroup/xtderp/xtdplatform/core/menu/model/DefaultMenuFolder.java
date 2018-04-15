@@ -48,7 +48,7 @@ public final class DefaultMenuFolder extends AbstractMenuNode implements MenuFol
         return finder.found;
     }
 
-    private static final class NodeFinder extends AbstractMenuNodeVisitor {
+    private static final class NodeFinder implements MenuNodeVisitor {
 
         private final String path;
         private MenuNode found;
@@ -72,6 +72,11 @@ public final class DefaultMenuFolder extends AbstractMenuNode implements MenuFol
         @Override
         public void visit(final MenuItem menuNode) {
             this.visitNode(menuNode);
+        }
+
+        @Override
+        public void endVisit(MenuFolder menuNode) {
+            // do nothing
         }
 
     }

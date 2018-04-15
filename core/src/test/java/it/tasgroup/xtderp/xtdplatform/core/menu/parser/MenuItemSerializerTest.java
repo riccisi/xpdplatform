@@ -24,7 +24,7 @@ public class MenuItemSerializerTest {
         Writer jsonWriter = new StringWriter();
         JsonGenerator jsonGenerator = new JsonFactory().createGenerator(jsonWriter);
         SerializerProvider serializerProvider = new ObjectMapper().getSerializerProvider();
-        new MenuItemSerializer().serialize(menuItem, jsonGenerator, serializerProvider);
+        new MenuItemSerializer((code, args, defaultMessage, locale) -> code).serialize(menuItem, jsonGenerator, serializerProvider);
         jsonGenerator.flush();
         assertThat(jsonWriter.toString(), is(equalTo("{\"id\":\"test\",\"icon\":\"\",\"isFolder\":false,\"isLeaf\":true}")));
     }

@@ -36,7 +36,7 @@ public final class JavaxValidationResult<T> implements ValidationResult {
         RenderedObject<R> rendered = media.asObject().with("valid", this.valid());
         for (final Map.Entry<String, List<String>> entry : messages.entrySet()) {
             final List<String> value = entry.getValue();
-            rendered = rendered.with(entry.getKey(), value.toArray(new String[value.size()]));
+            rendered = rendered.with(entry.getKey(), value.toArray(new String[0]));
         }
         return rendered;
     }

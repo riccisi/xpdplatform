@@ -16,12 +16,12 @@ import java.util.Collection;
  */
 final class JsonNotIn extends JsonExpression {
 
-    JsonNotIn(JsonNode node) {
+    private JsonNotIn(final JsonNode node) {
         super(node);
     }
 
     @Override
-    public void applyOn(Statement stmt) {
+    public void applyOn(final Statement stmt) {
         stmt.in(this.property(), Collection.class.cast(this.value()));
     }
 
@@ -32,7 +32,7 @@ final class JsonNotIn extends JsonExpression {
 
         @Override
         public boolean match() {
-            JsonNode operator = this.node.path("operator");
+            final JsonNode operator = this.node.path("operator");
             return !operator.isMissingNode() && "notin".equals(operator.asText());
         }
 

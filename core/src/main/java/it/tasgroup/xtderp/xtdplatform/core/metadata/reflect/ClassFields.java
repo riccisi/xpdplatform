@@ -21,7 +21,7 @@ import java.util.Iterator;
  * @since 1.0
  */
 @RequiredArgsConstructor
-public final class Fields implements Iterable<Attribute> {
+public final class ClassFields implements Iterable<Attribute> {
 
     private final Class<?> modelClass;
 
@@ -30,7 +30,7 @@ public final class Fields implements Iterable<Attribute> {
         return new Mapped<>(
             ClassField::new,
             new Filtered<>(
-                Fields::shouldInclude,
+                ClassFields::shouldInclude,
                 new ClassFieldsIterator(this.modelClass)
             )
         );

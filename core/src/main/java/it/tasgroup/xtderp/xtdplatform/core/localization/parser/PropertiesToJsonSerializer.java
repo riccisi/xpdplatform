@@ -1,7 +1,6 @@
 package it.tasgroup.xtderp.xtdplatform.core.localization.parser;
 
 import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializerProvider;
@@ -11,38 +10,38 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-public class PropertiesToJsonSerializer  extends JsonSerializer<Properties> {
+public final class PropertiesToJsonSerializer extends JsonSerializer<Properties> {
 
     @Override
-    public void serialize(Properties properties,
-                          JsonGenerator jgen,
-                          SerializerProvider serializerProvider) throws IOException, JsonProcessingException {
-        Map hierarchicalMap = this.buildHierarchicalMapFromFlatProperties(properties);
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.writeValue(jgen, hierarchicalMap);
+    public void serialize(final Properties properties,
+                          final JsonGenerator jgen,
+                          final SerializerProvider serializerProvider) throws IOException {
+        final Map map = this.buildHierarchicalMapFromFlatProperties(properties);
+        final ObjectMapper mapper = new ObjectMapper();
+        mapper.writeValue(jgen, map);
     }
 
-    private Map buildHierarchicalMapFromFlatProperties(Properties properties) {
-        Map hierarchicalMap = new HashMap();
+    private Map buildHierarchicalMapFromFlatProperties(final Properties properties) {
+        final Map map = new HashMap();
         for (final String key: properties.stringPropertyNames()) {
-            createFromBundleKey(hierarchicalMap, key, properties.getProperty(key));
+            this.createFromBundleKey(map, key, properties.getProperty(key));
         }
-        return hierarchicalMap;
+        return map;
     }
 
     private Map createFromBundleKey(final Map prop, final String key, final String value) {
         if (!key.contains(".")) {
-            final Map childProp = getChildMapIfExists(prop, key);
+            final Map childProp = this.getChildMapIfExists(prop, key);
             childProp.put("text", value);
             prop.put(key, childProp);
             return prop;
         }
 
-        final String currentKey = firstKey(key);
+        final String currentKey = this.firstKey(key);
         if (currentKey != null) {
             final String subRightKey = key.substring(currentKey.length() + 1, key.length());
-            final Map childProp = getChildMapIfExists(prop, currentKey);
-            prop.put(currentKey, createFromBundleKey(childProp, subRightKey, value));
+            final Map childProp = this.getChildMapIfExists(prop, currentKey);
+            prop.put(currentKey, this.createFromBundleKey(childProp, subRightKey, value));
         }
 
         return prop;
@@ -50,7 +49,7 @@ public class PropertiesToJsonSerializer  extends JsonSerializer<Properties> {
 
     private String firstKey(final String fullKey) {
         final String[] splittedKey = fullKey.split("\\.");
-        return (splittedKey.length != 0) ? splittedKey[0] : fullKey;
+        return splittedKey.length != 0 ? splittedKey[0] : fullKey;
     }
 
     private Map getChildMapIfExists(final Map prop, final String key) {

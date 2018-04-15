@@ -3,7 +3,9 @@ package it.tasgroup.xtderp.xtdplatform.prototype.model;
 
 import it.tasgroup.xtderp.xtdplatform.core.metadata.annotation.XtdFormula;
 import it.tasgroup.xtderp.xtdplatform.core.metadata.annotation.XtdMenu;
+import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -22,7 +24,8 @@ import java.util.Date;
 @Entity
 @ToString
 @EqualsAndHashCode(of = {"name","surname","birth"})
-@XtdMenu("menu.submenu.customer")
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@XtdMenu("menu.registry.customer")
 public class Customer {
 
     @Id
@@ -34,8 +37,6 @@ public class Customer {
     private Date birth;
     private Integer age;
     private int test = 1;
-
-    public Customer() {}
 
     public Customer(final String name, final String surname, final Date birth, final Integer age) {
         this.name = name;

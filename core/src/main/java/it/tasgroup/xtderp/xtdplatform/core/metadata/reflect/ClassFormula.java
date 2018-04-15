@@ -17,12 +17,12 @@ import java.lang.reflect.Method;
  * @author Simone Ricciardi (simone.ricciardi@gmail.com)
  * @since 1.0
  */
-final class MethodFormula implements Formula {
+final class ClassFormula implements Formula {
 
     @NonNull private final Method method;
     @NonNull private final Type<?> type;
 
-    MethodFormula(final Method method) throws Exception {
+    ClassFormula(final Method method) throws Exception {
         this.method = method;
         this.type = new TypeOf<>(method.getReturnType());
     }

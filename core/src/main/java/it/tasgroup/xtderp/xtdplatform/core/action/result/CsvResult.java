@@ -16,12 +16,12 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public final class CsvResult implements Result {
 
-    private static final String CSV_CONTENT_TYPE = "atext/csv;charset=UTF-8";
+    private static final String CSV_CONTENT_TYPE = "text/csv;charset=UTF-8";
 
     private final Printable printable;
 
     @Override
-    public void writeOn(Output output) throws Exception {
+    public void writeOn(final Output output) throws Exception {
         output.ofType(CSV_CONTENT_TYPE);
         this.printable.print(new CsvMedia()).writeOn(output.stream());
     }

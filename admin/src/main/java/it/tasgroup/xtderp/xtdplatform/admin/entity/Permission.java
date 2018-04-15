@@ -1,9 +1,9 @@
 package it.tasgroup.xtderp.xtdplatform.admin.entity;
 
-public class Permission {}
-/*
-import it.tasgroup.xtderp.extenderplib.core.metadata.annotation.XtdDefaultTenant;
-import it.tasgroup.xtderp.extenderplib.core.metadata.AbstractAuditableModel;
+import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -11,13 +11,22 @@ import javax.persistence.Embeddable;
 
 /**
  * Created by borric on 18/11/2015.
- *//*
-
+ */
 @Embeddable
+@ToString
+@EqualsAndHashCode(of = "code")
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 //@XtdDefaultTenant
-public class Permission extends AbstractAuditableModel {
+public class Permission {
 
     @Column(name = "COD")
-    private String id;
+    private String code;
 
-}*/
+    public Permission(final String code) {
+        this.code = code;
+    }
+
+    public final String code() {
+        return this.code;
+    }
+}

@@ -25,8 +25,8 @@ public final class ProcessStrategyOf<T> implements ProcessStrategy<T> {
             new Filtered<>(
                 ProcessStrategyMatcher::match,
                 new ListOf<>(
-                    new MethodProcessStrategy.Matcher<T>(modelClass),
-                    new EmptyProcessStrategy.Matcher<T>()
+                    new MethodProcessStrategy.Matcher<>(modelClass),
+                    new EmptyProcessStrategy.Matcher<>()
                 )
             )
         );

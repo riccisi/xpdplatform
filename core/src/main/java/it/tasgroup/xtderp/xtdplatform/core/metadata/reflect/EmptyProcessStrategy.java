@@ -27,7 +27,7 @@ public final class EmptyProcessStrategy<T> implements ProcessStrategy<T> {
 
         @Override
         public ProcessStrategy<T> matched() {
-            return new EmptyProcessStrategy<T>();
+            return new EmptyProcessStrategy<>();
         }
     }
 }

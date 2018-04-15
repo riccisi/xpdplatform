@@ -5,9 +5,10 @@ import it.tasgroup.xtderp.xtdplatform.core.media.Media;
 import it.tasgroup.xtderp.xtdplatform.core.media.PrintableList;
 import it.tasgroup.xtderp.xtdplatform.core.media.Rendered;
 import it.tasgroup.xtderp.xtdplatform.core.metadata.*;
-import it.tasgroup.xtderp.xtdplatform.core.metadata.reflect.ClassField;
 import it.tasgroup.xtderp.xtdplatform.core.metadata.reflect.ClassModelMetadata;
 import lombok.NonNull;
+import org.cactoos.iterable.Filtered;
+import org.cactoos.iterable.ItemAt;
 
 import javax.persistence.EntityManager;
 import javax.persistence.metamodel.EntityType;
@@ -69,7 +70,13 @@ public final class JpaEntityMetadata<T> implements EntityMetadata<T> {
         try {
             final EntityType<T> type = this.manager.getMetamodel().entity(this.modelClass);
             final String name = type.getId(type.getIdType().getJavaType()).getName();
-            return new ClassField(this.modelClass.getDeclaredField(name));
+            return new ItemAt<>(
+                0,
+                new Filtered<>(
+                    input -> input.name().equals(name),
+                    new Fields(this.metadata)
+                )
+            ).value();
         } catch (final Exception e) {
             throw new IllegalStateException(e);
         }

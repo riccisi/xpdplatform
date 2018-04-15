@@ -24,12 +24,16 @@
     </properties>
 
     <modules>
+        <module>sencha</module>
+        <module>sencha/packages</module>
+        <module>sencha/app</module>
         <module>core</module>
         <module>core-jpa</module>
         <module>proxy</module>
         <module>batch</module>
         <module>admin</module>
         <module>prototype</module>
+        <module>admin-jwt</module>
     </modules>
 
     <dependencyManagement>
@@ -47,6 +51,11 @@
             <dependency>
                 <groupId>it.tasgroup.xtderp.xtdplatform</groupId>
                 <artifactId>admin</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>it.tasgroup.xtderp.xtdplatform</groupId>
+                <artifactId>admin-jwt</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

@@ -1,13 +1,27 @@
 package it.tasgroup.xtderp.xtdplatform.admin.entity;
 
+import it.tasgroup.xtderp.xtdplatform.core.jpa.BaseJpaEntity;
+import it.tasgroup.xtderp.xtdplatform.core.metadata.annotation.XtdExclude;
 import it.tasgroup.xtderp.xtdplatform.core.metadata.annotation.XtdMenu;
+import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.cactoos.list.Joined;
+import org.cactoos.list.ListOf;
+import org.cactoos.list.Mapped;
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by borric on 18/11/2015.
@@ -15,24 +29,18 @@ import java.util.Date;
 @Entity
 @Table(name = "XTD_UTN")
 @ToString
-@EqualsAndHashCode(of = "username")
-@XtdMenu("menu.submenu.customer")
+@EqualsAndHashCode(of = "username", callSuper = false)
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@XtdMenu("admin.security.users")
 //@XtdFormLayout(columns = 2)
 //@XtdModel
 //@XtdLabel("{username}")
 //@XtdDefaultTenant
 //@UniqueUsernameValidator(groups = WhenTransient.class)
 //@PasswordConfirmValidator(groups = WhenTransient.class)
-public class User /*extends BaseEntity*/ {
+public class User extends BaseJpaEntity implements UserDetails {
 
-    @Id
-/*
-    @GeneratedValue(generator = "assigned")
-    @GenericGenerator(name = "assigned", strategy = "it.tasgroup.xtderp.extenderplib.core.model.AssignedGenerator")
-    @Column(name = "ID", columnDefinition = "CHAR(32)")
-*/
-//    @XtdExclude
-    private String id;
+    private static final String[] STRINGS = new String[0];
 
     @Column(name = "RIF_ID")
 //    @XtdColumnLayout(hidden = true)
@@ -78,21 +86,64 @@ public class User /*extends BaseEntity*/ {
 //    @XtdFieldLayout(order = ATTR_ORDER_END_DATE)
     private Date endDate;
 
-/*
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @XtdExclude
-    @JoinTable(
-        name="XTD_UTN_ROLE",
-        joinColumns={@JoinColumn(name="ID_UTN", referencedColumnName="ID")},
-        inverseJoinColumns={@JoinColumn(name="ID_ROLE", referencedColumnName="ID")})
+    @JoinTable(name = "XTD_UTN_ROLE", joinColumns = @JoinColumn(name = "ID_UTN", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "ID_ROLE", referencedColumnName = "ID"))
     private List<Role> roles = new ArrayList<>();
-*/
 
-/*
+    public User(String username, String password, String displayName, Role... roles) {
+        this.username = username;
+        this.displayName = displayName;
+        this.password = password;
+        this.roles = new ListOf<>(roles);
+    }
+
     @PrePersist
     private void encodePassword() {
-        this.password = new BCryptPasswordEncoder().encode(this.password);
+        this.password = new ShaPasswordEncoder(256).encodePassword(this.password, null);
     }
-*/
 
+    public final List<String> permissions() {
+        return new Joined<>(
+            new Mapped<>(
+                Role::permissions,
+                this.roles
+            )
+        );
+    }
+
+    @Override
+    public final Collection<? extends GrantedAuthority> getAuthorities() {
+        return AuthorityUtils.createAuthorityList(this.permissions().toArray(STRINGS));
+    }
+
+    @Override
+    public final String getPassword() {
+        return this.rifId != null ? this.rifId : this.password;
+    }
+
+    @Override
+    public final String getUsername() {
+        return this.username;
+    }
+
+    @Override
+    public final boolean isAccountNonExpired() {
+        return this.endDate == null || this.endDate.compareTo(new Date()) >= 0;
+    }
+
+    @Override
+    public final boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public final boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public final boolean isEnabled() {
+        return this.active && this.startDate.compareTo(new Date()) <= 0;
+    }
 }

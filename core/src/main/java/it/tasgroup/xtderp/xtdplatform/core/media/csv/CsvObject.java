@@ -36,7 +36,7 @@ final class CsvObject {
     }
 
     public String[] headers() {
-        return this.headers.toArray(new String[this.headers.size()]);
+        return this.headers.toArray(new String[0]);
     }
 
     public Iterable<Object> values() {

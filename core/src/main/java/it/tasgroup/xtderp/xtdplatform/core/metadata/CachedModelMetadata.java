@@ -10,13 +10,13 @@ import java.util.Iterator;
 /**
  *
  */
-public final class CachedModelMetadata implements ModelMetadata {
+public final class CachedModelMetadata<T> implements ModelMetadata<T> {
 
-    private final ModelMetadata delegate;
+    private final ModelMetadata<T> delegate;
     private final StickyIterable<Attribute> cache;
     private final StickyScalar<String> cachedId;
 
-    public CachedModelMetadata(ModelMetadata delegate) {
+    public CachedModelMetadata(final ModelMetadata<T> delegate) {
         this.delegate = delegate;
         this.cache = new StickyIterable<>(delegate);
         this.cachedId = new StickyScalar<>(delegate::id);
@@ -28,7 +28,7 @@ public final class CachedModelMetadata implements ModelMetadata {
     }
 
     @Override
-    public <T> Rendered<T> print(Media<T> media) throws Exception {
+    public <R> Rendered<R> print(final Media<R> media) throws Exception {
         return this.delegate.print(media);
     }
 
@@ -38,7 +38,7 @@ public final class CachedModelMetadata implements ModelMetadata {
     }
 
     @Override
-    public Model newInstance() throws Exception {
+    public Model<T> newInstance() throws Exception {
         return this.delegate.newInstance();
     }
 }

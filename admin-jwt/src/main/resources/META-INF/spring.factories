@@ -1,0 +1,3 @@
+
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  it.tasgroup.xtderp.xtdplatform.admin.jwt.AdminJwtAutoConfig

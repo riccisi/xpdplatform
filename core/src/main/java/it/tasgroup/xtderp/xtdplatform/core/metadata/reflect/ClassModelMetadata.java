@@ -34,10 +34,10 @@ public final class ClassModelMetadata<T> implements ModelMetadata<T> {
 
     public ClassModelMetadata(final Class<T> modelClass) {
         this(modelClass,
-            new ProcessStrategyOf<T>(modelClass),
+            new ProcessStrategyOf<>(modelClass),
             new Joined<>(
-                new Fields(modelClass),
-                new Formulas(modelClass)
+                new ClassFields(modelClass),
+                new ClassFormulas(modelClass)
             )
         );
     }

@@ -9,7 +9,7 @@ public final class MultipleBundleMessageSource extends ReloadableResourceBundleM
 
     private static final String[] STRINGS = new String[0];
 
-    private final List<String> baseNames = new ArrayList<>(Arrays.asList("classpath:messages"));
+    private final List<String> baseNames = new ArrayList<>(Collections.singletonList("classpath:messages"));
 
     public void addResource(final String name) {
         this.baseNames.add(String.format("classpath:%s_messages", name));

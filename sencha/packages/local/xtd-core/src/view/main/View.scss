@@ -1,0 +1,18 @@
+
+.treelist-with-nav .#{$prefix}panel-body {
+  background-color: #32404e;
+}
+
+.treelist-toolbar {
+  background-color: #32404e;
+}
+
+.treelist-button {
+  background-image: none !important;
+  background-color: transparent !important;
+  border: 0 !important;
+
+  .x-btn-icon-el-default-toolbar-small {
+    color: #adb3b8 !important;
+  }
+}

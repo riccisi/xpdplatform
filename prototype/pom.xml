@@ -19,7 +19,7 @@
         </dependency>
         <dependency>
             <groupId>it.tasgroup.xtderp.xtdplatform</groupId>
-            <artifactId>admin</artifactId>
+            <artifactId>admin-jwt</artifactId>
         </dependency>
         <dependency>
             <groupId>com.h2database</groupId>

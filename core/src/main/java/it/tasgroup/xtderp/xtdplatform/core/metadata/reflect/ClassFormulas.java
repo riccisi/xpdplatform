@@ -15,14 +15,14 @@ import java.util.Iterator;
  * @since 1.0
  */
 @RequiredArgsConstructor
-public final class Formulas implements Iterable<Attribute> {
+public final class ClassFormulas implements Iterable<Attribute> {
 
     private final Class<?> modelClass;
 
     @Override
     public Iterator<Attribute> iterator() {
         return new Mapped<>(
-            MethodFormula::new,
+            ClassFormula::new,
             new Filtered<>(
                 method -> method.isAnnotationPresent(XtdFormula.class),
                 new ClassMethodsIterator(this.modelClass)

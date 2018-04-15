@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Properties;
 
 @RestController
-@RequestMapping(value = "/i18n")
+@RequestMapping("/i18n")
 @RequiredArgsConstructor
-public class LocalizationService {
+public final class LocalizationService {
 
     private final MultipleBundleMessageSource messageSource;
 

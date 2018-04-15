@@ -1,62 +1,52 @@
 package it.tasgroup.xtderp.xtdplatform.admin.entity;
 
-public class Role {}
+import it.tasgroup.xtderp.xtdplatform.core.jpa.BaseJpaEntity;
+import it.tasgroup.xtderp.xtdplatform.core.metadata.annotation.XtdExclude;
+import it.tasgroup.xtderp.xtdplatform.core.metadata.annotation.XtdMenu;
+import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import org.cactoos.list.ListOf;
+import org.cactoos.list.Mapped;
 
-/*import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import it.tasgroup.xtderp.extenderplib.core.metadata.annotation.XtdDefaultTenant;
-import it.tasgroup.xtderp.extenderplib.core.metadata.annotation.XtdExclude;
-import it.tasgroup.xtderp.extenderplib.core.metadata.annotation.XtdFieldLayout;
-import it.tasgroup.xtderp.extenderplib.core.metadata.annotation.XtdLabel;
-import it.tasgroup.xtderp.extenderplib.core.metadata.annotation.XtdModel;
-import it.tasgroup.xtderp.extenderplib.core.metadata.BaseEntity;
-
-import java.util.ArrayList;
+import javax.persistence.*;
 import java.util.List;
 
 /**
  * Created by borric on 18/11/2015.
  */
-/*
 @Entity
 @Table(name="XTD_ROLE")
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
-@XtdLabel("{description}")
-@XtdModel
-@XtdDefaultTenant
-public class Role extends BaseEntity {
-
-    public static final int ATTR_ORDER_COD = 1;
-    public static final int ATTR_ORDER_DES = 2;
+@ToString
+@EqualsAndHashCode(of = "code", callSuper = false)
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@XtdMenu("admin.security.roles")
+//@XtdLabel("{description}")
+//@XtdModel
+//@XtdDefaultTenant
+public class Role extends BaseJpaEntity {
 
     @Column(name = "COD")
-    @XtdFieldLayout(order = ATTR_ORDER_COD)
-    private String cod;
+    private String code;
 
     @Column(name = "DES")
-    @XtdFieldLayout(order = ATTR_ORDER_DES)
     private String description;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "XTD_ROLE_ABL", joinColumns=@JoinColumn(name="ID_ROLE"))
     @XtdExclude
     private List<Permission> permissions;
 
-    public List<String> permissionCodes() {
-        List<String> permissionCodes = new ArrayList<>();
-        for(Permission permission : permissions) {
-            permissionCodes.add(permission.getCode());
-        }
-        return permissionCodes;
+    public Role(String code, Permission... permissions) {
+        this.code = code;
+        this.permissions = new ListOf<>(permissions);
     }
 
-    @Override
-    public String toString() {
-        return "Role{" +
-            "idOf='" + getId() + '\'' +
-            ", cod='" + cod + '\'' +
-            ", description='" + description + '\'' +
-            ", permissions=" + permissions +
-            '}';
+    public final List<String> permissions() {
+        return new Mapped<>(
+            Permission::code,
+            this.permissions
+        );
     }
 }
-*/
