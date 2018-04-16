@@ -9,6 +9,7 @@ import org.apache.commons.csv.CSVPrinter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.nio.charset.Charset;
 
 /**
  * Created with IntelliJ IDEA.
@@ -38,7 +39,7 @@ final class CsvRenderedObject implements RenderedObject<CsvObject>{
 
     @Override
     public void writeOn(final OutputStream stream) throws IOException {
-        final OutputStreamWriter out = new OutputStreamWriter(stream);
+        final OutputStreamWriter out = new OutputStreamWriter(stream, Charset.forName("UTF-8"));
         final CSVFormat format = CSVFormat.DEFAULT.withHeader(this.csvObject.headers());
         try (CSVPrinter printer = new CSVPrinter(out, format)) {
             printer.printRecord(this.csvObject.values());

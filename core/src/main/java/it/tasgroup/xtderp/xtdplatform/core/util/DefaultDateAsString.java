@@ -1,18 +1,20 @@
 package it.tasgroup.xtderp.xtdplatform.core.util;
 
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 
 import java.util.Date;
 
-@RequiredArgsConstructor
-public class DefaultDateAsString extends DefaultDateFormat implements Scalar<String> {
+public final class DefaultDateAsString extends DefaultDateFormat implements Scalar<String> {
 
     @NonNull
-    private final Date date;
+    private final long date;
+
+    public DefaultDateAsString(final Date date) {
+        this.date = date.getTime();
+    }
 
     @Override
     public String value() {
-        return new DateAsString(this.defaultFormat(), this.date).value();
+        return new DateAsString(this.defaultFormat(), new Date(this.date)).value();
     }
 }

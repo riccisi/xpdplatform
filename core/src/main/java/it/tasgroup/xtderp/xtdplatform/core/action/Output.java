@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.nio.charset.Charset;
 
 /**
  * Created with IntelliJ IDEA.
@@ -19,6 +20,6 @@ public interface Output {
     OutputStream stream() throws IOException;
 
     default Writer writer() throws IOException {
-        return new OutputStreamWriter(this.stream());
+        return new OutputStreamWriter(this.stream(), Charset.forName("UTF-8"));
     }
 }

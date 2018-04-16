@@ -12,6 +12,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -119,7 +120,7 @@ final class CsvRenderedList implements RenderedList<CsvObject> {
             values.add(csvObject.values());
         }
 
-        OutputStreamWriter out = new OutputStreamWriter(stream);
+        OutputStreamWriter out = new OutputStreamWriter(stream, Charset.forName("UTF-8"));
         CSVFormat format = CSVFormat.DEFAULT.withHeader(headers);
         try (CSVPrinter printer = new CSVPrinter(out, format)) {
             for (Iterable<Object> record : values) {

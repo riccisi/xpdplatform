@@ -1,10 +1,10 @@
 package it.tasgroup.xtderp.xtdplatform.core.media.txt;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.i18n.LocaleContextHolder;
 
 import java.text.DateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 /**
  * Created with IntelliJ IDEA.
@@ -16,11 +16,15 @@ import java.util.Locale;
 @RequiredArgsConstructor
 public final class TxtRenderedDate extends TxtRendered {
 
-    private final Date value;
+    private final long value;
+
+    TxtRenderedDate(final Date value) {
+        this.value = value.getTime();
+    }
 
     @Override
     public String value() {
-        final DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT, Locale.getDefault());
-        return df.format(this.value);
+        final DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT, LocaleContextHolder.getLocale());
+        return df.format(new Date(this.value));
     }
 }
