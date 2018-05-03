@@ -26,7 +26,7 @@ public final class ByteType implements Type<Byte> {
 
     @Override
     public Byte value(final String text) {
-        return Byte.parseByte(text);
+        return Byte.valueOf(text);
     }
 
     @RequiredArgsConstructor

@@ -1,5 +1,6 @@
 package it.tasgroup.xtderp.xtdplatform.core.metadata.reflect;
 
+import it.tasgroup.xtderp.xtdplatform.core.localization.I18n;
 import it.tasgroup.xtderp.xtdplatform.core.media.Media;
 import it.tasgroup.xtderp.xtdplatform.core.media.Printable;
 import it.tasgroup.xtderp.xtdplatform.core.media.Rendered;
@@ -11,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 import org.cactoos.iterable.Joined;
 import org.cactoos.list.ListOf;
+import org.cactoos.list.Mapped;
 
 import java.lang.reflect.Constructor;
 import java.util.Iterator;
@@ -32,12 +34,15 @@ public final class ClassModelMetadata<T> implements ModelMetadata<T> {
     @NonNull private final ProcessStrategy<T> strategy;
     @NonNull private final Iterable<Attribute> attributes;
 
-    public ClassModelMetadata(final Class<T> modelClass) {
+    public ClassModelMetadata(final Class<T> modelClass, final I18n i18n) {
         this(modelClass,
             new ProcessStrategyOf<>(modelClass),
-            new Joined<>(
-                new ClassFields(modelClass),
-                new ClassFormulas(modelClass)
+            new Mapped<>(
+                attribute -> new I18nAttribute(attribute, i18n, modelClass.getSimpleName()),
+                new Joined<>(
+                    new ClassFields(modelClass),
+                    new ClassFormulas(modelClass)
+                )
             )
         );
     }

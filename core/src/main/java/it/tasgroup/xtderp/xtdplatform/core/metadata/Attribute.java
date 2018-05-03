@@ -1,5 +1,6 @@
 package it.tasgroup.xtderp.xtdplatform.core.metadata;
 
+import it.tasgroup.xtderp.xtdplatform.core.media.Media;
 import it.tasgroup.xtderp.xtdplatform.core.media.Printable;
 import it.tasgroup.xtderp.xtdplatform.core.media.RenderedObject;
 
@@ -15,4 +16,7 @@ public interface Attribute extends Printable {
     String name();
 
     <R,T> RenderedObject<R> printValue(T model, RenderedObject<R> rendered);
+
+    @Override
+    <R> RenderedObject<R> print(Media<R> media) throws Exception;
 }

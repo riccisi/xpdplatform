@@ -1,7 +1,6 @@
 package it.tasgroup.xtderp.xtdplatform.admin.repository;
 
-import it.tasgroup.xtderp.xtdplatform.admin.entity.Role;
-import it.tasgroup.xtderp.xtdplatform.admin.entity.User;
+import it.tasgroup.xtderp.xtdplatform.admin.entity.JpaRole;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
@@ -12,7 +11,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
  * @since 1.0
  */
 @SuppressWarnings("InterfaceNeverImplemented")
-public interface RoleRepository extends JpaRepository<Role, String>, JpaSpecificationExecutor<User> {
+public interface RoleRepository extends JpaRepository<JpaRole, String>, JpaSpecificationExecutor<JpaRole> {
 
-    Role findByCode(String code);
+    JpaRole findByCode(String code);
 }

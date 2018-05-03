@@ -19,7 +19,7 @@ public final class JsonQueryAction extends QueryAction  {
     }
 
     @Override
-    public String id() throws Exception {
+    public String id() {
         return String.format("%s.json", this.query.id());
     }
 

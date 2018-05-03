@@ -46,11 +46,15 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 "/favicon.ico",
                 "/**/*.html",
                 "/**/*.css",
-                "/**/*.js"
+                "/**/*.js",
+                "/**/*.ttf",
+                "/**/*.woff",
+                "/**/*.woff2",
+                "/**/*.png",
+                "/**/classic.json",
+                "/**/modern.json"
             ).permitAll()
             .antMatchers("/public/**").permitAll()
             .anyRequest().authenticated();
-           /* .antMatchers("/actuator/**", "/api-docs/**").permitAll()
-            .antMatchers("/springjwt/**" ).authenticated();*/
     }
 }

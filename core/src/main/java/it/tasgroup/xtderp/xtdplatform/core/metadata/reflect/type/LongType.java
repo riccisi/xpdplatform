@@ -26,7 +26,7 @@ public final class LongType implements Type<Long> {
 
     @Override
     public Long value(final String text) {
-        return Long.parseLong(text);
+        return Long.valueOf(text);
     }
 
     @RequiredArgsConstructor

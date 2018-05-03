@@ -2,7 +2,7 @@ package it.tasgroup.xtderp.xtdplatform.core.metadata;
 
 import lombok.RequiredArgsConstructor;
 import org.cactoos.iterable.Filtered;
-import org.cactoos.iterable.ItemAt;
+import org.cactoos.scalar.ItemAt;
 
 @RequiredArgsConstructor
 public final class DefaultMetadataLookup implements MetadataLookup {

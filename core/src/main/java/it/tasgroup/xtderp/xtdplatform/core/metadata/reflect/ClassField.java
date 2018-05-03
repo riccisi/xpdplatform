@@ -1,7 +1,6 @@
 package it.tasgroup.xtderp.xtdplatform.core.metadata.reflect;
 
 import it.tasgroup.xtderp.xtdplatform.core.media.Media;
-import it.tasgroup.xtderp.xtdplatform.core.media.Rendered;
 import it.tasgroup.xtderp.xtdplatform.core.media.RenderedObject;
 import it.tasgroup.xtderp.xtdplatform.core.metadata.Field;
 import it.tasgroup.xtderp.xtdplatform.core.metadata.reflect.type.Type;
@@ -44,7 +43,7 @@ public final class ClassField implements Field {
     }
 
     @Override
-    public <T> Rendered<T> print(final Media<T> media) {
+    public <T> RenderedObject<T> print(final Media<T> media) {
         return media.asObject()
             .with("name", this.field.getName())
             .with("type", this.type.name());

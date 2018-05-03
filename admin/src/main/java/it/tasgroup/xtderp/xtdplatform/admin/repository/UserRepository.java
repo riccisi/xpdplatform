@@ -1,6 +1,6 @@
 package it.tasgroup.xtderp.xtdplatform.admin.repository;
 
-import it.tasgroup.xtderp.xtdplatform.admin.entity.User;
+import it.tasgroup.xtderp.xtdplatform.admin.entity.JpaUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
  * @since 1.0
  */
 @SuppressWarnings("InterfaceNeverImplemented")
-public interface UserRepository extends JpaRepository<User, String>, JpaSpecificationExecutor<User> {
+public interface UserRepository extends JpaRepository<JpaUser, String>, JpaSpecificationExecutor<JpaUser> {
 
-    User findByUsername(String username);
+    JpaUser findByUsername(String username);
 }

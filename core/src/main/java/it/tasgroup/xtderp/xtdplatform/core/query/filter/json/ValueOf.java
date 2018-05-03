@@ -2,6 +2,7 @@ package it.tasgroup.xtderp.xtdplatform.core.query.filter.json;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import it.tasgroup.xtderp.xtdplatform.core.util.DefaultStringAsDate;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.cactoos.list.Mapped;
 
@@ -20,72 +21,73 @@ import java.util.ArrayList;
 @RequiredArgsConstructor
 public final class ValueOf {
 
-    private final JsonNode node;
+    @NonNull private final JsonNode node;
 
     public Object get() {
-        if (node.isNull() || node.isMissingNode()) {
-            return null;
-        } else {
-            return parseValue(node);
+        Object value = null;
+        if (!this.node.isNull() && !this.node.isMissingNode()) {
+            value = this.parseValue(this.node);
         }
+        return value;
     }
 
-    private Object parseValue(JsonNode node) {
+    private Object parseValue(final JsonNode node) {
+        Object value = null;
         if (node.isArray()) {
-            return
-                new ArrayList<>(
+            value = new ArrayList<>(
                     new Mapped<>(
                         this::parseValue,
                         node
                 ));
         }
-        if (node.isTextual()) {
-            String textual = node.asText();
-            if ("true".equals(textual)) {
-                return true;
+        else if (node.isTextual()) {
+            final String text = node.asText();
+            if ("true".equals(text)) {
+                value = Boolean.TRUE;
             }
-            if ("false".equals(textual)) {
-                return false;
-            }
-            try {
-                return new DefaultStringAsDate(textual).value();
-            } catch (ParseException e) {
+            else if ("false".equals(text)) {
+                value = Boolean.FALSE;
+            } else {
                 try {
-                    return this.asEnum(textual);
-                } catch (Exception exc) {
-                    return textual;
+                    value = new DefaultStringAsDate(text).value();
+                } catch (final ParseException ex) {
+                    try {
+                        value = ValueOf.asEnum(text);
+                    } catch (final Exception exc) {
+                        value = text;
+                    }
                 }
             }
         }
-        if (node.isShort()) {
-            return Short.valueOf(node.asText());
+        else if (node.isShort()) {
+            value = Short.valueOf(node.asText());
         }
-        if (node.isInt()) {
-            return node.asInt();
+        else if (node.isInt()) {
+            value = node.asInt();
         }
-        if (node.isLong()) {
-            return node.asLong();
+        else if (node.isLong()) {
+            value =  node.asLong();
         }
-        if (node.isDouble()) {
-            return node.asDouble();
+        else if (node.isDouble()) {
+            value =  node.asDouble();
         }
-        if (node.isBoolean()) {
-            return node.asBoolean();
+        else if (node.isBoolean()) {
+            value =  node.asBoolean();
         }
-        if (node.isBigInteger()) {
-            return new BigInteger(node.asText());
+        else if (node.isBigInteger()) {
+            value =  new BigInteger(node.asText());
         }
-        if (node.isBigDecimal()) {
-            return new BigDecimal(node.asText());
+        else if (node.isBigDecimal()) {
+            value =  new BigDecimal(node.asText());
         }
-        throw new IllegalArgumentException("Unparsable value: " + node);
+        return value;
     }
 
     @SuppressWarnings("unchecked")
-    private Enum asEnum(String textValue) throws Exception {
-        String className = textValue.substring(0, textValue.lastIndexOf("."));
-        Class<Enum> enumClass = (Class<Enum>) Class.forName(className);
-        String enumConstant = textValue.substring(className.length() + 1, textValue.length());
+    private static Enum asEnum(final String value) throws Exception {
+        final String className = value.substring(0, value.lastIndexOf("."));
+        final Class<Enum> enumClass = (Class<Enum>) Class.forName(className);
+        final String enumConstant = value.substring(className.length() + 1, value.length());
         return Enum.valueOf(enumClass, enumConstant);
     }
 }

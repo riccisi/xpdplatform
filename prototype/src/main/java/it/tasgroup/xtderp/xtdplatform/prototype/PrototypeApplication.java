@@ -1,8 +1,8 @@
 package it.tasgroup.xtderp.xtdplatform.prototype;
 
+import it.tasgroup.xtderp.xtdplatform.admin.entity.JpaRole;
+import it.tasgroup.xtderp.xtdplatform.admin.entity.JpaUser;
 import it.tasgroup.xtderp.xtdplatform.admin.entity.Permission;
-import it.tasgroup.xtderp.xtdplatform.admin.entity.Role;
-import it.tasgroup.xtderp.xtdplatform.admin.entity.User;
 import it.tasgroup.xtderp.xtdplatform.admin.repository.RoleRepository;
 import it.tasgroup.xtderp.xtdplatform.admin.repository.UserRepository;
 import it.tasgroup.xtderp.xtdplatform.core.util.StringAsDate;
@@ -35,8 +35,8 @@ public class PrototypeApplication extends SpringBootServletInitializer {
     @Bean
     public CommandLineRunner demo(final CustomerRepository customers, final UserRepository users, final RoleRepository roles) {
         return args -> {
-            final Role admin = roles.save(new Role("admin", new Permission("all")));
-            users.save(new User("admin", "admin", "Administrator", admin));
+            final JpaRole admin = roles.save(new JpaRole("admin", new Permission("all")));
+            users.save(new JpaUser("admin", "admin", "Administrator", admin));
 
             customers.save(new Customer("Jack", "Bauer", new StringAsDate("dd/MM/yyyy","21/09/1973").value(),null));
             customers.save(new Customer("Chloe", "O'Brian", new StringAsDate("dd/MM/yyyy","01/03/1938").value(),null));

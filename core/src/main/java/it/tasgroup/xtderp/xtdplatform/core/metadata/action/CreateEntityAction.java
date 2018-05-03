@@ -22,7 +22,7 @@ public final class CreateEntityAction implements Action {
     @NonNull private final EntityMetadata metadata;
 
     @Override
-    public String id() throws Exception {
+    public String id() {
         return String.format("create%s.json", this.metadata.id());
     }
 
@@ -32,7 +32,7 @@ public final class CreateEntityAction implements Action {
     }
 
     @Override
-    public <R> Rendered<R> print(final Media<R> media) throws Exception {
+    public <R> Rendered<R> print(final Media<R> media) {
         return media.asObject()
             .with("id", this.id())
             .with("type", "entity")

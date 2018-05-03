@@ -27,4 +27,12 @@ public interface I18n {
     default String text(final String code, final Object[] args, final String defaultMessage) {
         return this.text(code, args, defaultMessage, LocaleContextHolder.getLocale());
     }
+
+    class Fake implements I18n {
+
+        @Override
+        public final String text(final String code, final Object[] args, final String defaultMessage, final Locale locale) {
+            return code;
+        }
+    }
 }

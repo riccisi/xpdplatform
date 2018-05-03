@@ -1,14 +1,16 @@
 package it.tasgroup.xtderp.xtdplatform.core.metadata.jpa;
 
 import it.tasgroup.xtderp.xtdplatform.core.action.Request;
+import it.tasgroup.xtderp.xtdplatform.core.localization.I18n;
 import it.tasgroup.xtderp.xtdplatform.core.media.Media;
 import it.tasgroup.xtderp.xtdplatform.core.media.PrintableList;
 import it.tasgroup.xtderp.xtdplatform.core.media.Rendered;
 import it.tasgroup.xtderp.xtdplatform.core.metadata.*;
+import it.tasgroup.xtderp.xtdplatform.core.metadata.reflect.ClassFields;
 import it.tasgroup.xtderp.xtdplatform.core.metadata.reflect.ClassModelMetadata;
 import lombok.NonNull;
 import org.cactoos.iterable.Filtered;
-import org.cactoos.iterable.ItemAt;
+import org.cactoos.scalar.ItemAt;
 
 import javax.persistence.EntityManager;
 import javax.persistence.metamodel.EntityType;
@@ -30,10 +32,10 @@ public final class JpaEntityMetadata<T> implements EntityMetadata<T> {
     @NonNull private final ModelMetadata<T> metadata;
     @NonNull private final Field id;
 
-    public JpaEntityMetadata(final EntityManager manager, final Class<T> modelClass) {
+    public JpaEntityMetadata(final EntityManager manager, final Class<T> modelClass, final I18n i18n) {
         this.manager = manager;
         this.modelClass = modelClass;
-        this.metadata = new ClassModelMetadata<T>(this.modelClass);
+        this.metadata = new ClassModelMetadata<T>(this.modelClass, i18n);
         this.id = this.idField();
     }
 
@@ -70,11 +72,11 @@ public final class JpaEntityMetadata<T> implements EntityMetadata<T> {
         try {
             final EntityType<T> type = this.manager.getMetamodel().entity(this.modelClass);
             final String name = type.getId(type.getIdType().getJavaType()).getName();
-            return new ItemAt<>(
+            return (Field) new ItemAt<>(
                 0,
                 new Filtered<>(
                     input -> input.name().equals(name),
-                    new Fields(this.metadata)
+                    new ClassFields(this.modelClass)
                 )
             ).value();
         } catch (final Exception e) {

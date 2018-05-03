@@ -13,6 +13,7 @@
 
     <modules>
         <module>local/xtd-core</module>
+        <module>local/xtd-admin-jwt</module>
     </modules>
 
     <build>

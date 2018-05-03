@@ -12,6 +12,10 @@
 
     <artifactId>prototype</artifactId>
 
+    <properties>
+        <start-class>it.tasgroup.xtderp.xtdplatform.prototype.PrototypeApplication</start-class>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>it.tasgroup.xtderp.xtdplatform</groupId>
@@ -26,5 +30,63 @@
             <artifactId>h2</artifactId>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <jvmArguments>-Dexternal.resources.path=file:///${basedir}\..\${sencha.resources.dir}\</jvmArguments>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration combine.children="append">
+                    <archive>
+                        <manifest combine.children="append">
+                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                        </manifest>
+                        <manifestEntries>
+                            <Specification-License>${license.url}</Specification-License>
+                        </manifestEntries>
+                    </archive>
+                    <webResources>
+                        <resource>
+                            <directory>${basedir}\..\${sencha.resources.dir}</directory>
+                            <filtering>true</filtering>
+                            <includes>
+                                <include>**/*.json</include>
+                            </includes>
+                        </resource>
+                        <resource>
+                            <directory>${basedir}\..\${sencha.resources.dir}</directory>
+                            <filtering>false</filtering>
+                            <excludes>
+                                <include>**/*.json</include>
+                            </excludes>
+                        </resource>
+                    </webResources>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <version>1.12</version>
+                <executions>
+                    <execution>
+                        <id>download-licenses</id>
+                        <goals>
+                            <goal>aggregate-add-third-party</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <outputDirectory>${project.build.directory}/${project.build.finalName}/META-INF/license</outputDirectory>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

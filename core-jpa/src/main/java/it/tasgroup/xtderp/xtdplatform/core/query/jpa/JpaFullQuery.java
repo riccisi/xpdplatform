@@ -1,6 +1,7 @@
 package it.tasgroup.xtderp.xtdplatform.core.query.jpa;
 
 import it.tasgroup.xtderp.xtdplatform.core.action.Request;
+import it.tasgroup.xtderp.xtdplatform.core.localization.I18n;
 import it.tasgroup.xtderp.xtdplatform.core.metadata.jpa.JpaEntity;
 import it.tasgroup.xtderp.xtdplatform.core.query.FullQueryResult;
 import it.tasgroup.xtderp.xtdplatform.core.query.QueryResult;
@@ -19,8 +20,8 @@ import javax.persistence.EntityManager;
  */
 public final class JpaFullQuery<T> extends JpaQuery<T> {
 
-    public JpaFullQuery(Class<T> entityClass, EntityManager entityManager) {
-        super(entityManager, entityClass);
+    public JpaFullQuery(Class<T> entityClass, EntityManager entityManager, I18n i18n) {
+        super(entityManager, entityClass, i18n);
     }
 
     @Override
@@ -31,7 +32,7 @@ public final class JpaFullQuery<T> extends JpaQuery<T> {
             new FullQueryResult(
                 new ListOf<>(
                     new Mapped<>(
-                        o -> new JpaEntity<>(o, this.metadata, entityManager),
+                        o -> new JpaEntity<>(o, this.metadata, this.entityManager),
                         this.repository.findAll(statement.get())
                     )
                 )

@@ -16,7 +16,7 @@ public final class MonitoredAction implements Action {
     @NonNull private final Action action;
 
     @Override
-    public String id() throws Exception {
+    public String id() {
         return this.action.id();
     }
 

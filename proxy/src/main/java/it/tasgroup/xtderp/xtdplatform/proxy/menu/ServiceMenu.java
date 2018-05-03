@@ -1,8 +1,8 @@
 package it.tasgroup.xtderp.xtdplatform.proxy.menu;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-import it.tasgroup.xtderp.xtdplatform.core.menu.model.Menu;
-import it.tasgroup.xtderp.xtdplatform.core.menu.model.MenuNode;
+import it.tasgroup.xtderp.xtdplatform.core.menu.Menu;
+import it.tasgroup.xtderp.xtdplatform.core.menu.MenuNode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;

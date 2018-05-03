@@ -1,11 +1,12 @@
 package it.tasgroup.xtderp.xtdplatform.proxy.menu;
 
-import it.tasgroup.xtderp.xtdplatform.core.menu.model.Menu;
+import it.tasgroup.xtderp.xtdplatform.core.menu.Menu;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -20,11 +21,11 @@ public class DiscoverableMenus implements Menus {
     private final LoadBalancerClient loadBalancerClient;
 
     @Override
-    public Iterator<Menu> iterator() {
-        List<Menu> menus = new ArrayList<>();
-        List<String> services = this.discoveryClient.getServices();
-        for (String service : services) {
-            menus.add(new ServiceMenu(service, loadBalancerClient));
+    public final Iterator<Menu> iterator() {
+        final Collection<Menu> menus = new ArrayList<>();
+        final List<String> services = this.discoveryClient.getServices();
+        for (final String service : services) {
+            menus.add(new ServiceMenu(service, this.loadBalancerClient));
         }
         return menus.iterator();
     }

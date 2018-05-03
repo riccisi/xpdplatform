@@ -1,6 +1,7 @@
 package it.tasgroup.xtderp.xtdplatform.core.query.jpa;
 
 import it.tasgroup.xtderp.xtdplatform.core.action.Request;
+import it.tasgroup.xtderp.xtdplatform.core.localization.I18n;
 import it.tasgroup.xtderp.xtdplatform.core.metadata.jpa.JpaEntity;
 import it.tasgroup.xtderp.xtdplatform.core.query.PageQueryResult;
 import it.tasgroup.xtderp.xtdplatform.core.query.QueryResult;
@@ -21,8 +22,8 @@ import javax.persistence.EntityManager;
  */
 public final class JpaPaginatedQuery<T> extends JpaQuery<T> {
 
-    public JpaPaginatedQuery(final Class<T> entityClass, final EntityManager entityManager) {
-        super(entityManager, entityClass);
+    public JpaPaginatedQuery(final Class<T> entityClass, final EntityManager entityManager, final I18n i18n) {
+        super(entityManager, entityClass, i18n);
     }
 
     @Override

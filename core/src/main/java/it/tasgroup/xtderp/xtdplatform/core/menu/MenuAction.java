@@ -13,4 +13,6 @@ public interface MenuAction extends Action {
     String path();
 
     int order();
+
+    String uid();
 }

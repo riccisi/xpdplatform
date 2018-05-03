@@ -1,7 +1,7 @@
 package it.tasgroup.xtderp.xtdplatform.core.menu.service;
 
-import it.tasgroup.xtderp.xtdplatform.core.menu.model.Menu;
-import it.tasgroup.xtderp.xtdplatform.core.menu.model.MenuNode;
+import it.tasgroup.xtderp.xtdplatform.core.menu.Menu;
+import it.tasgroup.xtderp.xtdplatform.core.menu.MenuNode;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;

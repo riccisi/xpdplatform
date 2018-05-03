@@ -3,8 +3,8 @@ package it.tasgroup.xtderp.xtdplatform.core.metadata.reflect.type;
 import it.tasgroup.xtderp.xtdplatform.core.media.Printable;
 import lombok.RequiredArgsConstructor;
 import org.cactoos.collection.Filtered;
-import org.cactoos.iterable.ItemAt;
 import org.cactoos.list.ListOf;
+import org.cactoos.scalar.ItemAt;
 
 import java.text.ParseException;
 

@@ -3,7 +3,7 @@ package it.tasgroup.xtderp.xtdplatform.core.action;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.cactoos.iterable.Filtered;
-import org.cactoos.iterable.ItemAt;
+import org.cactoos.scalar.ItemAt;
 
 /**
  *

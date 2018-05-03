@@ -5,5 +5,5 @@ package it.tasgroup.xtderp.xtdplatform.core.util;
  */
 public interface Identified {
 
-    String id() throws Exception;
+    String id();
 }

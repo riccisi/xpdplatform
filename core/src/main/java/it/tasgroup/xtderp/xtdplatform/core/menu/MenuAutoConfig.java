@@ -2,10 +2,8 @@ package it.tasgroup.xtderp.xtdplatform.core.menu;
 
 import it.tasgroup.xtderp.xtdplatform.core.action.Actions;
 import it.tasgroup.xtderp.xtdplatform.core.localization.I18n;
-import it.tasgroup.xtderp.xtdplatform.core.menu.model.*;
-import it.tasgroup.xtderp.xtdplatform.core.menu.parser.MenuFolderSerializer;
-import it.tasgroup.xtderp.xtdplatform.core.menu.parser.MenuItemSerializer;
 import it.tasgroup.xtderp.xtdplatform.core.menu.parser.MenuNodeDeserializer;
+import it.tasgroup.xtderp.xtdplatform.core.menu.service.FlatMenuService;
 import it.tasgroup.xtderp.xtdplatform.core.menu.service.MenuService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
@@ -21,8 +19,6 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 @SuppressWarnings("DesignForExtension")
 public class MenuAutoConfig implements Jackson2ObjectMapperBuilderCustomizer {
 
-    private final I18n i18n;
-
     @Bean
     @ConditionalOnMissingBean
     public MenuActions menuActions(final Actions actions) {
@@ -31,8 +27,14 @@ public class MenuAutoConfig implements Jackson2ObjectMapperBuilderCustomizer {
 
     @Bean
     @ConditionalOnMissingBean
-    public Menu menu(final MenuActions actions) {
-        return new CachedMenu(new ActionMenu(actions));
+    public Menu menu(final MenuActions actions, final I18n i18n) {
+        return new CachedMenu(new ActionMenu(actions, i18n));
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public FlatMenu flatMenu(final Menu menu, final I18n i18n) {
+        return new CachedFlatMenu(new DefaultFlatMenu(menu, i18n));
     }
 
     @Bean
@@ -40,10 +42,13 @@ public class MenuAutoConfig implements Jackson2ObjectMapperBuilderCustomizer {
         return new MenuService(menu);
     }
 
+    @Bean
+    public FlatMenuService flatMenuService(final FlatMenu menu) {
+        return new FlatMenuService(menu);
+    }
+
     @Override
     public void customize(final Jackson2ObjectMapperBuilder builder) {
-        builder.serializerByType(MenuFolder.class, new MenuFolderSerializer(this.i18n));
-        builder.serializerByType(MenuItem.class, new MenuItemSerializer(this.i18n));
         builder.deserializerByType(MenuNode.class, new MenuNodeDeserializer());
     }
 }

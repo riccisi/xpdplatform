@@ -26,7 +26,7 @@ public final class IntType implements Type<Integer> {
 
     @Override
     public Integer value(final String text) {
-        return Integer.parseInt(text);
+        return Integer.valueOf(text);
     }
 
     @RequiredArgsConstructor

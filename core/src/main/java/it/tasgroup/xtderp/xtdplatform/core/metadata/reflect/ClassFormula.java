@@ -1,7 +1,6 @@
 package it.tasgroup.xtderp.xtdplatform.core.metadata.reflect;
 
 import it.tasgroup.xtderp.xtdplatform.core.media.Media;
-import it.tasgroup.xtderp.xtdplatform.core.media.Rendered;
 import it.tasgroup.xtderp.xtdplatform.core.media.RenderedObject;
 import it.tasgroup.xtderp.xtdplatform.core.metadata.Formula;
 import it.tasgroup.xtderp.xtdplatform.core.metadata.reflect.type.Type;
@@ -44,7 +43,7 @@ final class ClassFormula implements Formula {
     }
 
     @Override
-    public <R> Rendered<R> print(final Media<R> media) {
+    public <R> RenderedObject<R> print(final Media<R> media) {
         return media.asObject()
             .with("name", this.method.getName())
             .with("type", this.type.name())

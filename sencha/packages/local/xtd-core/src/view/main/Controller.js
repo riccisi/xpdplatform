@@ -3,6 +3,18 @@ Ext.define('Xtd.core.view.main.Controller', {
 
     alias: 'controller.xtd-main',
 
+    bindings: {
+        onMenuSelection: '{selectedNode}'
+    },
+
+    listen: {
+        controller: {
+            '*': {
+                showcontent: 'showContent'
+            }
+        }
+    },
+
     collapseMenu: function () {
         var treelist = this.lookupReference('treelist'),
             expandBtn = this.lookupReference('expandTreelistBtn'),
@@ -29,6 +41,27 @@ Ext.define('Xtd.core.view.main.Controller', {
         expandBtn.setHidden(true);
         collapseBtn.setHidden(false);
         searchToolbar.setHidden(false);
+    },
+
+    onSearchMenuSelect: function(combo, menuitem) {
+        var treelist = this.lookupReference('treelist');
+        treelist.setSelection(menuitem.getId());
+    },
+
+    onMenuSelection: function(node) {
+        var coordinate = node.get('coordinate');
+        if(coordinate) {
+            this.showContent(coordinate)
+        }
+    },
+
+    showContent: function(config) {
+        var content = this.lookupReference('content');
+        var widget = content.lookupComponent(config);
+        if(!content.contains(widget)) {
+            content.add(widget);
+        }
+        content.getLayout().setActiveItem(widget);
     }
 
 });

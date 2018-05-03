@@ -19,7 +19,7 @@ public final class CsvQueryAction extends QueryAction {
     }
 
     @Override
-    public String id() throws Exception {
+    public String id() {
         return String.format("%s.csv", this.query.id());
     }
 

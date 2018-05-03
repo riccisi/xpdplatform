@@ -19,7 +19,8 @@
      */
     "requires": [
         "font-awesome",
-        "xtd-core"
+        "xtd-core",
+        "xtd-admin-jwt"
     ],
 
     /**

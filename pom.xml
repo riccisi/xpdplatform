@@ -16,12 +16,27 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
+        <license.url>http://www.tasgroup.eu/solutions/copyright</license.url>
         <java.version>1.8</java.version>
         <spring-cloud.version>Edgware.SR1</spring-cloud.version>
         <springfox-swagger2.version>2.7.0</springfox-swagger2.version>
         <extjs.version>6.5.2</extjs.version>
-        <sencha.env>development</sencha.env>
+        <extjs.app.name>App</extjs.app.name>
     </properties>
+
+    <licenses>
+        <license>
+            <name>TAS S.p.A. Copyright</name>
+            <url>${license.url}</url>
+            <distribution>manual</distribution>
+            <comments>TAS S.p.A. Copyright</comments>
+        </license>
+    </licenses>
+
+    <organization>
+        <name>TAS S.p.A.</name>
+        <url>http://www.tasgroup.eu</url>
+    </organization>
 
     <modules>
         <module>sencha</module>
@@ -90,5 +105,67 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest combine.children="append">
+                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                        </manifest>
+                        <manifestEntries>
+                            <Specification-License>${license.url}</Specification-License>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>development</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+                <property>
+                    <name>env</name>
+                    <value>dev</value>
+                </property>
+            </activation>
+            <properties>
+                <sencha.env>development</sencha.env>
+                <sencha.resources.dir>sencha</sencha.resources.dir>
+            </properties>
+        </profile>
+        <profile>
+            <id>test</id>
+            <activation>
+                <property>
+                    <name>env</name>
+                    <value>test</value>
+                </property>
+            </activation>
+            <properties>
+                <sencha.env>testing</sencha.env>
+                <sencha.resources.dir>sencha\build\${sencha.env}\${extjs.app.name}</sencha.resources.dir>
+            </properties>
+        </profile>
+        <profile>
+            <id>production</id>
+            <activation>
+                <property>
+                    <name>env</name>
+                    <value>prod</value>
+                </property>
+            </activation>
+            <properties>
+                <sencha.env>production</sencha.env>
+                <sencha.resources.dir>sencha\build\${sencha.env}\${extjs.app.name}</sencha.resources.dir>
+            </properties>
+        </profile>
+    </profiles>
 
 </project>

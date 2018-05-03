@@ -1,5 +1,6 @@
 package it.tasgroup.xtderp.xtdplatform.admin.jwt;
 
+import it.tasgroup.xtderp.xtdplatform.admin.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +13,7 @@ import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
-import java.util.Collections;
+import java.util.Arrays;
 
 /**
  * Created with IntelliJ IDEA.
@@ -52,6 +53,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Autowired
+    private Users users;
+
     @Override
     @SuppressWarnings("MethodDoesntCallSuperMethod")
     public void configure(final ClientDetailsServiceConfigurer configurer) throws Exception {
@@ -68,7 +72,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @SuppressWarnings("MethodDoesntCallSuperMethod")
     public void configure(final AuthorizationServerEndpointsConfigurer endpoints) {
         final TokenEnhancerChain chain = new TokenEnhancerChain();
-        chain.setTokenEnhancers(Collections.singletonList(this.accessTokenConverter));
+        chain.setTokenEnhancers(Arrays.asList(new XtdTokenEnhancer(this.users), this.accessTokenConverter));
         endpoints.tokenStore(this.tokenStore)
             .accessTokenConverter(this.accessTokenConverter)
             .tokenEnhancer(chain)

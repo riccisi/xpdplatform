@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import it.tasgroup.xtderp.xtdplatform.core.media.Media;
 import it.tasgroup.xtderp.xtdplatform.core.media.Printable;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Custom Jackson {@link JsonSerializer} to serialize a {@link Printable} using the {@link Media} API.
@@ -13,6 +14,7 @@ import it.tasgroup.xtderp.xtdplatform.core.media.Printable;
  * @version $Id$
  * @since 1.0
  */
+@Slf4j
 public final class PrintableJsonSerializer extends JsonSerializer<Printable> {
 
     @Override
@@ -20,6 +22,7 @@ public final class PrintableJsonSerializer extends JsonSerializer<Printable> {
         try {
             gen.writeTree(printable.print(new JsonMedia()).value());
         } catch (final Exception e) {
+            log.error("error serializing printable {}", printable);
             throw new RuntimeException(e);
         }
     }
