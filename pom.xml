@@ -41,7 +41,6 @@
     <modules>
         <module>sencha</module>
         <module>sencha/packages</module>
-        <module>sencha/app</module>
         <module>core</module>
         <module>core-jpa</module>
         <module>proxy</module>

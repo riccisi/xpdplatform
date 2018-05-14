@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
  * @since 1.0
  */
 @RequiredArgsConstructor
-public class JsonPaginatedFilter implements PaginatedFilter {
+public final class JsonPaginatedFilter implements PaginatedFilter {
 
     private static final String PAGE_FIELD = "page";
     private static final String LIMIT_FIELD = "limit";
@@ -23,6 +23,10 @@ public class JsonPaginatedFilter implements PaginatedFilter {
 
     @NonNull private final JsonNode node;
     @NonNull private final Filter filters;
+
+    public JsonPaginatedFilter(final JsonNode node) {
+        this(node, node.has("filter") ? new JsonFilterOf(node.get("filter")) : Filter.EMPTY);
+    }
 
     @Override
     public int page() {
@@ -35,7 +39,7 @@ public class JsonPaginatedFilter implements PaginatedFilter {
     }
 
     @Override
-    public void applyOn(Statement stmt) {
+    public void applyOn(final Statement stmt) {
         this.filters.applyOn(stmt);
     }
 }

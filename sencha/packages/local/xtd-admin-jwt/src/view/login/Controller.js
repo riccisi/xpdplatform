@@ -9,11 +9,14 @@ Ext.define('Xtd.admin.jwt.view.login.Controller', {
     onLoginClick: function() {
         var username = this.getViewModel().get('username');
         var password = this.getViewModel().get('password');
+        var redirect = this.getView().getRedirect();
         Xtd.admin.jwt.security.Authentication.login(username, password).then(function() {
             this.getView().destroy();
-            Ext.create({
-                xtype: 'xtd-admin-main'
-            });
+            if(redirect) {
+                Ext.create({
+                    xtype: 'xtd-admin-main'
+                });
+            }
         }.bind(this), function(data) {
             Ext.Msg.alert('Error', data.message || 'An error occurred while logging in.');
         });

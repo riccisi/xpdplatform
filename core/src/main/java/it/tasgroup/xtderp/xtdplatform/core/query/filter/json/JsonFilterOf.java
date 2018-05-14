@@ -24,7 +24,7 @@ public final class JsonFilterOf implements Filter {
     private final Collection<FilterMatcher> matchers;
     private final JsonNode node;
 
-    public JsonFilterOf(JsonNode node) {
+    public JsonFilterOf(final JsonNode node) {
         this(
             new Filtered<>(
                 FilterMatcher::match,
@@ -47,7 +47,7 @@ public final class JsonFilterOf implements Filter {
     }
 
     @Override
-    public void applyOn(Statement stmt) {
+    public void applyOn(final Statement stmt) {
         this.matchedFilter().applyOn(stmt);
     }
 

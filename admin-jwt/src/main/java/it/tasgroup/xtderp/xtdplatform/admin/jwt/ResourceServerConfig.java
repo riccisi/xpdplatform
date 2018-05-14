@@ -52,6 +52,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 "/**/*.woff2",
                 "/**/*.png",
                 "/**/classic.json",
+                "/**/bootstrap.json",
                 "/**/modern.json"
             ).permitAll()
             .antMatchers("/public/**").permitAll()

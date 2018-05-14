@@ -18,14 +18,14 @@ import java.io.Serializable;
  */
 abstract class JpaQuery<T> implements Query {
 
-    protected final EntityManager entityManager;
+    protected final EntityManager manager;
     protected final Class<T> entityClass;
     protected final EntityMetadata<T> metadata;
     protected final SimpleJpaRepository<T, Serializable> repository;
 
-    protected JpaQuery(final EntityManager entityManager, final Class<T> entityClass, final I18n i18n) {
+    JpaQuery(final EntityManager entityManager, final Class<T> entityClass, final I18n i18n) {
         this.metadata = new JpaEntityMetadata<>(entityManager, entityClass, i18n);
-        this.entityManager = entityManager;
+        this.manager = entityManager;
         this.entityClass = entityClass;
         this.repository = new SimpleJpaRepository<>(entityClass, entityManager);
     }

@@ -10,8 +10,8 @@ Ext.define('Xtd.core.view.UIFactory', {
         defaultType: 'xtype'
     },
 
-    build: function(conf) {
-        return Ext.widget
+    build: function (conf) {
+        return Ext.widget(Ext.apply({ xtype: conf.uid }, conf));
     }
 
 });

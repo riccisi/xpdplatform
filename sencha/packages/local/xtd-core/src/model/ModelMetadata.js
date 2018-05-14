@@ -13,20 +13,20 @@ Ext.define('Xtd.core.model.ModelMetadata', {
         {name: 'attributes', convert: function(attributes) {
             var list = new Ext.util.MixedCollection();
             Ext.each(attributes, function(attribute) {
-                list.add(Xtd.core.model.Attribute.create(attribute.type, attribute));
+                list.add(Xtd.core.model.Attribute.create(attribute));
             });
             return list;
         }}
     ],
 
     defineModel: function() {
-        var id = this.getId();
+        var modelName = this.getModelName();
         var fields = this.getModelFields();
-        Ext.define(id, {
+        Ext.define(modelName, {
             extend: 'Ext.data.Model',
             fields: fields
         });
-        console.log('Model ' + id + ' successfully defined!');
+        console.log('Model ' + modelName + ' successfully defined!');
     },
 
     /*createInstance: function(referencedBy, callback, scope) {
@@ -34,6 +34,10 @@ Ext.define('Xtd.core.model.ModelMetadata', {
         model.initFromServer({ callback: callback, scope: scope }, referencedBy);
         return model;
     },*/
+
+    getModelName: function() {
+        return this.getId();
+    },
 
     getModelFields: function() {
         if (!this.modelFields) {
@@ -48,7 +52,47 @@ Ext.define('Xtd.core.model.ModelMetadata', {
             }, this);
         }
         return this.modelFields;
-    }/*,
+    },
+
+    columns: function() {
+        if (!this.gridColumns) {
+            var attributes = this.get('attributes');
+            this.gridColumns = [];
+            attributes.each(function(attribute) {
+                var gridColumnConf = attribute.getGridColumnConf();
+                gridColumnConf = Ext.isArray(gridColumnConf) ? gridColumnConf : [gridColumnConf];
+                for (var i in gridColumnConf) {
+                    this.gridColumns.push(gridColumnConf[i]);
+                }
+            }, this);
+        }
+        return this.gridColumns;
+    },
+
+    store: function(url) {
+        return Ext.create('Ext.data.Store', {
+            model: this.getModelName(),
+            proxy: {
+                type: 'ajax',
+                url: url,
+                paramsAsJson: true,
+                actionMethods: {
+                    create: 'POST',
+                    read: 'POST',
+                    update: 'POST',
+                    destroy: 'POST'
+                },
+                reader: {
+                    type: 'json',
+                    rootProperty: 'result' ,
+                    totalProperty: 'total'
+                }
+            },
+            autoLoad: true
+        });
+    }
+
+    /*,
 
     getFormFields: function(excludedFields) {
         return this.collectFormFields(excludedFields);

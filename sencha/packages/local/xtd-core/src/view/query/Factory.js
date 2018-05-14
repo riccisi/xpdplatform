@@ -1,32 +1,22 @@
 Ext.define('Xtd.core.view.query.Factory', {
+    extends: 'Xtd.core.view.UIFactory',
+    requires: [
+        'Xtd.core.view.query.View'
+    ],
     mixins: [
         'Ext.mixin.Factoryable'
     ],
 
     alias: 'uifactory.query',
 
-    factoryConfig: {
-        type: 'idfactory',
-        defaultType: 'default'
-    },
-
-    build: function() {
-
+    build: function(conf) {
+        var modelId = conf.modelId;
+        var id = "query-" + modelId.replace(/\./g, '_');
+        var widget = Ext.getCmp(id);
+        if (!widget) {
+            widget = Ext.widget('query', Ext.apply({ id: id }, conf));
+        }
+        return widget;
     }
 
 });
-
-/**
- * if(!modelClass) {
-            Ext.raise('modelClass should be not null');
-        }
- var gridId = "model-grid-" + modelClass.replace(/\./g, '_');
- var widget = Ext.getCmp(gridId);
- if (!widget) {
-            widget = Ext.widget('search-panel', Ext.apply({
-                id: gridId,
-                modelClass: modelClass
-            }, conf));
-        }
- return widget;
- **/

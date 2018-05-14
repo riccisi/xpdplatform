@@ -14,7 +14,7 @@ import it.tasgroup.xtderp.xtdplatform.core.util.Identified;
  */
 public interface Query extends Identified {
 
-    String modelId() throws Exception;
+    String modelId();
 
     QueryResult find(Request request) throws Exception;
 }

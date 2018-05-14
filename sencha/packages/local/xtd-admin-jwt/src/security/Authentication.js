@@ -1,8 +1,8 @@
 Ext.define('Xtd.admin.jwt.security.Authentication', {
     singleton: true,
     requires: [
-        'Xtd.admin.jwt.security.TokenStorage',
-        'Xtd.admin.jwt.security.Token'
+        'Xtd.admin.jwt.security.Token',
+        'Xtd.admin.jwt.security.TokenStorage'
     ],
 
     login: function(username, password) {

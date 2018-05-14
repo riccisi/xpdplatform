@@ -23,7 +23,7 @@ public final class PaginatedFilterRequest implements Request {
 
     private final JsonRequest request;
 
-    public PaginatedFilterRequest(Request request) {
+    public PaginatedFilterRequest(final Request request) {
         this.request = new JsonRequest(request);
     }
 
@@ -33,11 +33,11 @@ public final class PaginatedFilterRequest implements Request {
     }
 
     @Override
-    public String param(String key) {
+    public String param(final String key) {
         return this.request.param(key);
     }
 
     public PaginatedFilter filter() throws Exception {
-        return this.request.parse(node -> new JsonPaginatedFilter(node, new JsonFilterOf(node)));
+        return this.request.parse(node -> new JsonPaginatedFilter(node));
     }
 }

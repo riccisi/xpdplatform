@@ -22,7 +22,7 @@ public final class ActionMenu implements Menu {
     @Override
     public Iterator<MenuNode> iterator() {
         final MenuBuilder builder = new DefaultMenuBuilder(this.i18n);
-        this.actions.forEach(action -> builder.add(action.path(), new SimpleActionCoordinate(action)));
+        this.actions.forEach(action -> builder.add(action.path(), action.coordinate()));
         return builder.build().iterator();
     }
 }

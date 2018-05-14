@@ -14,12 +14,12 @@ Ext.define('Xtd.core.model.DateField', {
     },
 
     getGridColumnConf: function() {
-        return {
+        return Ext.apply(this.callParent(), {
             xtype: 'datecolumn',
             align: 'center',
             format: 'd/m/Y',
             width: 120
-        };
+        });
     },
 
     getColumnFilterConf: function() {

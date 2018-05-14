@@ -1,12 +1,5 @@
 {
     /**
-     *  An array of the paths to all the applications present in this workspace
-     */
-    "apps": [
-        "app"
-    ],
-
-    /**
      * An object containing key value pair framework descriptors.
      *
      * The value should be an object containing "path" the path inside the workspace where the framework
@@ -27,8 +20,7 @@
      * with "sencha workspace install". See "sencha help workspace install" for more information.
      *
      */
-    "frameworks": {
-        "ext": {
+    "frameworks": {        "ext": {
             "path":"ext",
             "version":"6.5.2.463"
         }

@@ -37,7 +37,7 @@ public final class JpaPaginatedQuery<T> extends JpaQuery<T> {
             new PageQueryResult(
                 new ListOf<>(
                     new Mapped<>(
-                        o -> new JpaEntity<>(o, this.metadata, this.entityManager),
+                        o -> new JpaEntity<>(o, this.metadata, this.manager),
                         result.getContent()
                     )
                 ),

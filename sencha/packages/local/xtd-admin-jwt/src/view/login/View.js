@@ -16,6 +16,10 @@ Ext.define('Xtd.admin.jwt.view.login.View', {
     autoShow: true,
     layout: 'fit',
 
+    config: {
+        redirect: true
+    },
+
     items: {
         xtype: 'form',
         bodyPadding: 10,

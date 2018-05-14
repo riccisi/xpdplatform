@@ -20,8 +20,8 @@ import javax.persistence.EntityManager;
  */
 public final class JpaFullQuery<T> extends JpaQuery<T> {
 
-    public JpaFullQuery(Class<T> entityClass, EntityManager entityManager, I18n i18n) {
-        super(entityManager, entityClass, i18n);
+    public JpaFullQuery(final Class<T> entityClass, final EntityManager manager, final I18n i18n) {
+        super(manager, entityClass, i18n);
     }
 
     @Override
@@ -32,7 +32,7 @@ public final class JpaFullQuery<T> extends JpaQuery<T> {
             new FullQueryResult(
                 new ListOf<>(
                     new Mapped<>(
-                        o -> new JpaEntity<>(o, this.metadata, this.entityManager),
+                        o -> new JpaEntity<>(o, this.metadata, this.manager),
                         this.repository.findAll(statement.get())
                     )
                 )

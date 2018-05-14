@@ -18,14 +18,10 @@ import java.util.Date;
 @ToString(of = "value")
 public final class PrintableDate implements Printable {
 
-    private final long value;
-
-    public PrintableDate(final Date value) {
-        this.value = value != null ? value.getTime() : -1L;
-    }
+    private final Date value;
 
     @Override
     public <T> Rendered<T> print(final Media<T> media) {
-        return media.as(this.value > 0L ? new Date(this.value) : null);
+        return media.as(this.value);
     }
 }

@@ -11,11 +11,11 @@ Ext.define('Xtd.core.model.NumberField', {
     },
 
     getGridColumnConf: function() {
-        return {
+        return Ext.apply(this.callParent(), {
             xtype: 'numbercolumn',
             align: 'right',
             format: '0'
-        };
+        });
     },
 
     getColumnFilterConf: function() {

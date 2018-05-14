@@ -10,15 +10,8 @@ package it.tasgroup.xtderp.xtdplatform.core.query.filter;
  */
 public interface Filter {
 
+    Filter EMPTY = stmt -> {};
+
     void applyOn(Statement stmt);
 
-    /**
-     * Fake Filter implementation class for testing purpose.
-     */
-    final class Fake implements Filter {
-
-        @Override
-        public void applyOn(Statement stmt) {
-        }
-    }
 }

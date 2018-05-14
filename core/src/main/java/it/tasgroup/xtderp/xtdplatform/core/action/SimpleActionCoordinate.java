@@ -21,10 +21,6 @@ public final class SimpleActionCoordinate implements ActionCoordinate {
     private final String uid;
     private final Map<String, String> params;
 
-    public SimpleActionCoordinate(final MenuAction action) {
-        this(action.id(), action.uid(), new HashMap<>());
-    }
-
     @Override
     public <R> RenderedObject<R> print(final Media<R> media) {
         RenderedObject<R> rendered = media.asObject().with("actionId", this.actionId).with("uid", this.uid);

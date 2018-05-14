@@ -17,6 +17,10 @@ Ext.define('Xtd.core.model.Attribute', {
         text: null
     },
 
+    constructor: function(config) {
+        this.initConfig(config);
+    },
+
     getModelFieldConf: function() {
         return {
             name: this.getName(),

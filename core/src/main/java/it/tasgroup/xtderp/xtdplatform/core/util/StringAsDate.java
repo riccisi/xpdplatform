@@ -13,7 +13,7 @@ import java.util.Date;
  */
 @RequiredArgsConstructor
 @EqualsAndHashCode
-public class StringAsDate implements Scalar<Date> {
+public final class StringAsDate implements Scalar<Date> {
 
     @NonNull
     private final String format;
@@ -23,6 +23,6 @@ public class StringAsDate implements Scalar<Date> {
 
     @Override
     public Date value() throws ParseException {
-        return new SimpleDateFormat(format).parse(this.dateString);
+        return new SimpleDateFormat(this.format).parse(this.dateString);
     }
 }

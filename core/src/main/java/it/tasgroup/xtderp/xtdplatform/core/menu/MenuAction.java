@@ -1,6 +1,7 @@
 package it.tasgroup.xtderp.xtdplatform.core.menu;
 
 import it.tasgroup.xtderp.xtdplatform.core.action.Action;
+import it.tasgroup.xtderp.xtdplatform.core.action.ActionCoordinate;
 
 /**
  * Created with IntelliJ IDEA.
@@ -14,5 +15,5 @@ public interface MenuAction extends Action {
 
     int order();
 
-    String uid();
+    ActionCoordinate coordinate();
 }

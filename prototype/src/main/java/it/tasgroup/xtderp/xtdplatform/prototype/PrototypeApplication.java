@@ -38,11 +38,11 @@ public class PrototypeApplication extends SpringBootServletInitializer {
             final JpaRole admin = roles.save(new JpaRole("admin", new Permission("all")));
             users.save(new JpaUser("admin", "admin", "Administrator", admin));
 
-            customers.save(new Customer("Jack", "Bauer", new StringAsDate("dd/MM/yyyy","21/09/1973").value(),null));
-            customers.save(new Customer("Chloe", "O'Brian", new StringAsDate("dd/MM/yyyy","01/03/1938").value(),null));
-            customers.save(new Customer("Kim", "Bauer", new StringAsDate("dd/MM/yyyy","13/02/1960").value(),null));
-            customers.save(new Customer("David", "Palmer", new StringAsDate("dd/MM/yyyy","05/05/1998").value(),null));
-            customers.save(new Customer("Michelle", "Dessler", new StringAsDate("dd/MM/yyyy","12/11/1983").value(),null));
+            customers.save(new Customer("Jack", "Bauer", new StringAsDate("dd/MM/yyyy","21/09/1973").value()));
+            customers.save(new Customer("Chloe", "O'Brian", new StringAsDate("dd/MM/yyyy","01/03/1938").value()));
+            customers.save(new Customer("Kim", "Bauer", new StringAsDate("dd/MM/yyyy","13/02/1960").value()));
+            customers.save(new Customer("David", "Palmer", new StringAsDate("dd/MM/yyyy","05/05/1998").value()));
+            customers.save(new Customer("Michelle", "Dessler", new StringAsDate("dd/MM/yyyy","12/11/1983").value()));
         };
     }
 

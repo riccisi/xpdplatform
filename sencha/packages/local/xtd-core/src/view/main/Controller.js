@@ -3,6 +3,10 @@ Ext.define('Xtd.core.view.main.Controller', {
 
     alias: 'controller.xtd-main',
 
+    requires: [
+        'Xtd.core.view.UIFactory'
+    ],
+
     bindings: {
         onMenuSelection: '{selectedNode}'
     },
@@ -57,7 +61,7 @@ Ext.define('Xtd.core.view.main.Controller', {
 
     showContent: function(config) {
         var content = this.lookupReference('content');
-        var widget = content.lookupComponent(config);
+        var widget = Xtd.core.view.UIFactory.create(config.uid).build(config);
         if(!content.contains(widget)) {
             content.add(widget);
         }
